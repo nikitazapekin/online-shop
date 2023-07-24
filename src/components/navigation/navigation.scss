@@ -1,0 +1,24 @@
+.navigation {
+    width: 100%;
+    max-width: 100%;
+    background-color: red;
+    h1{
+        color: orange;
+    }
+}
+
+/*
+sass navigation.scss navigation.css
+Error reading navigation.scss: no such file or directory.
+PS C:\Users\LENOVO\log>  npm install -g sass
+
+changed 17 packages in 2s
+
+2 packages are looking for funding
+  run `npm fund` for details      
+PS C:\Users\LENOVO\log> sass navigation.scss navigation.css
+Error reading navigation.scss: no such file or directory.
+PS C:\Users\LENOVO\log> sass navigation.scss navigation.css
+Error reading navigation.scss: no such file or directory.
+PS C:\Users\LENOVO\log> 
+*/

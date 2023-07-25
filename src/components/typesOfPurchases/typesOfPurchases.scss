@@ -1,0 +1,14 @@
+.typesOfPurchases {
+ 
+    display: grid;
+    grid-template-columns: repeat(4, 250px); 
+    grid-template-rows: repeat(auto, 300px);
+    justify-content: center;
+    color: blue;
+    align-items: center;
+  margin-top: 150px;
+    .typeOfPurchase{
+       font-size: 32px;
+       cursor: pointer;
+    }
+}

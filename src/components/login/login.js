@@ -1,4 +1,4 @@
-import "./login.css"
+import "./login.scss"
 import { Link } from "react-router-dom"
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
@@ -39,13 +39,13 @@ const Login =()=> {
             name="email"
             onChange={changeHandler}
              type="text" 
-             className="loginForm"
+             className="loginForm registrationItem"
               placeholder="type email" />
             <input
             name="password"
             onChange={changeHandler}
              type="password"
-              className="passwordForm"
+              className="passwordForm registrationItem"
                placeholder="type password" />
             <button 
 
@@ -73,8 +73,9 @@ onClick={() => {
   }}
 
             type="button" 
-            className="continue">continue</button>
-            <Link to="/" style={{textDecoration: "none", color: "#fff"}}>  or register </Link>
+            className="continue registrationItem">continue</button>
+            <Link to="/register" style={{textDecoration: "none", color: "#fff"}}><h2 className="registrationItem">  or register</h2> </Link>
+            <div className="registerFon"></div>
         </div>
     )
 }

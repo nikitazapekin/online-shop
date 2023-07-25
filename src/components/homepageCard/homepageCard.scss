@@ -1,0 +1,78 @@
+
+
+.card {
+    position: absolute;
+    top: 50%;
+ margin-left: 340px;
+    height: 400px;
+    width: 300px;
+    transform: translate(-50%, -50%);
+    transform-style: preserve-3d;
+    perspective: 600px;
+    transition: 0.5s;
+border-radius: 20px;
+
+    &:hover {
+        .card-front {
+            transform: rotateX(-180deg);
+        }
+
+        .card-back {
+            transform: rotateX(0deg);
+        }
+    }
+}
+
+.card-front {
+    height: 100%;
+    width: 100%;
+    background-image: url('https://mykaleidoscope.ru/uploads/posts/2021-11/1637146997_3-mykaleidoscope-ru-p-devushka-v-ochkakh-i-kostyume-devushka-kra-3.jpg');
+  //  background-image: url('https://99px.ru/sstorage/56/2013/12/image_563012130153328414049.jpg');
+    background-position: 50% 50%;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    backface-visibility: hidden;
+    transform: rotateX(0deg);
+    transition: 0.5s;
+    border-radius: 20px;
+}
+
+.card-back {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #000000;
+    backface-visibility: hidden;
+    transform: rotateX(180deg);
+    transition: 0.5s;
+    color: #ffffff;
+    text-align: center;
+    border-radius: 20px;
+
+    h2 {
+        margin: 60% auto 35% auto;
+        font-size: 26px;
+    }
+
+    span {
+        font-size: 20px;
+    }
+
+    a {
+        height: 20px;
+        width: 20px;
+        padding: 5px 5px;
+        border-radius: 4px;
+        line-height: 20px;
+
+        &:hover {
+            color: #000000;
+            background-color: #fff;
+        }
+    }
+}

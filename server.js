@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 const PORT = 5000;
 const app = express();
 const DB_url ="mongodb+srv://nikita:nikita@cluster0.vsujhaf.mongodb.net/?retryWrites=true&w=majority"
+//const DB_url1 ="mongodb+srv://nikita:nikita@cluster0.bjysy3o.mongodb.net/?retryWrites=true&w=majority"
 app.use(express.json());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); 
@@ -98,6 +99,13 @@ async function startApp() {
   } catch (e) {
     console.log(e);
   }
+
 }
 
 startApp();
+
+
+
+//mongodb+srv://nikita:<password>@cluster0.bjysy3o.mongodb.net/?retryWrites=true&w=majority
+
+

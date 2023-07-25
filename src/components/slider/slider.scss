@@ -1,0 +1,72 @@
+.gallery {
+	padding: 1rem;
+	display: grid;
+	/*grid-template-columns: repeat(10, 10vw); */
+    grid-template-columns: repeat(10, 200px); 
+	grid-template-rows: 1fr;
+	grid-column-gap: 1rem;
+	grid-row-gap: 1rem;
+	overflow: scroll;
+	/*height: 90vh; */
+    height: 25vh;
+	scroll-snap-type: both mandatory;
+	scroll-padding: 1rem;
+align-items: flex-end;
+margin-top: 100px;
+user-select: none;
+//position: absolute;
+z-index: 12;
+}
+
+.sliderFon {
+    width: 100%;
+    max-width: 100%;
+    height: 35vh;
+    background-color: red;
+    position: absolute;
+    left: 0;
+    z-index: -1;
+    opacity: 0.75;
+    background-color: #222a27;
+   
+}
+.activeSlide {
+	scroll-snap-type: unset;
+}
+
+li {
+	scroll-snap-align: center;
+	display: inline-block;
+	border-radius: 13px;
+    font-size: 15px;
+	/*font-size: 0; */
+}
+.gallery {
+    overflow-x: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none; 
+  }
+  
+  .gallery::-webkit-scrollbar {
+    display: none; 
+  }
+  
+.sliderImage {
+    width: 100%;
+    border-radius: 13px;
+    height: 8vw;
+}
+.sliderTitleAnime {
+ 
+    color: black;
+  
+    z-index: 233;
+   text-align: center;
+}
+.animesLastMonth {
+    color: #fff;
+    font-weight: 900;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%) translateY(30px);
+}

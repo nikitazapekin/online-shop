@@ -10,6 +10,7 @@ import CataloguePage from './pages/cataloguePage/cataloguePage.js';
 
 import {  useSearchParams } from 'react-router-dom';
 import CataloguePageItem from './pages/cataloguePageItem/cataloguePageItem.js';
+import AddPurchase from './components/addPurchase/addPurchase.js';
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
 <Route path="/user" element={ <WelcomeUser />} />
 <Route path="/catalogue" element={ <CataloguePage />} />
 <Route path="/catalogue/:id" element={<CataloguePageItem />} /> 
+<Route path="/add" element={<AddPurchase />} />
 </Routes>
 
     </div>

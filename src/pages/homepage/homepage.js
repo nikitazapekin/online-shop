@@ -4,6 +4,7 @@ import HomepageAboutText from "../../components/homepageAboutText/homepageAboutT
 import TitleOfSite from "../../components/titleOfSite/titleOfSite.js"
 import Fon1 from "./fn.jpg"
 import Fon2 from "./fonnn.jpg"
+import { Link } from "react-router-dom"
 import "./homepage.scss"
 const Homepage=()=> {
    /* let stars = document.getElementById("stars");
@@ -32,7 +33,7 @@ const Homepage=()=> {
             <Navigation />
             <TitleOfSite />
             <button className="showCatalogue">
-        Show Catalogue
+    <Link to="/add">   Show Catalogue </Link>
     </button>
     <div className="fonsBlock">
         <img src={Fon2} alt="fon" className="fon1" />

@@ -34,11 +34,13 @@ z-index: 12;
 	scroll-snap-type: unset;
 }
 
-li {
+.gallery li {
 	scroll-snap-align: center;
 	display: inline-block;
 	border-radius: 13px;
     font-size: 15px;
+    width: 200px;
+    cursor: pointer;
 	/*font-size: 0; */
 }
 .gallery {

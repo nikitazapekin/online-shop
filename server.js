@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 const PORT = 5000;
 const app = express();
 const DB_url ="mongodb+srv://nikita:nikita@cluster0.vsujhaf.mongodb.net/?retryWrites=true&w=majority"
-//const DB_url1 ="mongodb+srv://nikita:nikita@cluster0.bjysy3o.mongodb.net/?retryWrites=true&w=majority"
+
 app.use(express.json());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); 
@@ -38,6 +38,7 @@ const postSchema = new mongoose.Schema({
   password: String,
   id: String,
 });
+
 const Post = mongoose.model('Post', postSchema);
 
 app.post('/', async (req, res) => {
@@ -90,9 +91,56 @@ app.post('/log', async (req, res) => {
     res.status(500).json({ error: 'Failed to create a new post.' });
   }
 });
+//==========================================================
+
+const postSchema1 = new mongoose.Schema({
+  type: String,
+  id: Number,
+  sale: Boolean,
+  price: Number,
+  country: String, 
+ title: String,
+ logo: String,
+ descrybtion: String,
+ rate: Number,
+ neww: Boolean
+ });
+ const Post1 = mongoose.model('Shop', postSchema1);
+app.post('/add', async (req, res) => {
+  const {type, id, sale, price, country, title, logo, describtion, rate, neww } = req.body;
+ 
+  try {
+//  res(1)
+const post = await Post1.create({type, id, sale, price, country, title, logo, describtion, rate, neww});
+console.log(post);
+res.json(post);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new post.' });
+  }
+});
+
+
+app.get('/tovars', async (req, res) => {
+  try {
+    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww');
+   
+    res.json(posts);
+    console.log(posts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch posts.' });
+  }
+});
+
+
+
+
+
 async function startApp() {
   try {
     await mongoose.connect(DB_url, { useUnifiedTopology: true, useNewUrlParser: true })
+   // await mongoose.connect(DB_url1, { useUnifiedTopology: true, useNewUrlParser: true })
     app.listen(PORT, () => {
       console.log('SERVER STARTED ON PORT: ' + PORT);
     });
@@ -102,10 +150,5 @@ async function startApp() {
 
 }
 
-startApp();
-
-
-
-//mongodb+srv://nikita:<password>@cluster0.bjysy3o.mongodb.net/?retryWrites=true&w=majority
-
+startApp();  
 

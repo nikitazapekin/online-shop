@@ -24,44 +24,7 @@ const dispatch=useDispatch();
         return decrypted;
       }
       const sendRequest=()=> {
-      /*  fetch('http://localhost:5000/posts')
-        .then(response => response.json())
-        .then(json =>{
-
-          let isReggistered=false;
-      
-          console.log(json)
-      console.log(typeof json)
-        lengthOfLogs=json.length
     
-         Object.values(json).forEach((item,index)=> {
-          console.log(item.email+":"+ form.email)
-            if (item.email==form.email){
-              isReggistered=true
-            console.log(item.email)
-            }
-          })
-          console.log(isReggistered)
-          console.log(json)
-      
-          if(isReggistered==false){
-      setIsLogged(false) 
-            let data=JSON.stringify({"username": form.username, "email": form.email, "password": form.password, "id": lengthOfLogs})
-           dispatch({type: "USER", payload: data})
-            fetch('http://localhost:5000', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: data
-            })
-       
-            navigate('/user');
-          } else {
-      setIsLogged(true)
-          }
-        }
-          ) */
       }
       const changeHandler=(event)=> {
         setForm({...form, [event.target.name]: event.target.value})

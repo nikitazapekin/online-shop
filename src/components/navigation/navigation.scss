@@ -59,6 +59,16 @@
     height: 50px;
     transform: translateY(-10px) rotate(270deg);
   }
+  .searchedItems {
+    width: 100%;
+    background-color: #fff;
+     color: black;
+     text-align: center;
+  }
+  .searchedItem {
+    border-bottom: 2px solid black;
+    height: 30px;
+  }
 }
 /*
 sass navigation.scss navigation.css

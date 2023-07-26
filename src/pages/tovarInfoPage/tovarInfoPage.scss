@@ -1,0 +1,82 @@
+.tovarInfoPage {
+    min-height: 100vh;
+    background-color: pink;
+    width: 100%;
+    max-width: 100%;
+    position: relative;
+   
+    .puschaseCard {
+        max-width: 80%;
+        width: 100%;
+        background-color: #ff1515;
+margin: 0 auto;
+height: 600px;
+position: relative;
+top: 100px;
+    }
+    .purchaseCardImage {
+position: absolute;
+//left: 100px;
+//top: 50px;
+        height: 400px;
+        width: 450px;
+    }
+    .itemTitle {
+        position: absolute;
+     left: 50%;
+     transform: translateX(-50%);
+     top: 50px;
+     margin-left: 100px;
+
+    }
+    .itemDescribtion {
+        position: absolute;
+     left: 50%;
+     transform: translateX(-50%);
+     top: 150px;
+     margin-left: 100px;
+
+    }
+    .itemNew {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        z-index: 123;
+        top: 350px;
+        left: 0;
+    }
+    .buyBtn {
+        width: 200px;
+        height: 70px;
+        background-color: purple;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-left: 200px;
+        color: #fff;
+        top: 400px
+    }
+    .priceOfItem{
+        position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-left: 100px;
+      top: 350px;
+    }
+    .itemSale {
+        width: 100px;
+        height: 100px;
+     //   position: absolute;
+     position: absolute;
+     right: 0;
+     top: 350px;
+    }
+    .imagePurchaseBlock{
+        position: absolute;
+        width: 450px;
+        height: 400px;
+        left: 100px;
+        top: 50px
+    }
+    
+}

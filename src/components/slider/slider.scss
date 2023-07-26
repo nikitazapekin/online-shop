@@ -42,6 +42,7 @@ z-index: 12;
     width: 200px;
     cursor: pointer;
 	/*font-size: 0; */
+    position: relative;
 }
 .gallery {
     overflow-x: scroll;
@@ -71,4 +72,11 @@ z-index: 12;
     position: absolute;
     left: 50%;
     transform: translateX(-50%) translateY(30px);
+}
+.newImage {
+  position: absolute;
+    width: 60px;
+    height: 60px;
+   right: 0;
+    bottom: 0;
 }

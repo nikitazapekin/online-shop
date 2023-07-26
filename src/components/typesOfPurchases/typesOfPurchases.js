@@ -16,30 +16,26 @@ item.addEventListener("click", ()=> {
     navigate(`/catalogue/${item.textContent}`);
 })
             })
-        /*   (items.current.children).forEach(item=> {
-                item.addEventListener("click", ()=> {
-                 //   console.log(item.textContent)
-                })
-            })  */
+       
 
         }
     },[])
     return (
         <div ref={items} className="typesOfPurchases">
-            <p className="typeOfPurchase">Lamps</p>
-            <p className="typeOfPurchase">Sofas</p>
-            <p className="typeOfPurchase">Tables</p>
-            <p className="typeOfPurchase">Chairs</p>
-            <p className="typeOfPurchase">Decorations</p>
-            <p className="typeOfPurchase">Shelves</p>
-            <p className="typeOfPurchase">Curtains</p>
-            <p className="typeOfPurchase">Doors</p>
-            <p className="typeOfPurchase">Wardrobes</p>
-            <p className="typeOfPurchase">Plates</p>
-            <p className="typeOfPurchase">Pillows</p>
-            <p className="typeOfPurchase">Blankets</p>
-            <p className="typeOfPurchase"></p>
-            <p className="typeOfPurchase">Clothes</p>
+            <p className="typeOfPurchase">Lamp</p>
+            <p className="typeOfPurchase">Sofa</p>
+            <p className="typeOfPurchase">Table</p>
+            <p className="typeOfPurchase">Chair</p>
+            <p className="typeOfPurchase">Decoration</p>
+            <p className="typeOfPurchase">Shelve</p>
+            <p className="typeOfPurchase">Curtain</p>
+            <p className="typeOfPurchase">Door</p>
+            <p className="typeOfPurchase">Wardrobe</p>
+            <p className="typeOfPurchase">Plate</p>
+            <p className="typeOfPurchase">Pillow</p>
+            <p className="typeOfPurchase">Blanket</p>
+            <p className="typeOfPurchase">Electronic</p>
+            <p className="typeOfPurchase">Clothe</p>
             <p className="typeOfPurchase">Various</p>
         </div>
     )

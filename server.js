@@ -42,7 +42,7 @@ const postSchema = new mongoose.Schema({
 const Post = mongoose.model('Post', postSchema);
 
 app.post('/', async (req, res) => {
-  //const {username, email, password, id } = req.body;
+ 
  let {username, email, password, id } = req.body;
   try {
    // const post = await Post.create({username, email, password, id  });
@@ -101,7 +101,7 @@ const postSchema1 = new mongoose.Schema({
   country: String, 
  title: String,
  logo: String,
- descrybtion: String,
+ describtion: String,
  rate: Number,
  neww: Boolean
  });
@@ -137,10 +137,58 @@ app.get('/tovars', async (req, res) => {
 
 
 
+app.post('/id', async (req, res) => {
+  
+ let { id } = req.body;
+  try {
+    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww');
+   
+   const filteredPosts=posts.filter((item)=> {
+//return item.type==id
+console.log(item.type+":"+id)
+if(item.type==id){
+  return item
+}
+   })
+    console.log(filteredPosts)
+    res.json(filteredPosts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' });
+  }
+});
+
+
+
+
+
+
+app.post('/item', async (req, res) => {
+  
+  let { id } = req.body;
+   try {
+     const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww');
+    
+    const filteredPosts=posts.filter((item)=> {
+ //return item.type==id
+ console.log(item.type+":"+id)
+ if(item.id==id){
+   return item
+ }
+    })
+     console.log(filteredPosts)
+     res.json(filteredPosts);
+   } catch (err) {
+     console.error(err);
+     res.status(500).json({ error: 'Failed to create a new postt.' });
+   }
+ });
+ 
+
 async function startApp() {
   try {
     await mongoose.connect(DB_url, { useUnifiedTopology: true, useNewUrlParser: true })
-   // await mongoose.connect(DB_url1, { useUnifiedTopology: true, useNewUrlParser: true })
+   
     app.listen(PORT, () => {
       console.log('SERVER STARTED ON PORT: ' + PORT);
     });

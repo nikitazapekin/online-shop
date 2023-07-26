@@ -11,7 +11,8 @@ import CataloguePage from './pages/cataloguePage/cataloguePage.js';
 import {  useSearchParams } from 'react-router-dom';
 import CataloguePageItem from './pages/cataloguePageItem/cataloguePageItem.js';
 import AddPurchase from './components/addPurchase/addPurchase.js';
-
+import TovarInfoPage from './pages/tovarInfoPage/tovarInfoPage.js';
+import ProductsPage from './pages/productsPage/productsPage.js';
 function App() {
 
 
@@ -25,6 +26,8 @@ function App() {
 <Route path="/catalogue" element={ <CataloguePage />} />
 <Route path="/catalogue/:id" element={<CataloguePageItem />} /> 
 <Route path="/add" element={<AddPurchase />} />
+<Route path="/tovarInfo/:id" element={ <TovarInfoPage />} />
+<Route path="/products" element={ <ProductsPage />} />
 </Routes>
 
     </div>

@@ -1,0 +1,9 @@
+.productsPage {
+    background-color: pink;
+    .productsTitle{
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 100px
+    }
+}

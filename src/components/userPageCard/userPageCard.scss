@@ -1,0 +1,34 @@
+.userPageCard {
+    width: 100%;
+    max-width: 80%;
+ height: 500px;
+ top: 50px;
+ position: relative;
+ border-radius: 20px;
+    .userPageCardFon {
+        border-radius: 20px;
+        width: 100%;
+        height: 100%;
+        background-color: purple;
+        opacity: 0.5;
+        position: absolute;
+        left: 0;
+        z-index: 0;
+    }
+    .userLogo{
+        position: absolute;
+        left: 150px;
+        top: 150px;
+    }
+    .userPageCardBlock {
+display: block;
+position: absolute;
+
+    }
+    h1{
+    //    position: absolute;
+        z-index: 11;
+
+    }
+   
+}

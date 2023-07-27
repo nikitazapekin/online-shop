@@ -50,7 +50,7 @@ const dispatch=useDispatch();
 
 <button
   onClick={() => {
-    const data = JSON.stringify({"email": form.email, "password": form.password, "username": form.username });
+    const data = JSON.stringify({"email": form.email, "password": form.password, "username": form.username, "date": new Date() });
     fetch('http://localhost:5000/register', { 
       method: 'POST',
       headers: {
@@ -65,53 +65,7 @@ const dispatch=useDispatch();
           navigate(`/user/${responseData.id}`);
         }
       })
-/*
-    fetch('http://localhost:5000/posts')
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((json) => {
-        let isRegistered = false;
-        console.log(json);
-        const lengthOfLogs = json.length;
-        console.log(lengthOfLogs);
-        Object.values(json).forEach((item, index) => {
-          console.log(item.email + ':' + form.email);
-          if (item.email === form.email) {
-            isRegistered = true;
-            console.log(item.email);
-          }
-        });
-      
 
-        if (!isRegistered) {
-          setIsLogged(false);
-          const data = JSON.stringify({
-            username: form.username,
-            email: form.email,
-            password: form.password,
-            id: lengthOfLogs,
-          });
-          dispatch({ type: 'USER', payload: data });
-          fetch('http://localhost:5000', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: data,
-          }).then(() => {
-            navigate(`/user/${lengthOfLogs}`);
-          });
-        } else {
-          setIsLogged(true);
-        }
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      }); */
   }} 
   type="button"
   className="continue registrationItem"

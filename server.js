@@ -4,17 +4,23 @@
 import express from 'express';
 import crypto from "crypto"
 import mongoose from 'mongoose';
+import cookie_parser from "cookie-parser"
+//let cookie_parser=require('cookie-parser')
 const PORT = 5000;
 const app = express();
 const DB_url ="mongodb+srv://nikita:nikita@cluster0.vsujhaf.mongodb.net/?retryWrites=true&w=majority"
 
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); 
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
-});
-
+}); 
+/*app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+}); */
 /*
 const secretKey = 'secret';
 function encrypt(text) {
@@ -37,45 +43,21 @@ const postSchema = new mongoose.Schema({
   email: String,
   password: String,
   id: String,
+  date: String,
+  logo: String
 });
 
 const Post = mongoose.model('Post', postSchema);
-/*
-app.post('/register', async (req, res) => {
-  let {username, email, password} = req.body;
-  let sizeOdDatas=0
-  try{
-let isRegistered =false
-    const posts = await Post.find({}, 'email username password id');
-posts.forEach(item=> {
-  sizeOdDatas++;
-  if(item.email==email){
-    isRegistered=true
-    res.json("is registered")
-  }
-})
-if(!isRegistered){
-  let id=sizeOdDatas
-    const post = await Post.create({username, id, password, email});
-    res.json("yes")
-}
-  } catch(e){
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create a new postt.' });
-  }
-})
-
-*/
-
+//запросы регистрации
 
 
 app.post('/register', async (req, res) => {
-  let { username, email, password } = req.body;
+  let { username, email, password, date } = req.body;
   let sizeOfDatas = 0;
 
   try {
     let isRegistered = false;
-    const posts = await Post.find({}, 'email username password id');
+    const posts = await Post.find({}, 'email username password id date');
     posts.forEach((item) => {
       sizeOfDatas++;
       if (item.email == email) {
@@ -86,7 +68,8 @@ app.post('/register', async (req, res) => {
 
     if (!isRegistered) {
       let id = sizeOfDatas;
-      const post = await Post.create({ username, id, password, email });
+      let logo="https://gomelculture.by/wp-content/uploads/2023/01/Male-scaled.jpg"
+      const post = await Post.create({ username, id, password, email, date, logo});
       res.json({id: id});
     }
   } catch (err) {
@@ -133,103 +116,82 @@ if(!isRegistered){
 })
 
 
-
-
-
-
-
-
-/*
-app.post('/', async (req, res) => {
- 
- let {username, email, password, id } = req.body;
-  try {
-  
-  // email=encrypt(email)
-   //password=encrypt(password)
-   const post = await Post.create({username,email, password, id});
-    console.log(post);
-    res.json(post);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create a new postt.' });
-  }
-});
-app.get('/posts', async (req, res) => {
-  try {
-    const posts = await Post.find({}, 'email username');
-    //const decryptedPosts = posts.map(post => ({
-    //  ...post._doc,
-     // email: decrypt(post.email),
-    //})); 
-res.json(posts)
-// res.json(decryptedPosts);
-   // console.log(decryptedPosts); 
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to fetch posts.' });
-  }
-});
-app.post('/log', async (req, res) => {
-  const {email, password } = req.body;
-  console.log("body:" +email+":"+password)
-  try {
-  
-    const posts = await Post.find({}, 'email password id');
-
-    Object.values(posts).forEach((item, index)=> {
-      if((item.email)==email && (item.password)==password){
-        res.json({isLogged: true, id: item.id})
-        }
- // if(decrypt(item.email)==email && decrypt(item.password)==password){
-//res.json({isLogged: true, id: item.id})
-//} 
-    })
-    res.json("unlogged")
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create a new post.' });
-  }
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
+//==================================================
+//Запрос id
 
 app.post('/userId', async (req, res) => {
-  const {id } = req.body;
- // console.log("body:" +email+":"+password)
-  try {
-  
-    const posts = await Post.find({}, 'email id username');
+  let { id} = req.body;
+  let sizeOdDatas=0
+  try{
+let isRegistered =false
+    const posts = await Post.find({}, 'email username password id date logo');
+posts.forEach(item=> {
 
-    Object.values(posts).forEach((item, index)=> {
-if(item.id==id){
-//const mail=descrypt(item.email)
-const mail=item.email
-res.json({email: mail, username: item.username, id: item.id})
+ console.log(item)
+
+ if(item.id==id ){
+  res.json({id: item.id, username: item.username, email: item.email, date: item.date, logo: item.logo})
+  isRegistered=true
+ } 
+
+})
+if(!isRegistered){
+ 
+
+    res.json("is non registered")
 }
-    })
-    res.json("Error")
-  } catch (err) {
+  } catch(err){
     console.error(err);
-    res.status(500).json({ error: 'Failed to create a new post.' });
+    res.status(500).json({ error: 'Failed to create a new postt.' , err});
   }
+})
+
+
+
+
+
+
+
+
+app.use('/userImage', (req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  next();
 });
+app.post('/userImage', async (req, res) => {
+  let { id, logo} = req.body;
+  let sizeOdDatas=0
+  try{
+    console.log("THISSSSSSSSSSSSSSSS"+logo)
+let isRegistered =false
+    const posts = await Post.find({}, 'email username password id date logo');
+posts.forEach(item=> {
+
+ //console.log(item)
+
+ if(item.id==id ){
+  item.logo=logo
+  res.json({id: item.id, username: item.username, email: item.email, date: item.date, logo: item.logo})
+  isRegistered=true
+ } 
+
+})
+if(!isRegistered){
+ 
+
+    res.json("is non registered")
+}
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' , err});
+  }
+})
 
 
-*/
+
+
 //==========================================================
-
+//запросы товаров
 const postSchema1 = new mongoose.Schema({
   type: String,
   id: Number,

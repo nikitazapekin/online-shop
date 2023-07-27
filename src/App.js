@@ -37,3 +37,70 @@ function App() {
 }
 
 export default App;
+
+
+
+/*
+import React from "react";
+import { LinksPage } from "./pages/LinksPage";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { CreatePage } from "./pages/CreatePage";
+import { DetailPage } from "./pages/DetailPage";
+import { Routes } from 'react-router-dom';
+import { AuthPage } from "./pages/AuthPage";
+
+const postData = {
+ "me": 'ddvsdsvdvsdvsvds', // Replace this with the actual data you want to send
+};
+
+fetch('http://localhost:5000/api/data', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(postData),
+})
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data); // This will log the response from the server
+  })
+  .catch((error) => {
+    console.error('Error:', error);
+  });
+
+
+
+export const useRoutes = (isAuthenticated) => {
+  if (isAuthenticated) {
+    return (
+      <Routes>
+        <Route path="/links" element={<LinksPage />} />
+        <Route path="/create" element={<CreatePage />} />
+        <Route path="/detail/:id" element={<DetailPage />} />
+      
+        </Routes>
+        );
+      }
+    
+      return (
+        <Routes>
+          <Route path="/" element={<AuthPage />} />
+        
+        </Routes>
+      );
+    };
+    
+    function App() {
+      const routes = useRoutes(true);
+    
+      return (
+        <Router>
+          <div className="container">
+            {routes}
+          </div>
+        </Router>
+      );
+    }
+    
+    export default App;
+    */

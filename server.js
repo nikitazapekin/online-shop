@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
-
+/*
 const secretKey = 'secret';
 function encrypt(text) {
   const cipher = crypto.createCipher('aes-256-cbc', secretKey);
@@ -29,7 +29,7 @@ function decrypt(encryptedText) {
   let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
   decrypted += decipher.final('utf8');
   return decrypted;
-}
+} */
 
 
 const postSchema = new mongoose.Schema({
@@ -40,14 +40,113 @@ const postSchema = new mongoose.Schema({
 });
 
 const Post = mongoose.model('Post', postSchema);
+/*
+app.post('/register', async (req, res) => {
+  let {username, email, password} = req.body;
+  let sizeOdDatas=0
+  try{
+let isRegistered =false
+    const posts = await Post.find({}, 'email username password id');
+posts.forEach(item=> {
+  sizeOdDatas++;
+  if(item.email==email){
+    isRegistered=true
+    res.json("is registered")
+  }
+})
+if(!isRegistered){
+  let id=sizeOdDatas
+    const post = await Post.create({username, id, password, email});
+    res.json("yes")
+}
+  } catch(e){
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' });
+  }
+})
 
+*/
+
+
+
+app.post('/register', async (req, res) => {
+  let { username, email, password } = req.body;
+  let sizeOfDatas = 0;
+
+  try {
+    let isRegistered = false;
+    const posts = await Post.find({}, 'email username password id');
+    posts.forEach((item) => {
+      sizeOfDatas++;
+      if (item.email == email) {
+        isRegistered = true;
+        res.json("is registered");
+      }
+    });
+
+    if (!isRegistered) {
+      let id = sizeOfDatas;
+      const post = await Post.create({ username, id, password, email });
+      res.json({id: id});
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' });
+  }
+});
+
+
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+  res.status(500).json({ error: 'Ошибка подключения к базе данных' });
+});
+
+
+
+
+app.post('/login', async (req, res) => {
+  let { email,  password} = req.body;
+  let sizeOdDatas=0
+  try{
+let isRegistered =false
+    const posts = await Post.find({}, 'email username password id');
+posts.forEach(item=> {
+ // sizeOdDatas++;
+ console.log(item)
+ console.log(item.email+":"+email)
+ console.log(item.password+":"+password)
+ if(item.email==email && item.password==password){
+  res.json({id: item.id})
+  isRegistered=true
+ }
+
+})
+if(!isRegistered){
+ 
+
+    res.json("is non registered")
+}
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' , err});
+  }
+})
+
+
+
+
+
+
+
+
+/*
 app.post('/', async (req, res) => {
  
  let {username, email, password, id } = req.body;
   try {
-   // const post = await Post.create({username, email, password, id  });
-   email=encrypt(email)
-   password=encrypt(password)
+  
+  // email=encrypt(email)
+   //password=encrypt(password)
    const post = await Post.create({username,email, password, id});
     console.log(post);
     res.json(post);
@@ -59,13 +158,13 @@ app.post('/', async (req, res) => {
 app.get('/posts', async (req, res) => {
   try {
     const posts = await Post.find({}, 'email username');
-    const decryptedPosts = posts.map(post => ({
-      ...post._doc,
-      email: decrypt(post.email),
-    }));
-
-    res.json(decryptedPosts);
-    console.log(decryptedPosts);
+    //const decryptedPosts = posts.map(post => ({
+    //  ...post._doc,
+     // email: decrypt(post.email),
+    //})); 
+res.json(posts)
+// res.json(decryptedPosts);
+   // console.log(decryptedPosts); 
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to fetch posts.' });
@@ -76,14 +175,15 @@ app.post('/log', async (req, res) => {
   console.log("body:" +email+":"+password)
   try {
   
-    const posts = await Post.find({}, 'email password');
+    const posts = await Post.find({}, 'email password id');
 
     Object.values(posts).forEach((item, index)=> {
-
-//if(item.email==email && item.password==password){
-  if(decrypt(item.email)==email && decrypt(item.password)==password){
-  res.json("logged")
-}
+      if((item.email)==email && (item.password)==password){
+        res.json({isLogged: true, id: item.id})
+        }
+ // if(decrypt(item.email)==email && decrypt(item.password)==password){
+//res.json({isLogged: true, id: item.id})
+//} 
     })
     res.json("unlogged")
   } catch (err) {
@@ -91,6 +191,43 @@ app.post('/log', async (req, res) => {
     res.status(500).json({ error: 'Failed to create a new post.' });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+app.post('/userId', async (req, res) => {
+  const {id } = req.body;
+ // console.log("body:" +email+":"+password)
+  try {
+  
+    const posts = await Post.find({}, 'email id username');
+
+    Object.values(posts).forEach((item, index)=> {
+if(item.id==id){
+//const mail=descrypt(item.email)
+const mail=item.email
+res.json({email: mail, username: item.username, id: item.id})
+}
+    })
+    res.json("Error")
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new post.' });
+  }
+});
+
+
+*/
 //==========================================================
 
 const postSchema1 = new mongoose.Schema({

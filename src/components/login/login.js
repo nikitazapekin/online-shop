@@ -12,7 +12,26 @@ const Login =()=> {
                 setForm({...form, [event.target.name]: event.target.value})
                     }
                     const sendRequest=()=> {
+                      /*
                       const data = JSON.stringify({"email": form.email, "password": form.password });
+                      fetch('http://localhost:5000/login', { 
+                        method: 'POST',
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: data
+                      })
+                        .then(response => response.json())
+                        .then(responseData => {
+                          console.log(responseData);
+                          if(responseData!="is registered"){
+                            navigate(`/user/${responseData.id}`);
+                          }
+                        }) .catch((error) => {
+                          console.error('Error fetching data:', error);
+                        }); */
+
+                     /* const data = JSON.stringify({"email": form.email, "password": form.password });
                       console.log(data)
                       fetch('http://localhost:5000/log', { 
                         method: 'POST',
@@ -24,13 +43,13 @@ const Login =()=> {
                         .then(response => response.json())
                         .then(responseData => {
                           console.log(responseData);
-                          if(responseData=="logged"){
-                            navigate('/account');
+                          if(responseData.isLogged==true){
+                            navigate(`/account/${responseData.id}`);
                           }
                         })
                         .catch(error => {
                           console.error('Ошибка:', error);
-                        });
+                        }); */
                     }
     return (
         <div className="login">
@@ -50,31 +69,29 @@ const Login =()=> {
             <button 
 
 onClick={() => {
-  sendRequest()
-   /* const data = JSON.stringify({"email": form.email, "password": form.password });
-    console.log(data)
-    fetch('http://localhost:5000/log', { 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: data
-    })
-      .then(response => response.json())
-      .then(responseData => {
-        console.log(responseData);
-        if(responseData=="logged"){
-          navigate('/account');
-        }
-      })
-      .catch(error => {
-        console.error('Ошибка:', error);
-      }); */
+  const data = JSON.stringify({"email": form.email, "password": form.password });
+  fetch('http://localhost:5000/login', { 
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: data
+  })
+    .then(response => response.json())
+    .then(responseData => {
+      console.log(responseData);
+      if(responseData!="is non registered"){
+        navigate(`/user/${responseData.id}`);
+      }
+    }) .catch((error) => {
+      console.error('Error fetching data:', error);
+    });
+  
   }}
 
             type="button" 
             className="continue registrationItem">continue</button>
-            <Link to="/register" style={{textDecoration: "none", color: "#fff"}}><h2 className="registrationItem">  or register</h2> </Link>
+            <Link to={`/register`} style={{textDecoration: "none", color: "#fff"}}><h2 className="registrationItem">  or register</h2> </Link>
             <div className="registerFon"></div>
         </div>
     )

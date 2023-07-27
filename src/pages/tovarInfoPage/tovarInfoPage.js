@@ -5,6 +5,7 @@ import { useParams } from "react-router"
 import Nn from "./new.png"
 import Sale from "./sale.png"
 import { useEffect, useState } from "react"
+import Comments from "../../components/comments/comments.js"
 const TovarInfoPage=()=> {
     const {id} =useParams()
     const [item, setItem]=useState();
@@ -28,7 +29,7 @@ useEffect(()=> {
   
     return (
         <div className="tovarInfoPage">
-            <Navigation />
+      <Navigation />
         {item!=undefined  && (
             <div className="puschaseCard">
                 <div className="imagePurchaseBlock">
@@ -42,8 +43,8 @@ useEffect(()=> {
                 <button className="buyBtn">Buy</button>
                 <Stars />
             </div>
-        )}
-    
+        )} 
+    <Comments />
         </div>
     )
 }

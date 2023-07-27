@@ -6,8 +6,6 @@ const WelcomeUser =()=> {
     console.log(myState)
     return (
         <div className="welcomeUser">
-       
-
 { myState.username != undefined && (
 <p>
 Добро пожаловать  {myState.username}! 

@@ -13,6 +13,7 @@ import CataloguePageItem from './pages/cataloguePageItem/cataloguePageItem.js';
 import AddPurchase from './components/addPurchase/addPurchase.js';
 import TovarInfoPage from './pages/tovarInfoPage/tovarInfoPage.js';
 import ProductsPage from './pages/productsPage/productsPage.js';
+import UserPage from './pages/userPage/userPage.js';
 function App() {
 
 
@@ -22,7 +23,8 @@ function App() {
   <Route path="/" element={ <Homepage />} />
 <Route path="/register" element={ <RegistrationWebPage />} />
 <Route path="/login" element={ <LoginPage />} />
-<Route path="/user" element={ <WelcomeUser />} />
+<Route path="/user/:id" element={ <UserPage />} />
+<Route path="/account/:id" element={ <UserPage />} />
 <Route path="/catalogue" element={ <CataloguePage />} />
 <Route path="/catalogue/:id" element={<CataloguePageItem />} /> 
 <Route path="/add" element={<AddPurchase />} />

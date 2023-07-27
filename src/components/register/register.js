@@ -17,15 +17,8 @@ const dispatch=useDispatch();
   password: ''
       })
 
-      function decrypt(encryptedText) {
-        const decipher = crypto.createDecipher('aes-256-cbc', 'mySecretKey');
-        let decrypted = decipher.update(encryptedText, 'hex', 'utf8');
-        decrypted += decipher.final('utf8');
-        return decrypted;
-      }
-      const sendRequest=()=> {
+  
     
-      }
       const changeHandler=(event)=> {
         setForm({...form, [event.target.name]: event.target.value})
             }
@@ -57,7 +50,22 @@ const dispatch=useDispatch();
 
 <button
   onClick={() => {
-    sendRequest();
+    const data = JSON.stringify({"email": form.email, "password": form.password, "username": form.username });
+    fetch('http://localhost:5000/register', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: data
+    })
+      .then(response => response.json())
+      .then(responseData => {
+        console.log(responseData);
+        if(responseData!="is registered"){
+          navigate(`/user/${responseData.id}`);
+        }
+      })
+/*
     fetch('http://localhost:5000/posts')
       .then((response) => {
         if (!response.ok) {
@@ -95,7 +103,7 @@ const dispatch=useDispatch();
             },
             body: data,
           }).then(() => {
-            navigate('/user');
+            navigate(`/user/${lengthOfLogs}`);
           });
         } else {
           setIsLogged(true);
@@ -103,8 +111,8 @@ const dispatch=useDispatch();
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
-      });
-  }}
+      }); */
+  }} 
   type="button"
   className="continue registrationItem"
 >

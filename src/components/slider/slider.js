@@ -54,10 +54,14 @@ const Slider = () => {
         return response.json();
       })
       .then((res) => {
-        const filteredData = res.filter((item, index) => {
+        const filteredData = Object.values(res).filter((item, index) => {
           return item.neww !== false;
         });
+        console.log(filteredData)
         setFilteredElems(filteredData);
+        filteredData[0].forEach(item=> {
+          console.log(item)
+        })
       });
 
    
@@ -75,19 +79,21 @@ if(slider.current!=undefined){
     <>
       <h1 className="animesLastMonth">Новые товары</h1>
       <ul ref={slider} className="gallery">
-        {filteredElems.map((item) => (
-             <Link style={{textDecoration: "none", color: "black"}} to={`/tovarInfo/${item.id}`}>
-          <li key={item.id} style={{ background: '#f6bd60' }}>
-            <img src={item.logo} alt="purchase" className="sliderImage" />
-            <img src={Nn} className='newImage' alt="new" />
-          
-            <p className="sliderTitleAnime">{item.title} <br /> 
-            {item.price} rub
-            </p>
-         
-          </li> 
-          </Link>
-        ))}
+    
+{filteredElems[0]!=undefined && filteredElems[0].map((item) => ( 
+ <Link style={{textDecoration: "none", color: "black"}} to={`/tovarInfo/${item.id}`}>
+ <li key={item.id} style={{ background: '#f6bd60' }}>
+   <img src={item.logo} alt="purchase" className="sliderImage" />
+   <img src={Nn} className='newImage' alt="new" />
+ 
+   <p className="sliderTitleAnime">{item.title} <br /> 
+   {item.price} rub
+   </p>
+
+ </li> 
+ </Link>
+))}  
+
         <div className="sliderFon"></div>
       </ul>
     </>

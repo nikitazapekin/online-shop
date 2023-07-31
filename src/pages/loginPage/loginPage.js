@@ -1,18 +1,17 @@
 import Login from "../../components/login/login.js"
 import Navigation from "../../components/navigation/navigation.js"
 import "./loginPage.scss"
+import Footer from "../../components/footer/footer.js"
 const LoginPage=()=> {
     return (
         <>
         <Navigation />
         <Login />
-        {/*<div class="context">
-        <h1>Pure Css Animated Background</h1>
-    </div> */}
+     
 
 
-<div class="area" >
-            <ul class="circles">
+<div className="area" >
+            <ul className="circles">
                     <li></li>
                     <li></li>
                     <li></li>
@@ -25,6 +24,7 @@ const LoginPage=()=> {
                     <li></li>
             </ul>
     </div >
+    <Footer />  
         </>
     )
 }

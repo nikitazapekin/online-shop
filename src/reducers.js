@@ -17,4 +17,19 @@ const reducer=(state=initialState, action)=>{
     }
 return state
 }
-export default reducer
+
+
+
+const initialStateOfAuth = {
+    isRegistered: false
+  };
+  
+const authReducer=(state=initialStateOfAuth, action)=>{
+    if(action.type=="CHECK_AUTH"){
+
+       state=action.payload
+       // console.log(JSON.stringify(state) +":"+action.payload )
+    }
+return state
+}
+export default authReducer

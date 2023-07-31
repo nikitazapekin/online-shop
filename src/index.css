@@ -6,3 +6,6 @@
 body::-webkit-scrollbar {
   width: 0 !important;
 }
+html, body {
+  height: 100%;
+}

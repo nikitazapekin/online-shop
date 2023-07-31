@@ -14,11 +14,55 @@ import AddPurchase from './components/addPurchase/addPurchase.js';
 import TovarInfoPage from './pages/tovarInfoPage/tovarInfoPage.js';
 import ProductsPage from './pages/productsPage/productsPage.js';
 import UserPage from './pages/userPage/userPage.js';
+import { Suspense } from 'react';
+import Spinner from './components/spinner/spinner.js';
+import AppRoutes from './routes/appRoutes.js';
+import { useEffect } from 'react';
 function App() {
 
+ useEffect(()=> {
 
+   /* fetch('http://localhost:5000/isRegistered', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({isRegistered: false, username: "", password: "", login: "", id: 0})
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(responseData => {
+        console.log(responseData);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+    */
+   /* fetch('http://localhost:5000/isRegistered', { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    //  body: {isRegistered: false, username: "", password: "", login: "", id: 0}
+    body: JSON.stringify({isRegistered: false, username: "", password: "", login: "", id: 0})
+
+    })
+      .then(response => response.json())
+      .then(responseData => {
+     
+        console.log(responseData);
+      }) .catch((error) => {
+        console.error('Error fetching data:', error);
+      });  */
+    }, []) 
   return (
     <div className="App">
+      <AppRoutes />
+         {/* <Suspense fallback={<Spinner />}>
   <Routes >
   <Route path="/" element={ <Homepage />} />
 <Route path="/register" element={ <RegistrationWebPage />} />
@@ -31,6 +75,7 @@ function App() {
 <Route path="/tovarInfo/:id" element={ <TovarInfoPage />} />
 <Route path="/products" element={ <ProductsPage />} />
 </Routes>
+  </Suspense> */}
 
     </div>
   );

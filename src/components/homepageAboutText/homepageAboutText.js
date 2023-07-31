@@ -1,21 +1,55 @@
 import "./homepageAboutText.scss"
+import { useEffect, useRef, useState } from "react"
 const HomepageAboutText=()=> {
+    const [distance, setDistance]=useState(0)
+    const elems=useRef()
+    const styles={
+        position: "absolute",
+left: distance-600
+     //   left
+    }
+    const scrollFunction=()=> {
+        let value =window.scrollY;
+        setDistance(value)
+      //  console.log(value)
+
+    }
+    useEffect(()=> {
+
+   /*
+    window.addEventListener('scroll', function (){
+       // elems.
+         let value =window.scrollY;
+         setDistance(value)
+         console.log(value)
+     })
+  
+     return () => {
+       window.removeEventListener('scroll')
+            
+     
+            }; */
+            window.addEventListener('scroll', scrollFunction)
+           
+              return () => {
+                window.removeEventListener('scroll', scrollFunction)
+                     
+              
+                     }; 
+    }, [])
     return (
     
     <>
- <div class="content">
+ <div style={styles} ref={elems} className="content">
   <h2 class="text_shadows">Our catalogue</h2>
 </div>
+
+<button  style={{position: "absolute", zIndex: 111}} onClick={()=> console.log(elems.current)}>
+        sjsjsssssssss
+    </button>
 </>
     )
 }
 export default HomepageAboutText
 
 
-   {/* <div className="homepageAboutText">
-            <h1 className="aboutUs">About us</h1>
-            <h2>
-
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
-            </h2>
-    </div> */}

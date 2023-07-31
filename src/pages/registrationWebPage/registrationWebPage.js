@@ -1,6 +1,6 @@
 import Navigation from "../../components/navigation/navigation.js"
 import Register from "../../components/register/register.js"
-
+import Footer from "../../components/footer/footer.js"
 const RegistrationWebPage=()=> {
     return (
         <>
@@ -23,6 +23,7 @@ const RegistrationWebPage=()=> {
                     <li></li>
             </ul>
     </div >
+    <Footer />
         </>
     )
 }

@@ -5,17 +5,21 @@ import express from 'express';
 import crypto from "crypto"
 import mongoose from 'mongoose';
 import cookie_parser from "cookie-parser"
+import cors from 'cors';
+
 //let cookie_parser=require('cookie-parser')
 const PORT = 5000;
 const app = express();
 const DB_url ="mongodb+srv://nikita:nikita@cluster0.vsujhaf.mongodb.net/?retryWrites=true&w=majority"
 
 app.use(express.json({ limit: '10mb' }));
+app.use(cors());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); 
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 }); 
+app.use(cookie_parser('1234'))
 /*app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -222,10 +226,23 @@ res.json(post);
 
 app.get('/tovars', async (req, res) => {
   try {
-    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww');
-   
-    res.json(posts);
-    console.log(posts);
+    const { _limit, _page } = req.query;
+    const limit = parseInt(_limit) || 20;
+    const page = parseInt(_page) || 1;
+
+    const totalCount = await Post1.countDocuments();
+    const totalPages = Math.ceil(totalCount / limit);
+
+    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww')
+      .skip((page - 1) * limit)
+      .limit(limit);
+
+    res.json({
+      data: posts,
+      total_pages: totalPages,
+      current_page: page,
+      total_count: totalCount,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to fetch posts.' });
@@ -283,6 +300,83 @@ app.post('/item', async (req, res) => {
    }
  });
  
+//=========================================
+/*
+const postSchema2 = new mongoose.Schema({
+ isRegistered: Boolean,
+ username: String,
+ login: String,
+ password: String,
+ id: Number
+ });
+ const Post2 = mongoose.model('auth', postSchema2);
+app.post('/isRegistered', async (req, res) => {
+ // res.json("sss")
+  
+  let { isRegistered, username, login, password, id } = req.body;
+   try {
+    await Post2.deleteMany({});
+    const posts = await Post2.create({isRegistered, username, login, password, id });
+  //const posts = await Post1.find({}, 'id username password login isRegistered')
+   
+     res.json(posts);
+   } catch (err) {
+     console.error(err);
+     res.status(500).json({ error: 'Failed to create a new postt.' });
+   }  
+ });
+ 
+
+
+app.put('/isRegisteredCheck', async (req, res) => {
+  let { isRegistered, username, login, password, id } = req.body;
+
+  try {
+    // Очищаем коллекцию Post2
+    await Post2.deleteMany({});
+
+    // Получаем данные из коллекции Post
+    const postsUsers = await Post.find({}, 'id username password login');
+    let currentId = postsUsers.length;
+
+    // Создаем новый документ и добавляем его в коллекцию Post2
+    await Post2.create({
+      isRegistered: isRegistered,
+      id: currentId,
+      username: username,
+      password: password,
+      login: login,
+    });
+
+   
+    const posts = await Post2.find({}, 'id username password login isRegistered');
+
+    res.json(posts);
+  } catch (e) {
+    console.log(e);
+    res.json(e);
+  }
+});
+
+
+
+
+app.get('/stateOfAuth', async (req, res) => {
+  try {
+    const posts = await Post2.find({}, 'id username password login isRegistered');
+    res.json(posts)
+   
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch posts.' });
+  }
+});
+*/
+
+
+
+ 
+
 
 async function startApp() {
   try {
@@ -299,3 +393,4 @@ async function startApp() {
 
 startApp();  
 
+//npm install cors

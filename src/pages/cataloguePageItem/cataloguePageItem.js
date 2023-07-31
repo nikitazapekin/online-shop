@@ -31,15 +31,13 @@ useEffect(()=> {
 
     return (
 <div className="cataloguePageItem">
-
-
-
             <Navigation />
             <h1 className="titleOfCataloguePage">
             Found products {id}
             </h1>
 <div className="catalogPageItemTable">
-{elems!=undefined && elems.map(item=> (
+    
+{elems!=undefined && (elems).map(item=> (
     <Link to={`/tovarInfo/${item.id}`}>
     <div className="cataloguePageItemTableElement">
 <img src={item.logo} className="purchaseImage" alt="purchase" />
@@ -47,7 +45,7 @@ useEffect(()=> {
 
     </div>
     </Link>
-))}
+))} 
 </div>
 </div>
     )

@@ -1,6 +1,7 @@
 import { useState } from "react"
-const AddPurchase=()=> {
 
+const AddPurchase=()=> {
+const [stat, setStat]=useState(24)
  const [form, setForm]= useState({
   email: '',
   password: ''
@@ -35,7 +36,7 @@ const AddPurchase=()=> {
             <h1>new</h1>
             <input onChange={changeHandler} name="neww" placeholder="rate" />
             <button onClick={()=> {
- const data = JSON.stringify({   "type": form.type, "id": form.id, "sale": form.sale, "neww": form.neww,  "price": form.price, "country": form.country, "title": form.title, "logo": form.logo, "describtion": form.describtion, "rate": form.rate  });
+ const data = JSON.stringify({   "type": form.type, "id": stat, "sale": form.sale, "neww": form.neww,  "price": form.price, "country": form.country, "title": form.title, "logo": form.logo, "describtion": form.describtion, "rate": form.rate  });
  console.log(data)
  fetch('http://localhost:5000/add', { 
    method: 'POST',
@@ -52,7 +53,10 @@ const AddPurchase=()=> {
    .catch(error => {
      console.error('Ошибка:', error);
    });
+   setStat(prev=> prev+1)
             }}>add</button>
+
+            {stat}
         </div>
     )
 }

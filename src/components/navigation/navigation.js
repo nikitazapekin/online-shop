@@ -124,7 +124,7 @@ function deleteAllCookies() {
   }
 }
 
-// Вызываем функцию для удаления всех cookie
+
 deleteAllCookies();
 navigate(`/`);
                 }}>

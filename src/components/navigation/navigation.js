@@ -24,18 +24,18 @@ const Navigation =()=> {
   const cookiesString = document.cookie;
   const cookiesArray = cookiesString.split(';');
   const userCookie = cookiesArray.find(cookie => cookie.trim().startsWith('user='));
-  console.log( (userCookie))
+ // console.log( (userCookie))
   // Если куки с именем 'user' найден, получаем его значение
   let userValue = null;
   if (userCookie) {
   let userCookieValue = userCookie.split('=')[1];
     let indexOfcav=userCookieValue.lastIndexOf('}')
   let  userCookieValueNew=userCookieValue.substring(indexOfcav+1, -userCookieValue.length)
-    console.log(userCookieValueNew)
+  //  console.log(userCookieValueNew)
     try {
       userValue = JSON.parse(decodeURIComponent(userCookieValueNew));
       setIsAuth(userValue)
-      console.log(userValue)
+   //   console.log(userValue)
     } catch (error) {
       console.error('Ошибка разбора куки user:', error);
     }
@@ -47,7 +47,7 @@ function search(query) {
     .then((response) => response.json())
     .then((json) => {
       if (json !== undefined) {
-        console.log(json)
+      //  console.log(json)
         const filteredItems = json.data.filter((item) =>
           item.title.toLowerCase().includes(query.toLowerCase())
         );

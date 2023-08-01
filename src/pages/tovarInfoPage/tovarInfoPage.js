@@ -6,6 +6,8 @@ import Nn from "./new.png"
 import Sale from "./sale.png"
 import { useEffect, useState } from "react"
 import Comments from "../../components/comments/comments.js"
+import { Suspense } from "react"
+import Spinner from "../../components/spinner/spinner.js"
 const TovarInfoPage=()=> {
     const {id} =useParams()
     const [item, setItem]=useState();
@@ -33,7 +35,9 @@ useEffect(()=> {
         {item!=undefined  && (
             <div className="puschaseCard">
                 <div className="imagePurchaseBlock">
+            <Suspense fallback={<Spinner />} >
                 <img src={item[0].logo} alt="item" className="purchaseCardImage" />
+             </Suspense>
                 {item[0].neww==true ? <img src={Nn} className="itemNew" alt="itemNew" /> : null}
                 {item[0].sale==true ? <img src={Sale} className="itemSale" alt="itemNewww" /> : null}
                 </div>
@@ -42,9 +46,9 @@ useEffect(()=> {
                 <h2 className="priceOfItem">{item[0].price} rub</h2>
                 <button className="buyBtn">Buy</button>
                 <Stars />
+                <Comments id={id} item={item} />
             </div>
         )} 
-    <Comments />
         </div>
     )
 }

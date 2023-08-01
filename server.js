@@ -206,15 +206,30 @@ const postSchema1 = new mongoose.Schema({
  logo: String,
  describtion: String,
  rate: Number,
- neww: Boolean
+ neww: Boolean,
+ //comments: Object
+ comments: Array
  });
  const Post1 = mongoose.model('Shop', postSchema1);
 app.post('/add', async (req, res) => {
-  const {type, id, sale, price, country, title, logo, describtion, rate, neww } = req.body;
+  const {type, id, sale, price, country, title, logo, describtion, rate, neww} = req.body;
  
   try {
 //  res(1)
-const post = await Post1.create({type, id, sale, price, country, title, logo, describtion, rate, neww});
+//let comments={}
+const post = await Post1.create({type, id, sale, price, country, title, logo, describtion, rate, neww,
+ // comments: {}
+ comments: []
+ /* comments: {
+    comm: {
+      text: "Some comment text",
+      author: "John Doe",
+      timestamp: Date.now(),
+      rate: 4,
+      id: 1
+    }
+  }  */
+});
 console.log(post);
 res.json(post);
   } catch (err) {
@@ -257,7 +272,7 @@ app.post('/id', async (req, res) => {
   
  let { id } = req.body;
   try {
-    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww');
+    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
    
    const filteredPosts=posts.filter((item)=> {
 //return item.type==id
@@ -283,7 +298,7 @@ app.post('/item', async (req, res) => {
   
   let { id } = req.body;
    try {
-     const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww');
+     const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
     
     const filteredPosts=posts.filter((item)=> {
  //return item.type==id
@@ -294,6 +309,56 @@ app.post('/item', async (req, res) => {
     })
      console.log(filteredPosts)
      res.json(filteredPosts);
+   } catch (err) {
+     console.error(err);
+     res.status(500).json({ error: 'Failed to create a new postt.' });
+   }
+ });
+
+
+
+
+
+ app.post('/addComment', async (req, res) => {
+  
+  let { form, id, date, username, textComment } = req.body;
+   try {
+     const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+     const post = await Post1.findOne({ id });
+    // console.log("this post1"+post)
+     if (!post) {
+      return res.status(404).json({ error: 'Post not found.' });
+    }
+  
+
+
+   if (!post.comments || !Array.isArray(post.comments)) {
+    post.comments = []; // Если свойства нет или не является массивом, создаем пустой массив
+  }
+  
+  // Добавляем новый комментарий в массив comments
+  const newComment={
+    //  "text": form.comment,
+    "text": textComment,
+      "author": username,
+      "id": post.comments.length,
+      "date": date,
+      "rate": form.rate
+    }
+ 
+   console.log(post)
+
+  post.comments.push(newComment);
+  
+  // Результат с добавленным комментарием
+  console.log(post);
+   // post.comments.push({ form, date });
+   //console.log("FF"+JSON.stringify(form)+":"+date+":"+username)
+  // post.comments.comm.push({ text: form, author: 'John Doe', timestamp: date });
+  //post.comments.comm.push({ text: form.comment, author: username, timestamp: date });
+    await post.save(); // Сохранить изменения в базе данных
+
+    res.json(post)
    } catch (err) {
      console.error(err);
      res.status(500).json({ error: 'Failed to create a new postt.' });

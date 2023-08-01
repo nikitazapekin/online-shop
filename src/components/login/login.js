@@ -64,11 +64,9 @@ onClick={() => {
   })
     .then(response => response.json())
     .then(responseData => {
-     // setDataUser(responseData)
       console.log(responseData);
       let expirationDate = new Date();
       expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
-      //document.cookie = "имя=cok;expires=" + expirationDate.toUTCString()+";HttpOnly";
       document.cookie = `user=${JSON.stringify({name: responseData.username, isLogged: true, id: responseData.id})}expires=` + expirationDate.toUTCString()
       navigate(`/user/${responseData.id}`);
     }) .catch((error) => {

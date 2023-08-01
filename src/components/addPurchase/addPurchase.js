@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 const AddPurchase=()=> {
-const [stat, setStat]=useState(24)
+const [stat, setStat]=useState(142)
  const [form, setForm]= useState({
   email: '',
   password: ''

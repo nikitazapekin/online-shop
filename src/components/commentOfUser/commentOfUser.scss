@@ -1,14 +1,82 @@
+$delete-red: red;
 .avatarOfUser {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     position: absolute;
+    left: 0;
 }
 .commentOfUser {
 height: 60px;
 display: flex;
 width: 100%;
+max-width: 100%;
+justify-content: space-between;
 }
 .blockOfUserComment {
     display: block;
+    position: absolute;
+    left: 100px;
 }
+.commentOfUserSection{
+    display: flex;
+}
+.userCommentDate {
+  position: absolute;
+  right: 0;
+  margin-right: 100px;
+}
+
+
+.btn {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: 1px solid lighten(gray, 24%);
+    height: 48px;
+    padding: 0 24px 0 16px;
+    letter-spacing: .25px;
+    border-radius: 24px;
+    cursor: pointer;
+    
+    &:focus {
+      outline: none;
+    }
+    
+    .mdi {
+      margin-right: 8px;
+    }
+  }
+  
+  .btn-delete {
+    font-size: 16px;
+    color: red;
+    
+    >.mdi-delete-empty {
+      display: none;
+    }
+    
+    &:hover {
+      background-color: lighten(red, 48%);
+      
+      >.mdi-delete-empty {
+        display: block;
+      }
+      
+      >.mdi-delete {
+        display: none;
+      }
+    }
+    
+  
+    
+    &:focus {
+      box-shadow: 0 0 0 4px lighten(red, 40%);
+    }
+  }
+  .trashCan {
+    position: absolute;
+    right: 0;
+    margin-right: 40px;
+    cursor: pointer;
+  }

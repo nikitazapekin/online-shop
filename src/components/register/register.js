@@ -74,40 +74,6 @@ document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, i
         }
       })
 
-
-// Срок годности до конца текущего сеанса (закрытие браузера)
-//document.cookie = "имя=значение;expires=0";
-
-// Срок годности на определенное количество секунд
-   
-/*
-const myObject = { name: "Nikita" };
-const myObjectJson = JSON.stringify(myObject);
-
-let expirationDate = new Date();
-expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000));
-
-// Устанавливаем cookie с атрибутами и значением JSON (без HttpOnly)
-document.cookie = `имя=${myObjectJson};expires=${expirationDate.toUTCString()}`;
-
-// Получаем cookie и преобразуем его значение обратно в объект
-function getCookieValueAsObject(name) {
-  const value = "; " + document.cookie;
-  const parts = value.split("; " + name + "=");
-  if (parts.length === 2) {
-    const cookieValue = parts.pop().split(";").shift();
-    return JSON.parse(cookieValue);
-  }
-}
-
-const cookieObject = getCookieValueAsObject("имя");
-console.log(cookieObject); // Выведет { name: "Nikita" }
- */
-
-
-
-
-   
   }} 
   type="button"
   className="continue registrationItem"

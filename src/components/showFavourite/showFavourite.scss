@@ -1,0 +1,55 @@
+.showFavouritee {
+    width: 100%;
+    height: 400px;
+    background-color: rgb(34, 242, 93);
+    position: absolute;
+    bottom: 0;
+    z-index: 11111;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+    .favDataItem {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-color: rgb(190, 215, 48);
+        .favDataImage {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+
+        }
+        .lineOfFav {
+            position: absolute;
+            left: 110px;
+            display: flex;
+            width: 150px;
+            top: 10px
+        }
+        .favItemDescribtion{
+           position: absolute;
+           left: 125px;
+           top: 50px
+        }
+        .favTrashCan{
+            position: absolute;
+            right: 0;
+            margin-right: 50px;
+            top: 40px;
+            cursor: pointer;
+        }
+    }
+    .payForAll {
+        position: relative;
+        background-color: gold;
+        color: #fff;
+        width: 200px;
+        height: 70px;
+        border: none;
+        cursor: pointer;
+        left: 100px;
+        top: 10px
+    }
+}

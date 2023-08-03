@@ -32,3 +32,19 @@ position: absolute;
     }
    
 }
+.userFavouriteAndBought {
+   display:flex;
+   justify-content: center;
+   position: absolute;
+   left: 50%;
+   z-index: 123;
+   top: 50px;
+   transform: translateX(-50%);
+   .showBought, .showFavourite {
+    cursor: pointer;
+    font-size: 32px;
+   }
+   .showBought{
+    margin-left: 10px;
+   }
+}

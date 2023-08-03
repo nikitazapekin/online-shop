@@ -1,0 +1,37 @@
+.showBoughtt {
+    width: 100%;
+    height: 400px;
+    background-color: rgb(34, 242, 93);
+    position: absolute;
+    bottom: 0;
+    z-index: 11111;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow-y: scroll;
+    .boughtDataItem {
+        position: relative;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-color: rgb(190, 215, 48);
+        .boughtDataImage {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+
+        }
+        .lineOfBought {
+            position: absolute;
+            left: 110px;
+            display: flex;
+            width: 150px;
+            top: 10px
+        }
+        .boughtItemDescribtion{
+            position: absolute;
+            left: 125px;
+            top: 50px
+         }
+    }
+}

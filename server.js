@@ -6,14 +6,24 @@ import crypto from "crypto"
 import mongoose from 'mongoose';
 import cookie_parser from "cookie-parser"
 import cors from 'cors';
+import bodyParser from 'body-parser';
 
 //let cookie_parser=require('cookie-parser')
 const PORT = 5000;
 const app = express();
 const DB_url ="mongodb+srv://nikita:nikita@cluster0.vsujhaf.mongodb.net/?retryWrites=true&w=majority"
+/*const corsOptions = {
+  origin: 'http://localhost:3000',
+}; */
+/*const corsOptions = {
+  origin: 'http://localhost:3000', // Specify the allowed origin (your frontend URL)
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify the allowed methods
+  allowedHeaders: 'Content-Type,Authorization', // Specify the allowed headers
+}; */
 
 app.use(express.json({ limit: '10mb' }));
 app.use(cors());
+app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*'); 
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -48,7 +58,9 @@ const postSchema = new mongoose.Schema({
   password: String,
   id: String,
   date: String,
-  logo: String
+  logo: String,
+  favourite: Array,
+  bought: Array
 });
 
 const Post = mongoose.model('Post', postSchema);
@@ -73,7 +85,17 @@ app.post('/register', async (req, res) => {
     if (!isRegistered) {
       let id = sizeOfDatas;
       let logo="https://gomelculture.by/wp-content/uploads/2023/01/Male-scaled.jpg"
-      const post = await Post.create({ username, id, password, email, date, logo});
+      const favourite=[]
+      const bought=[]
+    
+      const post = await Post.create({ username, id, password, email, date, logo, favourite, bought});
+      if (!post.favourite || !Array.isArray(post.favourite)) {
+        post.favourite = [];
+      }
+      if (!post.bought || !Array.isArray(post.bought)) {
+        post.bought = [];
+      }
+      post.save()
       res.json({id: id});
     }
   } catch (err) {
@@ -220,15 +242,7 @@ app.post('/add', async (req, res) => {
 const post = await Post1.create({type, id, sale, price, country, title, logo, describtion, rate, neww,
  // comments: {}
  comments: []
- /* comments: {
-    comm: {
-      text: "Some comment text",
-      author: "John Doe",
-      timestamp: Date.now(),
-      rate: 4,
-      id: 1
-    }
-  }  */
+
 });
 console.log(post);
 res.json(post);
@@ -352,10 +366,6 @@ app.post('/item', async (req, res) => {
   
   // Результат с добавленным комментарием
   console.log(post);
-   // post.comments.push({ form, date });
-   //console.log("FF"+JSON.stringify(form)+":"+date+":"+username)
-  // post.comments.comm.push({ text: form, author: 'John Doe', timestamp: date });
-  //post.comments.comm.push({ text: form.comment, author: username, timestamp: date });
     await post.save(); // Сохранить изменения в базе данных
 
     res.json(post)
@@ -365,82 +375,256 @@ app.post('/item', async (req, res) => {
    }
  });
  
-//=========================================
-/*
-const postSchema2 = new mongoose.Schema({
- isRegistered: Boolean,
- username: String,
- login: String,
- password: String,
- id: Number
- });
- const Post2 = mongoose.model('auth', postSchema2);
-app.post('/isRegistered', async (req, res) => {
- // res.json("sss")
+
+
+
+
+
+
+ 
+
+ app.post('/removeComment', async (req, res) => {
   
-  let { isRegistered, username, login, password, id } = req.body;
+  let { author, text, id, number } = req.body;
+  console.log(number)
    try {
-    await Post2.deleteMany({});
-    const posts = await Post2.create({isRegistered, username, login, password, id });
-  //const posts = await Post1.find({}, 'id username password login isRegistered')
+     const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+     const post = await Post1.findOne({ id });
+    const newComments = post.comments.filter((item,index) => {
+      console.log(item.text+":"+text+":"+item.author+":"+author)
+      if(number!=index){
+        return true
+      }
+      else {
+        return false
+      }
+  
+    });
+    console.log("NREEEW"+JSON.stringify(newComments))
+    post.comments.splice(0, post.comments.length);
+    console.log("ARRRRRR"+JSON.stringify(post.comments))
+    post.comments.push(newComments);
+    console.log("ARRRRRR"+JSON.stringify(post.comments))
+    await post.save(); 
+    
+  
+
+   res.json("sss")
    
-     res.json(posts);
    } catch (err) {
      console.error(err);
      res.status(500).json({ error: 'Failed to create a new postt.' });
-   }  
+   }
  });
  
+//=========================================
 
 
-app.put('/isRegisteredCheck', async (req, res) => {
-  let { isRegistered, username, login, password, id } = req.body;
+
+
+app.post('/addToFav', async (req, res) => {
+  let sendValue = req.body;
+  console.log(sendValue);
 
   try {
-    // Очищаем коллекцию Post2
-    await Post2.deleteMany({});
-
-    // Получаем данные из коллекции Post
-    const postsUsers = await Post.find({}, 'id username password login');
-    let currentId = postsUsers.length;
-
-    // Создаем новый документ и добавляем его в коллекцию Post2
-    await Post2.create({
-      isRegistered: isRegistered,
-      id: currentId,
-      username: username,
-      password: password,
-      login: login,
+    const name = sendValue.name;
+    const posts = await Post.find({}, 'email username password id date logo favourite bought');
+    let post;
+    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+    posts.forEach(item => {
+      if (item.username == sendValue.name) {
+        post = item;
+      }
     });
 
-   
-    const posts = await Post2.find({}, 'id username password login isRegistered');
-
-    res.json(posts);
-  } catch (e) {
-    console.log(e);
-    res.json(e);
-  }
-});
+    const purchaseItems = postsPurchases.filter(item => item.id == sendValue.id);
 
 
-
-
-app.get('/stateOfAuth', async (req, res) => {
-  try {
-    const posts = await Post2.find({}, 'id username password login isRegistered');
-    res.json(posts)
-   
+    post.favourite.push(...purchaseItems);
+    await post.save();
+    console.log(post);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to fetch posts.' });
+    res.status(500).json({ error: 'Failed to create a new postt.' });
   }
 });
-*/
 
 
 
+app.post('/fav', async (req, res) => {
+  let {test} = req.body;
  
+ // console.log(username)
+//res.json("yes")
+  try {
+    console.log("hsuhfehefuhefhwfjhewfjfew")
+    res.json("HREEEEEl")
+ 
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+app.post('/favv', async (req, res) => {
+  let { name} = req.body;
+  try {
+    const posts = await Post.find({}, 'email username password id date logo favourite bought');
+console.log(name)
+let post;
+let favArray;
+let boughtArray;
+posts.forEach(item => {
+  if (item.username == name) {
+    post = item;
+    console.log(post)
+    favArray=post.favourite
+    boughtArray=post.bought
+    res.json({"fav": favArray, "bough": boughtArray})
+  }
+});
+
+//res.json(name)
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' , err});
+  }
+})
+  */
+app.post('/favv', async (req, res) => {
+  try {
+    // Проверяем наличие и правильность значения "name" в запросе
+    const { name } = req.body;
+    if (!name || typeof name !== 'string') {
+      return res.status(400).json({ error: 'Invalid name provided.' });
+    }
+
+   
+    const post = await Post.findOne({ username: name }, 'email username password id date logo favourite bought');
+    if (!post) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+   
+    const { favourite, bought } = post;
+    res.json({ fav: favourite, bough: bought });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to retrieve data from the database.', err });
+  }
+});
+
+
+app.post('/removeFavv', async (req, res) => {
+  let { id, name } = req.body;
+  try {
+    const posts = await Post.find({}, 'email username password id date logo favourite bought');
+    let post;
+    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+    posts.forEach(async (item) => {
+      if (item.username === name) {
+        post = item;
+        const newPost = post.favourite.filter((item) => item.id !== id);
+        item.favourite = newPost;
+        console.log(newPost);
+        await item.save(); 
+      }
+    });
+    posts.forEach(item=> {
+      if (item.username === name) {
+        
+        res.json(item.favourite);
+      }
+    })
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.', err });
+  }
+});
+
+
+
+
+
+app.post('/removeAllFavv', async (req, res) => {
+  let {data, name } = req.body;
+  console.log(data, name)
+  try {
+    const posts = await Post.find({}, 'email username password id date logo favourite bought');
+    let post;
+    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+    posts.forEach(async (item) => {
+      if (item.username === name) {
+        post = item;
+       
+        const prevPurchases=item.bought
+        const prevFav=item.favourite
+let newBought=item.bought.concat(prevFav)
+item.bought=newBought
+item.favourite=[]
+console.log("prev"+prevFav)
+console.log("new"+newBought)
+        await item.save(); 
+      }
+    });
+    posts.forEach(item=> {
+      if (item.username === name) {
+        
+        res.json(item.favourite);
+      }
+    })
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.', err });
+  }
+});
+
+
+
+
+
+
+
+app.post('/bought', async (req, res) => {
+  let { name } = req.body;
+  console.log( name)
+  try {
+    const posts = await Post.find({}, 'email username password id date logo favourite bought');
+    let post;
+    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+    posts.forEach(async (item) => {
+      if (item.username === name) {
+        post = item;
+       res.json(post.bought)
+      /*  const prevPurchases=item.bought
+        const prevFav=item.favourite
+let newBought=item.bought.concat(prevFav)
+item.bought=newBought
+item.favourite=[]
+console.log("prev"+prevFav)
+console.log("new"+newBought)
+        await item.save();  */
+      }
+    });
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.', err });
+  }
+});
 
 
 async function startApp() {

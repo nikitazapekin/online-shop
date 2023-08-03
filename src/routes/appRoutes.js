@@ -126,29 +126,3 @@ const AppRoutes=()=> {
     )
 };
 export default AppRoutes
-
-/*
-const AppRoutes=()=> {
-    const user=false// проверка на авторизацию
-    return user ?  
-    (
-        <Routes>
-{privateRoutes.map(({path, Component})=>( <Route key={path} path={path} element={<Component />} exact={true} />)
-)}
-
-<Route path="*" element={<Navigate replace to={CHAT_ROUTE} />} /> 
-
-        </Routes>
-    )
-    :
-    (
-        <Routes>
-{publicRoutes.map(({path, Component})=> (<Route key={path} path={path} element={<Component />} exact={true} />)
-)}
-
-<Route path="*" element={<Navigate replace to={LOGIN_ROUTE} />} /> 
-
-        </Routes>
-    )
-};
-export default AppRoutes */

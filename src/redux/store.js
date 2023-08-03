@@ -11,9 +11,8 @@ import reducer from "./reducers.js";
 import authReducer from "./reducers.js";
 export const rootReducer = combineReducers({
 
- reducer: reducer,
-authReducer: authReducer
+// reducer: reducer,
+//authReducer: authReducer
 });
 
-//export const store = createStore(rootReducer, window.REDUX_DEVTOOLS_EXTENSION && window.REDUX_DEVTOOLS_EXTENSION());
 export const store = createStore(rootReducer, applyMiddleware(thunk));

@@ -8,9 +8,11 @@ import { useEffect, useState } from "react"
 import Comments from "../../components/comments/comments.js"
 import { Suspense } from "react"
 import Spinner from "../../components/spinner/spinner.js"
+import AddToFavourite from "../../components/addToFavourite/addToFavourite.js"
 const TovarInfoPage=()=> {
     const {id} =useParams()
     const [item, setItem]=useState();
+   
 useEffect(()=> {
     fetch('http://localhost:5000/item', {
         method: 'POST',
@@ -46,7 +48,8 @@ useEffect(()=> {
                 <h2 className="priceOfItem">{item[0].price} rub</h2>
                 <button className="buyBtn">Buy</button>
                 <Stars />
-                <Comments id={id} item={item} />
+                <Comments id={id} itemm={item} />
+                <AddToFavourite id={id} />
             </div>
         )} 
         </div>

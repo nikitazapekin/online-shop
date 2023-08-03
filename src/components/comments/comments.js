@@ -23,7 +23,10 @@ if(value==8){
 return 0
 }
 const Comments=(props)=> {
-  const {id, item} =props;
+  const {id, itemm} =props;
+  console.log(id)
+  const [item, setItem]=useState(itemm)
+  console.log(item)
   const inputForm=useRef()
  
   useEffect(()=> {
@@ -31,11 +34,11 @@ if(item!=undefined){
   (item.map(elem=> {
     console.log(elem)
      elem.comments.map(elemm=> {
-     // console.log(elemm)
     console.log(elemm.author)
    console.log( elemm.rate)
     console.log(elemm.text)
     console.log(elemm.date)
+    console.log(item.id)
      })
     }))
   }
@@ -57,7 +60,6 @@ if(item!=undefined){
           for (let i = 0; i < items.length; i += 2) {
             if (stars.current.children[i].checked) {
                 let rate=i;
-             //   console.log(rate)
                 
            setForm({ ...form, rate: checkRate(rate)});
             }
@@ -70,13 +72,8 @@ if(item!=undefined){
           item.addEventListener("click", handleStarClick);
         });
     }
-        // Функция очистки, удаляющая слушателей при размонтировании компонента
+
         const cleanup = () => {
-      /*      if(stars.current.children!=undefined){
-          (stars.current.children).forEach(item => {
-            item.removeEventListener("click", handleStarClick);
-          }) 
-        } */
         };
       
      
@@ -84,6 +81,7 @@ if(item!=undefined){
     }
       }, []);
       
+const addedComments = {};
 
     return (
         <div className="commentsForm">
@@ -93,23 +91,16 @@ if(item!=undefined){
      // if(inputForm!=undefined){
        const textComment =inputForm.current.value
        console.log(textComment)
-    //  }
-     /* if(form.comment.length==0){
-        form.comment=inputForm.textContent
-      }
-      console.log(form.comment) */
 const cookiesString = document.cookie;
 const cookiesArray = cookiesString.split(';');
 const userCookie = cookiesArray.find(cookie => cookie.trim().startsWith('user='));
-console.log( (userCookie))
-// Если куки с именем 'user' найден, получаем его значение
 let userValue = null;
 if (userCookie) {
   let userCookieValue = userCookie.split('=')[1];
   let indexOfcav=userCookieValue.lastIndexOf('}')
   let username;
 let  userCookieValueNew=userCookieValue.substring(indexOfcav+1, -userCookieValue.length)
-  console.log(userCookieValueNew)
+ // console.log(userCookieValueNew)
   try {
     userValue = JSON.parse(decodeURIComponent(userCookieValueNew));
     username=userValue.name
@@ -125,13 +116,15 @@ fetch('http://localhost:5000/addComment', {
 })
   .then(response => response.json())
   .then(responseData => {
+//   setItem(responseData.comments)
+setItem((prev)=> [...prev, responseData])
     console.log(responseData);
   }) 
 } else {
   console.log("зарегистрируйьесь")
 }
 
-  console.log(form)
+ // console.log(form)
 }}>Send </button>
     <div className="starRateComment"> 
     
@@ -167,21 +160,31 @@ fetch('http://localhost:5000/addComment', {
 
 
 
-       
-  {item !== undefined &&
-    item.map((el) => {
-      return el.comments.map((elemm, index) => (
-        <CommentOfUser author={elemm.author} rate={elemm.rate} text={elemm.text} date={elemm.date} />
-     
-      ));
-    })}
+{item !== undefined &&
+  item.map((el) => {
+    return el.comments.map((elemm, index) => {
+      const commentKey = `${elemm.author}_${elemm.text}`;
+      if (!addedComments[commentKey]) {
+        addedComments[commentKey] = true;
+        return (
+          <CommentOfUser
+            key={index} 
+            author={elemm.author}
+            rate={elemm.rate}
+            text={elemm.text}
+            date={elemm.date}
+            id={id}
+            number={index}
+          />
+        );
+      }
+      
+      // Если комментарий уже был добавлен, возвращаем null (ничего не будет отрисовано)
+      return null;
+    });
+  })}
+ 
 </div>
- {/* <div key={index} className="commentOfUser">
-          <img className="avatarOfUser" src={User} alt="logo" />
-
-          {elemm.author}. {elemm.rate}. {elemm.text}. {elemm.date}
-      </div> */}
-
 
 </div> 
         </div>

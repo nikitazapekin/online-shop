@@ -3,6 +3,11 @@ import thunk from "redux-thunk";
 import { combineReducers } from 'redux';
 //import { createStore } from 'redux';
 import { createStore, applyMiddleware } from 'redux';
+
+
+
+
+/*
 const initialState = {
     username: null, 
     email: null,
@@ -28,8 +33,8 @@ const authReducer=(state=initialStateOfAuth, action)=>{
     if(action.type=="CHECK_AUTH"){
 
        state=action.payload
-       // console.log(JSON.stringify(state) +":"+action.payload )
+     
     }
 return state
 }
-export default authReducer
+export default authReducer */

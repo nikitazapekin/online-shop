@@ -118,9 +118,10 @@ PS C:\Users\LENOVO\log>
 
 .navigation {
   position: relative;
+  //position: absolute;
   width: 100%;
   max-width: 100%;
-  z-index: 1;
+  z-index: 123;
   height: 60px;
   .burgerItem {
     display: none;
@@ -137,7 +138,7 @@ PS C:\Users\LENOVO\log>
     color: #fff;
     font-weight: 800;
     font-size: 18px;
-    z-index: 1;
+    z-index: 113;
     cursor: pointer;
     white-space: nowrap;
   }
@@ -149,7 +150,7 @@ PS C:\Users\LENOVO\log>
     height: 100%;
     background-color: red;
     left: 0;
-    z-index: 0;
+    z-index: 112;
   }
   .exitFromAccount{
     display: none;
@@ -244,7 +245,7 @@ display: block;
       margin-top: 20px;
       color: #0f0c0c;
       font-weight: 800;
-      z-index: 1;
+      z-index: 1234;
       cursor: pointer;
       white-space: nowrap;
     }

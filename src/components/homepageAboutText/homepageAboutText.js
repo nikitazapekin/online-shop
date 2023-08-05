@@ -15,20 +15,6 @@ left: distance-600
 
     }
     useEffect(()=> {
-
-   /*
-    window.addEventListener('scroll', function (){
-       // elems.
-         let value =window.scrollY;
-         setDistance(value)
-         console.log(value)
-     })
-  
-     return () => {
-       window.removeEventListener('scroll')
-            
-     
-            }; */
             window.addEventListener('scroll', scrollFunction)
            
               return () => {
@@ -44,9 +30,7 @@ left: distance-600
   <h2 class="text_shadows">Our catalogue</h2>
 </div>
 
-<button  style={{position: "absolute", zIndex: 111}} onClick={()=> console.log(elems.current)}>
-        sjsjsssssssss
-    </button>
+
 </>
     )
 }

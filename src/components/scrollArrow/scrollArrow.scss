@@ -1,0 +1,14 @@
+.arrowTop {
+    height: 50px;
+    width: 50px;
+    color: green;
+    position: fixed;
+    top: 70px;
+    left: 10px;
+    cursor: pointer;
+  }
+
+  .arrowTop::before {
+    font-size: 32px;
+    content: '▲';
+  }

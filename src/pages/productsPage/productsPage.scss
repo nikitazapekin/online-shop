@@ -1,6 +1,8 @@
 .productsPage {
     background-color: pink;
     min-height: 100vh;
+    position: relative;
+    display: block;
     .productsTitle{
         position: absolute;
         left: 50%;

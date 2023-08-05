@@ -9,6 +9,7 @@ import Comments from "../../components/comments/comments.js"
 import { Suspense } from "react"
 import Spinner from "../../components/spinner/spinner.js"
 import AddToFavourite from "../../components/addToFavourite/addToFavourite.js"
+import Footer from "../../components/footer/footer.js"
 const TovarInfoPage=()=> {
     const {id} =useParams()
     const [item, setItem]=useState();
@@ -46,12 +47,14 @@ useEffect(()=> {
                 <h1 className="itemTitle">{item[0].title}</h1>
                 <h2 className="itemDescribtion">{item[0].describtion} </h2>
                 <h2 className="priceOfItem">{item[0].price} rub</h2>
+                <h2 className="itemCountry">country {item[0].country}</h2>
                 <button className="buyBtn">Buy</button>
-                <Stars />
+              
                 <Comments id={id} itemm={item} />
                 <AddToFavourite id={id} />
             </div>
         )} 
+<Footer />
         </div>
     )
 }

@@ -2,18 +2,21 @@ import "./navigation.scss"
 import "./responsiveNavigation.scss"
 import { Link } from "react-router-dom"
 import Gl from "./log.png"
-import { useSelector } from "react-redux"
 import { useCallback, useState, useEffect } from "react"
 
 import useDebounce from "../../hooks/debounce.js"
 import BurgerMenu from "../burgerMenu/burgerMenu.js"
 import { useNavigate } from "react-router-dom"
+import { isAuth } from "../../redux/reducers/isLogged.js";
+import { useSelector, useDispatch } from "react-redux";
 const Navigation =()=> {
+  const username = useSelector((state) => state.addToFavouriteReducer.name);
+  const isLogged = useSelector((state) => state.addToFavouriteReducer.isLogged);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isAuth, setIsAuth]=useState(false)
   const stateData = useSelector((state) => state);
   const stateOfAuth= stateData.authReducer
-  console.log("thhhh" +stateOfAuth)
   const [value, setValue]=useState('')
   const [elems, setElems]=useState()
   const [isClicked, setIsClicked]=useState(false)
@@ -21,11 +24,11 @@ const Navigation =()=> {
     display: isClicked ? "block" : "none"
   }
   useEffect(()=> {
+   // dispatch(isAuth());
   const cookiesString = document.cookie;
   const cookiesArray = cookiesString.split(';');
   const userCookie = cookiesArray.find(cookie => cookie.trim().startsWith('user='));
- // console.log( (userCookie))
-  // Если куки с именем 'user' найден, получаем его значение
+ 
   let userValue = null;
   if (userCookie) {
   let userCookieValue = userCookie.split('=')[1];
@@ -39,7 +42,7 @@ const Navigation =()=> {
     } catch (error) {
       console.error('Ошибка разбора куки user:', error);
     }
-  }
+  } 
 }, [])
   const debouncedSearch=useDebounce(search,500)
 function search(query) {
@@ -112,10 +115,7 @@ const onChange =(e)=> {
 
                   // Функция для удаления всех cookie
 function deleteAllCookies() {
-  // Получаем все доступные cookie
   var cookies = document.cookie.split(";");
-
-  // Проходимся по каждому cookie и удаляем его, устанавливая дату истечения в прошлое
   for (var i = 0; i < cookies.length; i++) {
     var cookie = cookies[i];
     var eqPos = cookie.indexOf("=");

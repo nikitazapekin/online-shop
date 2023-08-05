@@ -3,14 +3,16 @@ import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
+import { registerAction } from "../../redux/reducers/registerReducer.js";
 
 
 let lengthOfLogs=0;
 
 const Register =()=> {
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
-const dispatch=useDispatch();
+//const dispatch=useDispatch();
 
  const [isLogged, setIsLogged]=useState(false)
  const [form, setForm]= useState({
@@ -23,7 +25,6 @@ const dispatch=useDispatch();
       const changeHandler=(event)=> {
         setForm({...form, [event.target.name]: event.target.value})
             }
-
 
 
     return (
@@ -54,7 +55,14 @@ const dispatch=useDispatch();
 
 <button
   onClick={() => {
+
+
+    
+    
     const data = JSON.stringify({"email": form.email, "password": form.password, "username": form.username, "date": new Date() });
+   
+
+
     fetch('http://localhost:5000/register', { 
       method: 'POST',
       headers: {
@@ -73,7 +81,7 @@ expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000));
 document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, id: responseData.id})}expires=` + expirationDate.toUTCString()//+";HttpOnly";  
         }
       })
-
+    
   }} 
   type="button"
   className="continue registrationItem"
@@ -84,6 +92,12 @@ document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, i
         <Link to="/login" style={{textDecoration: "none", color: "#fff"}} ><h2 className="orLogin registrationItem">  or Login
         </h2>
            </Link>
+
+
+ 
+     {/* <button onClick={() => {
+        console.log(count)
+     dispatch(increment())}}>инкримент</button> */}
         <div className="registerFon"></div>
         </div>
     )

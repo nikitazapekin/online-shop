@@ -4,16 +4,61 @@
     width: 100%;
     max-width: 100%;
     position: relative;
+    font-family: 'Merienda';
+   // display: block;
    
+.tovarInfoPage::-webkit-scrollbar {
+    width: 0 !important;
+  }
     .puschaseCard {
         max-width: 80%;
         width: 100%;
-        background-color: #ff1515;
+        //background-color: #ff1515;
 margin: 0 auto;
 height: 500px;
+
+.puschaseCard::-webkit-scrollbar {
+    width: 0 !important;
+  }
+ .puschaseCard::-webkit-scrollbar {
+  display: none;
+  }
+  
+  
+   .puschaseCard::-webkit-scrollbar-thumb {
+    display: none;
+  }
+  
+  /* For the scrollbar track when hovered */
+   .puschaseCard::-webkit-scrollbar-thumb:hover {
+    display: none;
+  }
+
+  scrollbar-width: none; /* Убираем полосу скроллинга в Firefox */
+  -ms-overflow-style: none; /* Убираем полосу скроллинга в IE/Edge */
 position: relative;
 overflow-y: scroll;
+border-top-left-radius: 20px ;
+border-top-right-radius: 20px ;
 top: 50px;
+    }
+    .purchaseCardWrapper {
+        position: relative;
+        display: block;
+    }
+    .purchasedCardFon {
+       /* top: 0;
+        left: 0;
+        position: absolute; */
+        border-top-left-radius: 20px ;
+border-top-right-radius: 20px ;
+        position: relative;
+        margin: 0 auto;
+        background-color: rgb(6, 6, 6);
+        width: 100%;
+        height: 100%;
+        opacity: 0.3;
+        z-index: 0;
     }
     .purchaseCardImage {
 position: absolute;

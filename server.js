@@ -131,8 +131,6 @@ mongoose.connection.on('error', (err) => {
 });
 
 
-
-
 app.post('/login', async (req, res) => {
   let { email,  password} = req.body;
   let sizeOdDatas=0
@@ -301,6 +299,20 @@ app.get('/tovars', async (req, res) => {
   }
 });
 
+
+app.get('/tovarss', async (req, res) => {
+  try {
+    
+    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww')
+   
+    res.json(
+   posts
+    );
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch posts.' });
+  }
+});
 
 
 

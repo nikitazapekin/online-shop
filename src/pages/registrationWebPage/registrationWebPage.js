@@ -1,9 +1,12 @@
 import Navigation from "../../components/navigation/navigation.js"
 import Register from "../../components/register/register.js"
 import Footer from "../../components/footer/footer.js"
+import "./registerWebPage.scss"
 const RegistrationWebPage=()=> {
     return (
-        <>
+        <div className="registerWebPage">
+
+   
 
 
         <Navigation />
@@ -24,7 +27,8 @@ const RegistrationWebPage=()=> {
             </ul>
     </div >
     <Footer />
-        </>
+    </div>
+       
     )
 }
 export default RegistrationWebPage

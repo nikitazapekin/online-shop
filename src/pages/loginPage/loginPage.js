@@ -1,7 +1,8 @@
-import Login from "../../components/login/login.js"
+//import Login from "../../components/login/login.js"
 import Navigation from "../../components/navigation/navigation.js"
 import "./loginPage.scss"
 import Footer from "../../components/footer/footer.js"
+import Login from "../../components/login/login.js"
 const LoginPage=()=> {
     return (
         <>

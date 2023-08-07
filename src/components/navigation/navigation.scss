@@ -1,115 +1,3 @@
-//@import "./responsiveNavigation.scss";
-/*.navigation {
-   position: relative;
-    width: 100%;
-    max-width: 100%;
-    z-index: 1;
-    height: 60px;
-   .navigationWrapper {
-   display: flex;
-   max-width: 90%;
-   width: 100%;
-   }
-   .navigationItem {
-       margin-left: 60px;
-       margin-top: 20px;
-       color: #fff;
-       font-weight: 800;
-       z-index: 1;
-       cursor: pointer;
-       white-space: nowrap;
-   }
-   .navigationFon {
-    position: absolute;
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
-    background-color: red;
-    left: 0;
-    z-index: 0;
-   }
-   .searchNavigation {
-    width: 350px;
-    height: 20px;
-  //  background-color: transparent;
-    outline: none;
-    border: none;
-    border-bottom: 1px solid black;
-    border-radius: 10px;
-   }
-  .searchNavigation::placeholder {
-  //  color: #fff;
-  color: black;
-    font-weight: 800;
-    padding-left: 20px;
-  }
-  .navigationItemUser {
-    display: flex;
-    
-  }
-  .signInBtn, .signUpBtn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-  }
-  .signInBtn {
-    margin-left: 20px;
-  }
-  .logoOfWebPage{
-    width: 50px;
-    height: 50px;
-    transform: translateY(-10px) rotate(270deg);
-  }
-  .searchedItems {
-    width: 100%;
-    background-color: #fff;
-     color: black;
-     text-align: center;
-  }
-  .searchedItem {
-    border-bottom: 2px solid black;
-    height: 30px;
-  }
-} */
-
-
-
-
-
-
-/*
-sass navigation.scss navigation.css
-Error reading navigation.scss: no such file or directory.
-PS C:\Users\LENOVO\log>  npm install -g sass
-
-changed 17 packages in 2s
-
-2 packages are looking for funding
-  run `npm fund` for details      
-PS C:\Users\LENOVO\log> sass navigation.scss navigation.css
-Error reading navigation.scss: no such file or directory.
-PS C:\Users\LENOVO\log> sass navigation.scss navigation.css
-Error reading navigation.scss: no such file or directory.
-PS C:\Users\LENOVO\log> 
-*/
-
-
-/*
-@media (max-width: 1020px){
-  .navigationItem{
-      margin-left: 20px;
-      margin-top: 20px;
-      color: #0f0c0c;
-      font-weight: 800;
-      z-index: 1;
-      cursor: pointer;
-      white-space: nowrap;
-   
-  }
-
-}
-*/
 
 
 
@@ -118,11 +6,11 @@ PS C:\Users\LENOVO\log>
 
 .navigation {
   position: relative;
-  //position: absolute;
   width: 100%;
   max-width: 100%;
-  z-index: 123;
+ // z-index: 123;
   height: 60px;
+  font-family: 'Merienda';
   .burgerItem {
     display: none;
   }
@@ -138,9 +26,11 @@ PS C:\Users\LENOVO\log>
     color: #fff;
     font-weight: 800;
     font-size: 18px;
-    z-index: 113;
+   position: relative;
+   z-index: 111;
     cursor: pointer;
     white-space: nowrap;
+    font-family: 'Merienda';
   }
 
   .navigationFon {
@@ -150,13 +40,19 @@ PS C:\Users\LENOVO\log>
     height: 100%;
     background-color: red;
     left: 0;
-    z-index: 112;
+   // z-index: 112;
+   z-index: 0;
   }
   .exitFromAccount{
     display: none;
   }
+  .navigationItem:nth-child(5) {
+    margin-right: 100px;
+  } 
+
 .accountNavigation{
-  width: 150px;
+ // margin-right: 150px;
+  width: 120px;
   height: 40px;
   background-color: blue;
   border: none;
@@ -165,12 +61,10 @@ PS C:\Users\LENOVO\log>
   border-radius: 10px;
 text-align: center;  
 position: absolute;
-top: 10px;
+top: -10px;
+//top: 10px;
 line-height: 40px;
-//margin-right: 100px;
-/*&:focus .exitFromAccount {
-display: block;
-} */
+
 } 
 .accountNavigationItems {
  
@@ -181,18 +75,21 @@ display: block;
   line-height: 40px;
   background-color: blue;
   border-radius: 10px;
-  width: 150px;
+  width: 120px;
   height: 40px;
   margin-top: 5px;
   cursor: pointer;
 }
   .searchNavigation {
     width: 350px;
+    overflow: hidden;
     height: 20px;
     outline: none;
     border: none;
     border-bottom: 1px solid black;
     border-radius: 10px;
+  //  position: absolute;
+   // z-index: -1;
   }
 
   .searchNavigation::placeholder {
@@ -211,6 +108,7 @@ display: block;
     cursor: pointer;
     color: #fff;
     font-size: 18px;
+    font-family: 'Merienda';
   }
 
   .signInBtn {
@@ -221,6 +119,7 @@ display: block;
     width: 50px;
     height: 50px;
     transform: translateY(-10px) rotate(270deg);
+  //  z-index: -111;
   }
 
   .searchedItems {
@@ -239,20 +138,21 @@ display: block;
     font-size: 15px;
   }
 }
-  @media (max-width: 1020px) {
+ // @media (max-width: 1020px) {
+  @media (max-width: 1110px) {
     .navigationItem {
       margin-left: 10px;
       margin-top: 20px;
       color: #0f0c0c;
       font-weight: 800;
-      z-index: 1234;
+      z-index: 122;
       cursor: pointer;
       white-space: nowrap;
     }
     .searchNavigation {
-      width: 200px;
+      width: 180px;
     }
-  } 
+  }  
   @media (max-width: 600px) {
 .navigationItem {
   display: none;

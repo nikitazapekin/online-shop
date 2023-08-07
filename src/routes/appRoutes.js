@@ -1,6 +1,7 @@
 import {Route, Routes, Navigate}  from "react-router-dom"
 import { HOMEPAGE_ROUTE, REGISTER_ROUTE, LOGIN_ROUTE, USER_PAGE_ROUTE, ACCOUNT_ROUTE, CATALOGUE_PAGE_ROUTE,
-     CATALOGUE_PAGE_ITEM_ROUTE,  ADD_ROUTE, TOVAR_INFO_PAGE_ROUTE, PRODUCTS_PAGE_ROUTE
+     CATALOGUE_PAGE_ITEM_ROUTE,  ADD_ROUTE, TOVAR_INFO_PAGE_ROUTE, PRODUCTS_PAGE_ROUTE,
+      FOUND_PAGE
  } from "./consts.js";
 import RegistrationWebPage from "../pages/registrationWebPage/registrationWebPage.js";
 import Homepage from "../pages/homepage/homepage.js";
@@ -11,6 +12,7 @@ import AddPurchase from "../components/addPurchase/addPurchase.js";
 import TovarInfoPage from "../pages/tovarInfoPage/tovarInfoPage.js";
 import ProductsPage from "../pages/productsPage/productsPage.js";
 import UserPage from "../pages/userPage/userPage.js";
+import FoundPage from "../pages/foundPage/foundPage.js";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 const publicRoutes=[
@@ -54,6 +56,10 @@ const publicRoutes=[
     {
         path: PRODUCTS_PAGE_ROUTE,
         Component: ProductsPage
+    },
+    {
+        path: FOUND_PAGE,
+        Component: FoundPage
     }
   
 ]
@@ -95,6 +101,10 @@ const publicRoutes=[
     {
         path: PRODUCTS_PAGE_ROUTE,
         Component: ProductsPage
+    },
+    {
+        path: FOUND_PAGE,
+        Component: FoundPage
     }
 ]
 

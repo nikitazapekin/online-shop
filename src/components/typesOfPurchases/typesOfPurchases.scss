@@ -1,14 +1,43 @@
 .typesOfPurchases {
- 
+ position: relative;
     display: grid;
     grid-template-columns: repeat(4, 250px); 
     grid-template-rows: repeat(auto, 300px);
     justify-content: center;
     color: blue;
     align-items: center;
-  margin-top: 150px;
+  margin-top: 50px;
+  margin-bottom: 50px;
     .typeOfPurchase{
        font-size: 32px;
        cursor: pointer;
     }
+}
+@media (max-width: 870px){
+  .typesOfPurchases{
+    grid-template-columns: repeat(4, 200px); 
+    grid-template-rows: repeat(auto, 150px);
+  }
+}
+@media (max-width: 766px){
+  .typesOfPurchases{
+    grid-template-columns: repeat(4, 150px); 
+    grid-template-rows: repeat(auto, 150px);
+  }
+}
+
+@media (max-width: 600px){
+  .typesOfPurchases{
+    grid-template-columns: repeat(3, 150px); 
+    grid-template-rows: repeat(auto, 150px);
+  }
+}
+
+
+@media (max-width: 427px){
+  .typesOfPurchases{
+    margin-top: 100px;
+    grid-template-columns: repeat(2, 150px); 
+    grid-template-rows: repeat(auto, 150px);
+  }
 }

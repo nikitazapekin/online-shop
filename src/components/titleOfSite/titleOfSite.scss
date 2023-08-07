@@ -12,14 +12,31 @@ $black: #010101;
    // height: 100vh;
 
 //   margin-left: 100px;
+top: 100px;
    position: absolute;
-   right: 0;
+  right: 0;
    margin-right: 200px;
    // position: relative;
    // transform: translateX(10px) translateY(10px);
     background: radial-gradient(circle, lighten($black, 5%) 15%, $black);
 }
+@media (max-width: 1145px){
+    .panel {
+        margin-right: 100px;
+    }
+}
 
+@media (max-width: 750px){
+    .panel {
+        margin-right: 50px;
+    }
+}
+@media (max-width: 600px){
+    .panel {
+        top: 200px;
+        margin-right: 10px;
+    }
+}
 .jj {
     z-index: 234;
     position: absolute;

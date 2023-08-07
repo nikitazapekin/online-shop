@@ -10,6 +10,7 @@ import { Suspense } from "react"
 import Spinner from "../../components/spinner/spinner.js"
 import AddToFavourite from "../../components/addToFavourite/addToFavourite.js"
 import Footer from "../../components/footer/footer.js"
+import ScrollArrow from "../../components/scrollArrow/scrollArrow.js"
 const TovarInfoPage=()=> {
     const {id} =useParams()
     const [item, setItem]=useState();
@@ -37,6 +38,7 @@ useEffect(()=> {
       <Navigation />
         {item!=undefined  && (
             <div className="puschaseCard">
+            
                 <div className="imagePurchaseBlock">
             <Suspense fallback={<Spinner />} >
                 <img src={item[0].logo} alt="item" className="purchaseCardImage" />
@@ -49,6 +51,8 @@ useEffect(()=> {
                 <h2 className="priceOfItem">{item[0].price} rub</h2>
                 <h2 className="itemCountry">country {item[0].country}</h2>
                 <button className="buyBtn">Buy</button>
+                <div className="purchasedCardFon"></div>
+      
               
                 <Comments id={id} itemm={item} />
                 <AddToFavourite id={id} />

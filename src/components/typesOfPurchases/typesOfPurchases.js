@@ -7,8 +7,6 @@ const TypesOfPurchases=()=> {
     useEffect(()=> {
 
         if(items!=undefined){
-            console.log(items)
-            console.log(items.current.children)
             const elems=items.current.children
             Object.values(elems).forEach((item, index)=> {
 item.addEventListener("click", ()=> {
@@ -35,7 +33,6 @@ item.addEventListener("click", ()=> {
             <p className="typeOfPurchase">Pillow</p>
             <p className="typeOfPurchase">Blanket</p>
             <p className="typeOfPurchase">Electronic</p>
-            <p className="typeOfPurchase">Clothe</p>
             <p className="typeOfPurchase">Various</p>
         </div>
     )

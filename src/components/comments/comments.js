@@ -163,7 +163,7 @@ setItem((prev)=> [...prev, responseData])
 {item !== undefined &&
   item.map((el) => {
     return el.comments.map((elemm, index) => {
-      const commentKey = `${elemm.author}_${elemm.text}`;
+      const commentKey = `${elemm.author}_${elemm.text}`; //проверка на дублирование
       if (!addedComments[commentKey]) {
         addedComments[commentKey] = true;
         return (
@@ -178,8 +178,6 @@ setItem((prev)=> [...prev, responseData])
           />
         );
       }
-      
-      // Если комментарий уже был добавлен, возвращаем null (ничего не будет отрисовано)
       return null;
     });
   })}

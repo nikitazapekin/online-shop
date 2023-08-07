@@ -4,7 +4,7 @@ const SwitchSearch =()=> {
         <div className="switchSearch">
 <button>BY</button>
 <button>RU</button>
-<button></button>
+<button>GER</button>
         </div>
     )
 }

@@ -1,4 +1,4 @@
-import axios from "axios";
+/*import axios from "axios";
 import thunk from "redux-thunk";
 import { combineReducers } from 'redux';
 //import { createStore } from 'redux';
@@ -26,6 +26,11 @@ export const registerReducer=(state=defaultState, action )=>{
     export const registerAction=(payload)=> ({
         type: REGISTER,  payload
             })
+
+
+
+
+            */
 /*
 const defaultState ={
     customers: []

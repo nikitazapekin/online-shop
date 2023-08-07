@@ -1,16 +1,13 @@
 .footer {
+  /* position: relative;
+   margin: 0 auto; */
    position: absolute;
-   left: 50%;
-   transform: translateX(-50%);
     width: 100%;
     max-width: 100%;
-   // position: relative;
     height: 60px;
-  //  margin: 0 auto;
+    bottom: 0;
     color: #fff;
     z-index: 11211;
-    bottom: 0;
-// bottom: 0;
     .footerItem {
 position: absolute;
 line-height: 60px;

@@ -2,8 +2,11 @@
     width: 100%;
     max-width: 100%;
     background-color: rgb(181, 236, 110);
+    border-bottom-left-radius: 20px ;
+    border-bottom-right-radius: 20px ;
+    //position: absolute;
     position: absolute;
-    top: 600px;
+  //  top: 600px;
    min-height: 400px;
     .addComment{
 display: inline;

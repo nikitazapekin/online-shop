@@ -2,11 +2,13 @@
     max-width: 500px;
     color: #fff;
     position: absolute;
+    top: -100px;
+
   //  right: 0;
     text-align: center;
-    transform: translateX(-300px);
-    top: 900px;
-    left: 200px;
+  //  transform: translateX(-300px);
+   // top: 900px;
+  //  left: 200px;
 }
 
 
@@ -25,17 +27,75 @@
 left: 100px;
   display: flex;
   max-width: 500px;
+  //top: 0;
+ top: 50%;
+ transform: translateY(-50%) translateX(-300px);
+
  // align-content: center;
   //justify-content: center;
 }
+@media (min-height: 1300px){
+  .content {
 
+    transform: translateY(-50%) translateX(-900px);
+  }
+}
+
+
+@media (max-height: 1300px){
+  .content {
+
+    transform: translateY(-50%) translateX(-600px);
+  }
+}
+
+@media (max-height: 1150px){
+  .content {
+
+    transform: translateY(-50%) translateX(-500px);
+  }
+}
+
+@media (max-height: 1050px){
+  .content {
+
+    transform: translateY(-50%) translateX(-400px);
+  }
+}
+
+@media (max-height: 1000px){
+  .content {
+
+    transform: translateY(-50%) translateX(-400px);
+  }
+}
+
+@media (max-height: 950px){
+  .content {
+
+    transform: translateY(-50%) translateX(-500px);
+    max-width: 400px;
+    font-size: 12px;
+  }
+ 
+}
+@media (max-height: 950px){
+  .content {
+
+    transform: translateY(-50%) translateX(-400px);
+    max-width: 300px;
+    font-size: 12px;
+  }
+ 
+}
 .text_shadows {
   text-shadow: 3px 3px 0 var(--color-secondary), 6px 6px 0 var(--color-tertiary),
     9px 9px var(--color-quaternary), 12px 12px 0 var(--color-quinary);
   font-family: bungee, sans-serif;
   font-weight: 400;
   text-transform: uppercase;
-  font-size: calc(2rem + 5vw);
+ // font-size: calc(2rem + 5vw);
+ font-size: 64px;
   text-align: center;
   margin: 0;
   color: var(--color-primary);

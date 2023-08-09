@@ -3,8 +3,6 @@ import "./responsiveNavigation.scss"
 import { Link } from "react-router-dom"
 import Gl from "./log.png"
 import { useCallback, useState, useEffect } from "react"
-//import { filteredTodos } from "../../redux/reducers/filteredItemsReducer.js"
-//import filteredTodos  from "../../redux/reducers/filteredItemsReducer.js"
 import useDebounce from "../../hooks/debounce.js"
 import BurgerMenu from "../burgerMenu/burgerMenu.js"
 import { useNavigate } from "react-router-dom"
@@ -154,4 +152,6 @@ exitFunction()
         </nav>
     )
 }
-export default Navigation
+export default Navigation 
+
+

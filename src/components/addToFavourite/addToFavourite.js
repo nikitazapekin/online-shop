@@ -38,7 +38,7 @@ handleAction()
       }}
     >
       <button className="addToFavouriteItem">
-        {!isAdded ? "Добавить в корзину" : "Убрать из корзины"}
+        {!isAdded ? "Добавить в корзину" : "Добавлено!"}
       </button>
     </div>
   );

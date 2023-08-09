@@ -1,9 +1,13 @@
+
+
+
 import "./login.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [isLoading, setIsLoading]=useState(false)
+  const [isReg, setIsReg]=useState(false)
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
@@ -34,7 +38,8 @@ const Login = () => {
           placeholder="type password"
         />
        <button
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault()
             const data = JSON.stringify({
               email: form.email,
               password: form.password,
@@ -50,9 +55,10 @@ const Login = () => {
               .then((response) => response.json())
               .then((responseData) => {
                 console.log(responseData);
+                if(responseData=="is non registered"){
+setIsReg(true)
+                }
                 if (responseData != "is non registered") {
-                  // navigate(`/user/${responseData.id}`);
-
                   const data = JSON.stringify({ id: responseData.id });
 
                   fetch("http://localhost:5000/userId", {
@@ -96,9 +102,13 @@ const Login = () => {
       <Link to={`/register`} style={{ textDecoration: "none", color: "#fff" }}>
         <h2 className="registrationItem"> or register</h2>{" "}
       </Link>
+
+      <div style={{display: !isReg ? "none" : "block"}} 
+               className="registerUserIsLogged">
+              Пользователь не существует</div>
       <div className="registerrFon"></div>
-      <p style={{display: isLoading ? "block" : "none"}}>loading</p>
+   
     </div>
   );
 };
-export default Login;
+export default Login;  

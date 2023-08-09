@@ -15,7 +15,7 @@ const addToFavouriteReducer = createSlice({
         const cookiesString = document.cookie;
         const cookiesArray = cookiesString.split(';');
         const userCookie = cookiesArray.find(cookie => cookie.trim().startsWith('user='));
-        console.log(userCookie)
+     //   console.log(userCookie)
         if(userCookie==undefined){
           state.isLogged=false
         }
@@ -27,7 +27,7 @@ const addToFavouriteReducer = createSlice({
           let  userCookieValueNew=userCookieValue.substring(indexOfcav+1, -userCookieValue.length)
         try {
           const userValue = JSON.parse(decodeURIComponent(userCookieValueNew));
-          console.log(userValue)
+        //  console.log(userValue)
           username = userValue.name;
           state.name = username;
           state.id=userValue.id
@@ -40,12 +40,22 @@ const addToFavouriteReducer = createSlice({
       document.cookie = action.payload + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
     },
   addCookie(state, action){
+   /* let expirationDate = new Date();
+    expirationDate.setTime(
+      expirationDate.getTime() + 7 * 24 * 60 * 60 * 1000
+    ); 
+
+      document.cookie =
+      `user=${JSON.stringify({
+        name: el.username,
+        isLogged: true,
+        id: el.id,
+      })}expires=` + expirationDate.toUTCString(); */
 console.log(action.payload)
   },
     registerAction(state, action){
       console.log(1)
       console.log(action.payload)
-//console.log(action.payload)
     }
   }
 });

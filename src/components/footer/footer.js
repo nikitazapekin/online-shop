@@ -1,8 +1,6 @@
 import "./footer.scss"
 import { useEffect, useState } from "react"
-const Footer=()=>{
-const [heightOfScrolling, setHeightOfScrolling]=useState()
-  
+const Footer=()=>{  
     return (
         <div  className="footer"> 
         <div className="footerItem">Template by 2023</div>

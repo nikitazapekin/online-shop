@@ -42,7 +42,6 @@ setCurrentPage(prevState=> prevState+1)
         }   
     return (
         <div className="productsPages">
-        {/*  <SwitchSearch /> */}
 <div className="productsPagesTable">
   {photos.map((item, index)=> (
     <ProductsPagesItem item={item} key={index} />

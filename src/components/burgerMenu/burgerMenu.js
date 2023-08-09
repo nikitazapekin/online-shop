@@ -29,8 +29,14 @@ const isLogged = useSelector((state) => state.addToFavouriteReducer.isLogged);
         icon.classList.toggle("open");
       });
     });
+    return () => {
+      icons.forEach(icon => {
+        icon.removeEventListener('click', (event) => {
+          icon.classList.toggle("open");
+        });
+      });
+    };
   }, []);
-
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
@@ -59,7 +65,6 @@ const fetchData = async () => {
 
 
   </button> 
-   
       <nav className={`burger-menu ${isOpen ? 'burger-menu-open' : ''}`}>
         <ul>
         

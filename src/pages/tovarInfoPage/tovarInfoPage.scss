@@ -13,7 +13,7 @@
     .puschaseCard {
         max-width: 80%;
         width: 100%;
-        //background-color: #ff1515;
+   
 margin: 0 auto;
 height: 500px;
 
@@ -62,6 +62,7 @@ border-top-right-radius: 20px ;
     }
     .purchaseCardImage {
 position: absolute;
+//right: 0;
 //left: 100px;
 //top: 50px;
         height: 400px;
@@ -69,26 +70,28 @@ position: absolute;
     }
     .itemTitle {
         position: absolute;
-     left: 50%;
-     transform: translateX(-50%);
+        right: 0;
+        margin-right: 200px;
+   //  left: 50%;
+    // transform: translateX(-50%);
      top: 50px;
-     margin-left: 100px;
+   //  margin-left: 100px;
 
     }
     .itemDescribtion {
         position: absolute;
-     left: 50%;
-     transform: translateX(-50%);
+        right: 0;
+        margin-right: 200px;
      top: 150px;
-     margin-left: 100px;
+// margin-left: 100px;
 
     }
     .itemCountry {
         position: absolute;
-     left: 50%;
-     transform: translateX(-50%);
+        right: 0;
+        margin-right: 200px;
      top: 100px;
-     margin-left: 100px;
+   //  margin-left: 100px;
 
     }
     .itemNew {
@@ -108,7 +111,8 @@ position: absolute;
         transform: translateX(-50%);
         margin-left: 200px;
         color: #fff;
-        top: 400px
+        top: 400px;
+        z-index: 11111;
     }
     .priceOfItem{
         position: absolute;
@@ -120,7 +124,6 @@ position: absolute;
     .itemSale {
         width: 100px;
         height: 100px;
-     //   position: absolute;
      position: absolute;
      right: 0;
      top: 350px;
@@ -130,7 +133,8 @@ position: absolute;
         width: 450px;
         height: 400px;
         left: 100px;
-        top: 50px
+        top: 50px;
+        z-index: 1111;
     }
     
 }

@@ -10,7 +10,6 @@ const TypesOfPurchases=()=> {
             const elems=items.current.children
             Object.values(elems).forEach((item, index)=> {
 item.addEventListener("click", ()=> {
-    console.log(item.textContent)
     navigate(`/catalogue/${item.textContent}`);
 })
             })

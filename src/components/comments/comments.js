@@ -3,133 +3,102 @@ import "./comments.scss"
 import { useState, useRef, useEffect } from "react"
 import User from "./user.jpg"
 import CommentOfUser from "../commentOfUser/commentOfUser.js"
-function checkRate(value){
-if(value==0){
-    return 5
-}
-if(value==2){
-    return 4
-}
-if(value==4){
-    return 3
-}
-if(value==6){
-    return 2
-}
-if(value==8){
-    return 1
-}
-
-return 0
-}
+import { useDispatch, useSelector } from "react-redux"
+import commentsReducer from "../../redux/reducers/commentsReducer.js"
+import { checkRate } from "../../redux/reducers/commentsReducer.js"
+import { isAuth } from "../../redux/reducers/isLogged.js"
+import addToFavouriteReducer from "../../redux/reducers/addToFavouriteReducer.js"
+import { addNewComment } from "../../redux/reducers/commentsAsyncReducer.js"
 const Comments=(props)=> {
+const dispatch=useDispatch()
+  const rate = useSelector((state) => state.commentsReducer.rate);
+  const isLogged = useSelector((state) => state.addToFavouriteReducer.isLogged);
+  const username = useSelector((state) => state.addToFavouriteReducer.name);
+  const resp=useSelector((state) => state.commentsAsyncReducer.resp);
   const {id, itemm} =props;
-  console.log(id)
-  const [item, setItem]=useState(itemm)
-  console.log(item)
+ const [item, setItem]=useState(itemm[0].comments)
   const inputForm=useRef()
- 
-  useEffect(()=> {
-if(item!=undefined){
-  (item.map(elem=> {
-    console.log(elem)
-     elem.comments.map(elemm=> {
-    console.log(elemm.author)
-   console.log( elemm.rate)
-    console.log(elemm.text)
-    console.log(elemm.date)
-    console.log(item.id)
-     })
-    }))
-  }
-  }, []) 
     const [form, setForm]= useState({
        comment: '',
         rate: ''
-            })
-             
+            })   
       const changeHandler=(event)=> {
         setForm({...form, [event.target.name]: event.target.value})
             }
     const stars=useRef()
-    useEffect(() => {
-        if(stars!=undefined){
-        const handleStarClick = (event) => {
-            if(stars.current.children!=undefined){
-          let items = stars.current.children;
-          for (let i = 0; i < items.length; i += 2) {
-            if (stars.current.children[i].checked) {
-                let rate=i;
-                
-           setForm({ ...form, rate: checkRate(rate)});
-            }
-          }
-     
+  const handleStarClick = (event) => {
+    if (stars.current.children != undefined) {
+      let items = stars.current.children;
+      for (let i = 0; i < items.length; i += 2) {
+        if (stars.current.children[i].checked) {
+          let rat = i;
+          dispatch(checkRate(rat)); 
+       
         }
-        };
-        if(stars.current.children!=undefined){
-        Object.values(stars.current.children).forEach(item => {
-          item.addEventListener("click", handleStarClick);
-        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (stars.current.children != undefined) {
+      Object.values(stars.current.children).forEach((item) => {
+       item.addEventListener("click", handleStarClick);
+      });
     }
 
-        const cleanup = () => {
-        };
+    const cleanup = () => {
+      try {
+        if (stars.current.children != undefined && stars.current.children != null) {
+          Object.values(stars.current.children).forEach((item) => {
+             item.removeEventListener("click", handleStarClick);
+          });
+        }
+      } catch (error) {
       
-     
-        return cleanup;
+        console.error("An error occurred during cleanup:", error);
+      }
+    };
+  
+    return cleanup;
+  }, []);
+  useEffect(() => { 
+    console.log(rate); 
+    setForm({ ...form, rate: rate});
+  }, [rate]);
+  const checkAuth=()=> {
+    const textComment =inputForm.current.value
+    dispatch(isAuth())
+   if(isLogged){
+    dispatch(addNewComment(JSON.stringify({form, id, date: new Date(), username, textComment})))
+   }  else {
+    console.log("зарегистрируйся")
+   }
+  }
+  useEffect(()=> {
+    try{
+      if(resp.comments!=null){
+        setItem(resp.comments)
+    } 
+    }  catch(err){
+      console.log(err)
     }
-      }, []);
-      
-const addedComments = {};
-
+  }, [resp])  
     return (
         <div className="commentsForm">
 <div className="addComment">
-    <input ref={inputForm}  onChange={changeHandler} name="comment" type="text" className="addCommentForm" placeholder="type comment" />
-    <button className="addCommentBtn" onClick={()=> {
-     // if(inputForm!=undefined){
-       const textComment =inputForm.current.value
-       console.log(textComment)
-const cookiesString = document.cookie;
-const cookiesArray = cookiesString.split(';');
-const userCookie = cookiesArray.find(cookie => cookie.trim().startsWith('user='));
-let userValue = null;
-if (userCookie) {
-  let userCookieValue = userCookie.split('=')[1];
-  let indexOfcav=userCookieValue.lastIndexOf('}')
-  let username;
-let  userCookieValueNew=userCookieValue.substring(indexOfcav+1, -userCookieValue.length)
- // console.log(userCookieValueNew)
-  try {
-    userValue = JSON.parse(decodeURIComponent(userCookieValueNew));
-    username=userValue.name
-  } catch (error) {
-    console.error('Ошибка разбора куки user:', error);
-  }
-fetch('http://localhost:5000/addComment', { 
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({form, id, date: new Date(), username, textComment})
-})
-  .then(response => response.json())
-  .then(responseData => {
-//   setItem(responseData.comments)
-setItem((prev)=> [...prev, responseData])
-    console.log(responseData);
-  }) 
-} else {
-  console.log("зарегистрируйьесь")
-}
-
- // console.log(form)
+    <input ref={inputForm}  
+    onChange={changeHandler}
+     name="comment"
+      type="text" 
+     className="addCommentForm"
+      placeholder="type comment" />
+    <button 
+    className="addCommentBtn" 
+    onClick={()=> {
+    
+    checkAuth()
 }}>Send </button>
     <div className="starRateComment"> 
-    
-
-
     <div ref={stars}  className="rating">
 
 <input type="radio" name="rating" id="r1" />
@@ -148,44 +117,27 @@ setItem((prev)=> [...prev, responseData])
 <label for="r5"></label>
 
 </div>
-
-
     </div>
-
 </div>
-
 <h1 className="comments">Comments</h1>
 <div className="userCommentsBlock">
 <div className="commentsItems">
 
-
-
-{item !== undefined &&
-  item.map((el) => {
-    return el.comments.map((elemm, index) => {
-      const commentKey = `${elemm.author}_${elemm.text}`; //проверка на дублирование
-      if (!addedComments[commentKey]) {
-        addedComments[commentKey] = true;
-        return (
-          <CommentOfUser
-            key={index} 
-            author={elemm.author}
-            rate={elemm.rate}
-            text={elemm.text}
-            date={elemm.date}
-            id={id}
-            number={index}
-          />
-        );
-      }
-      return null;
-    });
-  })}
- 
+{item.map((elemm, index)=> (
+   <CommentOfUser
+   key={index} 
+   author={elemm.author}
+   rate={elemm.rate}
+   text={elemm.text}
+   date={elemm.date}
+   id={id}
+   number={index}
+ />
+))}
 </div>
 
 </div> 
         </div>
     )
 }
-export default Comments
+export default Comments 

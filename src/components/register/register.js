@@ -10,6 +10,7 @@ const Register =()=> {
   const dispatch = useDispatch();
   const navigate = useNavigate();
  const [isLogged, setIsLogged]=useState(false)
+ const [isInvalid, setIsInvalid]=useState(false)
  const [form, setForm]= useState({
   email: '',
   password: ''
@@ -44,7 +45,8 @@ const Register =()=> {
                placeholder="Enter username"
                />
                <button
-  onClick={() => {
+  onClick={(event) => {
+    event.preventDefault()
     const data = 
     JSON.stringify({"email": form.email, "password": form.password, "username": form.username, "date": new Date() });
    
@@ -58,15 +60,20 @@ const Register =()=> {
       .then(response => response.json())
       .then(responseData => {
         console.log(responseData);
-        if(responseData!="is registered"){
+        if(responseData=="is registered"){
+          setIsLogged(true)
+        }
+        if(responseData=="is invalid"){
+          setIsInvalid(true)
+        }
+        if(responseData!="is registered" && responseData!="is invalid"){
           navigate(`/user/${responseData.id}`);
           const cookieValue=JSON.stringify({name: form.username, isLogged: true, id: responseData.id})
-         // dispatch(registerAction(cookieValue))*/
+      
          dispatch(registerAction(cookieValue))
           let expirationDate = new Date();
 expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
 document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, id: responseData.id})}expires=` + expirationDate.toUTCString() 
-    
 }
       }) 
     
@@ -76,59 +83,19 @@ document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, i
 >
   sign up
 </button>;
-
-
-
                </form>
                <div style={{display: !isLogged ? "none" : "block"}} 
                className="registerUserIsLogged">
                 Пользователь зарегистрирован</div>
-
-{/*
-<button
-  onClick={() => {
-    const data = 
-    JSON.stringify({"email": form.email, "password": form.password, "username": form.username, "date": new Date() });
-   
-
-
-    fetch('http://localhost:5000/register', { 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: data
-    })
-      .then(response => response.json())
-      .then(responseData => {
-        console.log(responseData);
-        if(responseData!="is registered"){
-          navigate(`/user/${responseData.id}`);
-          const cookieValue=JSON.stringify({name: form.username, isLogged: true, id: responseData.id})
-       //   dispatch(registerAction())
-          let expirationDate = new Date();
-expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
-document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, id: responseData.id})}expires=` + expirationDate.toUTCString() 
-    
-}
-      })
-    
-  }} 
-  type="button"
-  className="continue registrationItem"
->
-  sign up
-</button>; */}
-
-        <Link to="/login" style={{textDecoration: "none", color: "#fff"}} ><h2 className="orLogin registrationItem">  or Login
+              <div style={{display: !isInvalid ? "none" : "block"}} 
+               className="registerUserIsLogged">
+Неверная почта</div> 
+        <Link to="/login" style={{textDecoration: "none", color: "#fff"}} >
+          <h2 className="orLogin registrationItem">  
+        or Login
         </h2>
            </Link>
 
-
- 
-     {/* <button onClick={() => {
-        console.log(count)
-     dispatch(increment())}}>инкримент</button> */}
         <div className="registerFon"></div>
         </div>
     )

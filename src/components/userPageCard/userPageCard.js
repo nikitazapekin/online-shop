@@ -18,10 +18,10 @@ const UserPageCard = () => {
   useEffect(() => {
     const handleAction = async () => {
       await dispatch(addNewTodo(dataa));
-      setDataUser(todos.todos[0]);
+     setDataUser(todos.todos[((todos.todos.length))-1]);
     };
     if (dataUser === undefined) {
-      handleAction();
+     handleAction();
     }
   }, [dataUser, dispatch, todos.todos]);
   return (

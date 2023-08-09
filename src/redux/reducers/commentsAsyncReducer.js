@@ -1,4 +1,5 @@
 
+
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchTodos = createAsyncThunk(
@@ -12,14 +13,14 @@ export const fetchTodos = createAsyncThunk(
             }
     
             const data = await response.json();
-          //  console.log(data)
+            console.log(data)
             return data;
         } catch (error) {
             return rejectWithValue(error.message);
         }
     }
 );
-export const addNewTodo = createAsyncThunk(
+export const addNewComment = createAsyncThunk(
    // 'todos',
     'todos/addNewTodo',
    
@@ -34,14 +35,13 @@ export const addNewTodo = createAsyncThunk(
                 resp: {},
                 todos: []
             };
-          //   console.log(dataa)
-            const response = await fetch('http://localhost:5000/userId', {
+             console.log(dataa)
+            const response = await fetch('http://localhost:5000/addComment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: dataa,
-
             });
 
             if (!response.ok) {
@@ -49,8 +49,8 @@ export const addNewTodo = createAsyncThunk(
             }
 
             const data = await response.json();
-          //  console.log(data)
-            dispatch(addTodo(data));
+            console.log(data)
+            dispatch(addComments(data));
 
 
         } catch (error) {
@@ -64,20 +64,20 @@ const setError = (state, action) => {
     state.error = action.payload;
 }
 
- const  todoSlice = createSlice({
+ const commentsSlice  = createSlice({
     name: 'todos',
     initialState: {
         todos: [],
         status: null,
         error: null,
+        resp: null
     },
     reducers: {
-        addTodo(state, action) {
-        //    console.log(action.payload)
-          //  state.resp=action.payload
-            state.todos.push(action.payload);
-          //  console.log("This "+state.todos)
-        },
+     
+        addComments(state, action){
+console.log(action.payload)
+state.resp=action.payload
+        }
     },
     extraReducers: {
         [fetchTodos.pending]: (state) => {
@@ -92,5 +92,5 @@ const setError = (state, action) => {
     },
 });
 
-export const {addTodo} = todoSlice.actions;
-export default todoSlice.reducer
+export const {addComments} = commentsSlice.actions;
+export default commentsSlice.reducer

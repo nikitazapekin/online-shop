@@ -533,7 +533,6 @@ app.post('/removeFavv', async (req, res) => {
 
 
 
-
 app.post('/removeAllFavv', async (req, res) => {
   let {data, name } = req.body;
   console.log(data, name)

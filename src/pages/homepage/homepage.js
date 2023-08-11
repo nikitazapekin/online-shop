@@ -17,7 +17,6 @@ const Homepage=()=> {
           setIsLoading(false); 
         }, timeoutId); 
     
-        // Clean up the effect
         return () => {
           clearTimeout(timeoutId);
         };
@@ -33,7 +32,7 @@ const Homepage=()=> {
 <>
                 <TitleOfSite /> 
                 <button className="showCatalogue">
-        <Link style={{textDecoration: "none"}} to="/add">   Show Catalogue </Link>
+        <Link style={{textDecoration: "none"}} to="/catalogue">   Show Catalogue </Link>
         </button> 
     
     

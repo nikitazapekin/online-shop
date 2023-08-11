@@ -18,6 +18,91 @@ const Register =()=> {
       const changeHandler=(event)=> {
         setForm({...form, [event.target.name]: event.target.value})
             }
+
+        /*  const register=()=> {
+            const data = 
+            JSON.stringify({"email": form.email, "password": form.password, "username": form.username, "date": new Date() });
+           
+            fetch('http://localhost:5000/register', { 
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: data
+            })
+              .then(response => response.json())
+              .then(responseData => {
+                console.log(responseData);
+                if(responseData=="is registered"){
+                  setIsLogged(true)
+                }
+                if(responseData=="is invalid"){
+                  setIsInvalid(true)
+                }
+                if(responseData!="is registered" && responseData!="is invalid"){
+                  navigate(`/user/${responseData.id}`);
+                  const cookieValue=JSON.stringify({name: form.username, isLogged: true, id: responseData.id})
+              
+                 dispatch(registerAction(cookieValue))
+                  let expirationDate = new Date();
+        expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
+        document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, id: responseData.id})}expires=` + expirationDate.toUTCString() 
+        }
+              }) 
+            
+          } */
+
+
+
+          const register = () => {
+            const data = JSON.stringify({
+              "email": form.email,
+              "password": form.password,
+              "username": form.username,
+              "date": new Date()
+            });
+          
+            try {
+              fetch('http://localhost:5000/register', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: data
+              })
+                .then(response => response.json())
+                .then(responseData => {
+                  console.log(responseData);
+                  if (responseData === "is registered") {
+                    setIsLogged(true);
+                  }
+                  if (responseData === "is invalid") {
+                    setIsInvalid(true);
+                  }
+                  if (responseData !== "is registered" && responseData !== "is invalid") {
+                    navigate(`/user/${responseData.id}`);
+                    const cookieValue = JSON.stringify({
+                      name: form.username,
+                      isLogged: true,
+                      id: responseData.id
+                    });
+          
+                    dispatch(registerAction(cookieValue));
+                    let expirationDate = new Date();
+                    expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000));
+                    document.cookie = `user=${JSON.stringify({
+                      name: form.username,
+                      isLogged: true,
+                      id: responseData.id
+                    })}; expires=${expirationDate.toUTCString()}`;
+                  }
+                });
+            } catch (error) {
+              console.error('An error occurred:', error);
+  
+            }
+          }
+          
     return (
         <div className="registerFormPage">
             <h1>Регистрация</h1>
@@ -47,36 +132,7 @@ const Register =()=> {
                <button
   onClick={(event) => {
     event.preventDefault()
-    const data = 
-    JSON.stringify({"email": form.email, "password": form.password, "username": form.username, "date": new Date() });
-   
-    fetch('http://localhost:5000/register', { 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: data
-    })
-      .then(response => response.json())
-      .then(responseData => {
-        console.log(responseData);
-        if(responseData=="is registered"){
-          setIsLogged(true)
-        }
-        if(responseData=="is invalid"){
-          setIsInvalid(true)
-        }
-        if(responseData!="is registered" && responseData!="is invalid"){
-          navigate(`/user/${responseData.id}`);
-          const cookieValue=JSON.stringify({name: form.username, isLogged: true, id: responseData.id})
-      
-         dispatch(registerAction(cookieValue))
-          let expirationDate = new Date();
-expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
-document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, id: responseData.id})}expires=` + expirationDate.toUTCString() 
-}
-      }) 
-    
+  register()
   }} 
   type="submit"
   className="continue registrationItem"

@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import "./addToFavourite.scss";
 import { isAuth } from "../../redux/reducers/isLogged.js";
-import { addNewFavourite } from "../../redux/reducers/addToFavouriteReducer.js";
+//import { addNewFavourite } from "../../redux/reducers/addToFavouriteReducer.js";
+import { isAuthFunc } from "../../functions/authFunctions.js";
+import { addNewFavourite } from "../../redux/reducers/addToFavouriteActions.js";
 const AddToFavourite = (props) => {
   const isLogged = useSelector((state) => state.addToFavouriteReducer.isLogged);
   const username = useSelector((state) => state.addToFavouriteReducer.name);
@@ -10,7 +12,12 @@ const AddToFavourite = (props) => {
   const { id } = props;
   const [isAdded, setIsAdded] = useState(false);
   const [sendValue, setSendValue] = useState();
-  useEffect(() => {
+ {/* useEffect(()=> {
+setSendValue(isAuthFunc())
+console.log(sendValue)
+  }, []) */}
+
+  /*useEffect(() => {
     const fetchData = async () => {
       try {
         await dispatch(isAuth());
@@ -23,9 +30,9 @@ const AddToFavourite = (props) => {
   }, [username, dispatch]);
   const handleAction = async () => {
     await dispatch(addNewFavourite( JSON.stringify(sendValue)));
-  };
+  }; */
   return (
-    <div
+  {/*  <div
       className="addToFavourite"
       onClick={() => {
         if (isAdded && isLogged) {
@@ -33,14 +40,14 @@ const AddToFavourite = (props) => {
         }
         if (!isAdded && isLogged) {
           setIsAdded(true);
-handleAction()
+//handleAction()
         }
       }}
     >
       <button className="addToFavouriteItem">
         {!isAdded ? "Добавить в корзину" : "Добавлено!"}
-      </button>
-    </div>
+    </button> 
+    </div> */}
   );
 };
 export default AddToFavourite;

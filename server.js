@@ -353,6 +353,26 @@ app.post('/item', async (req, res) => {
    }
  });
 
+// Ваш исправленный код на серверной стороне
+/*
+app.post('/item', async (req, res) => {
+  try {
+    const { id } = req.body; // Извлекаем 'id' из объекта req.body
+
+    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+
+    const filteredPosts = posts.filter((item) => {
+      return item.id === id; // Сравниваем 'id' с извлеченным значением
+    });
+
+    console.log(filteredPosts);
+    res.json(filteredPosts);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' });
+  }
+});
+*/
 
 
 
@@ -374,7 +394,7 @@ app.post('/item', async (req, res) => {
     post.comments = []; // Если свойства нет или не является массивом, создаем пустой массив
   }
   
-  // Добавляем новый комментарий в массиzв comments
+  // Добавляем новый комментарий в массиzв commentsse
   const newComment={
     //  "text": form.comment,
     "text": textComment,
@@ -571,7 +591,7 @@ console.log("new"+newBought)
 
 
 
-
+/*
 app.post('/bought', async (req, res) => {
   let { name } = req.body;
   console.log( name)
@@ -592,7 +612,26 @@ app.post('/bought', async (req, res) => {
     res.status(500).json({ error: 'Failed to create a new postt.', err });
   }
 });
- 
+ */
+app.post('/bought', async (req, res) => {
+  const { name } = req.body;
+  console.log(name);
+  
+  try {
+    const posts = await Post.find({}, 'email username password id date logo favourite bought');
+    
+    const post = posts.find(item => item.username === name);
+
+    if (post) {
+      res.json(post.bought);
+    } else {
+      res.json([]); // Return an empty array or appropriate response if no matching post is found
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to retrieve data.', err });
+  }
+});
 
 
 
@@ -604,10 +643,12 @@ app.post('/bought', async (req, res) => {
 
 
 
+/*
 
 app.post('/buy', async (req, res) => {
   let { tovId, name, userId } = req.body;
-
+console.log("BUUUUY")
+console.log(tovId, name, userId)
   try {
     const posts = await Post.find({}, 'email username password id date logo favourite bought');
     let post;
@@ -635,7 +676,36 @@ app.post('/buy', async (req, res) => {
     res.status(500).json({ error: 'Failed to create a new postt.', err });
   }
 });
+*/
 
+
+
+
+app.post('/buy', async (req, res) => {
+  try {
+    const { tovId, name, userId } = req.body; // Destructure variables correctly
+
+    const postBought = await Post1.findOne({ id: tovId }); // Find the bought post
+
+    if (!postBought) {
+      return res.status(404).json({ error: 'Product not found' });
+    }
+
+    const userPost = await Post.findOne({ username: name }); // Find the user's post
+
+    if (!userPost) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    userPost.bought.push(postBought);
+    await userPost.save();
+
+    res.json(userPost); // Send the updated user post back
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to process the request' });
+  }
+});
 
 
 

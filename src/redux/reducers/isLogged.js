@@ -36,9 +36,9 @@ const addToFavouriteReducer = createSlice({
         }
       }
     },
-    deleteAllCookies(state, action){
+   /* deleteAllCookies(state, action){
       document.cookie = action.payload + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-    },
+    }, */
   addCookie(state, action){
    /* let expirationDate = new Date();
     expirationDate.setTime(

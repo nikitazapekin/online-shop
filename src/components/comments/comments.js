@@ -7,10 +7,15 @@ import { useDispatch, useSelector } from "react-redux"
 import commentsReducer from "../../redux/reducers/commentsReducer.js"
 import { checkRate } from "../../redux/reducers/commentsReducer.js"
 import { isAuth } from "../../redux/reducers/isLogged.js"
-import addToFavouriteReducer from "../../redux/reducers/addToFavouriteReducer.js"
 import { addNewComment } from "../../redux/reducers/commentsAsyncReducer.js"
+//import add
+//import addToFa
+//import addToFav
+//import addToFavouriteReducer from "../../redux/reducers/addToFavouriteReducer.js"
+
+//import { addNewComment } from "../../redux/reducers/commentsAsyncReducer.js"
 const Comments=(props)=> {
-const dispatch=useDispatch()
+/*const dispatch=useDispatch()
   const rate = useSelector((state) => state.commentsReducer.rate);
   const isLogged = useSelector((state) => state.addToFavouriteReducer.isLogged);
   const username = useSelector((state) => state.addToFavouriteReducer.name);
@@ -82,10 +87,10 @@ const dispatch=useDispatch()
     }  catch(err){
       console.log(err)
     }
-  }, [resp])  
+  }, [resp])   */
     return (
         <div className="commentsForm">
-<div className="addComment">
+{/*<div className="addComment">
     <input ref={inputForm}  
     onChange={changeHandler}
      name="comment"
@@ -136,7 +141,7 @@ const dispatch=useDispatch()
 ))}
 </div>
 
-</div> 
+</div>  */}
         </div>
     )
 }

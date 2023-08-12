@@ -1,36 +1,19 @@
 
-
 import "./showBought.scss";
 import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
+import { buyProductsPost } from "../../redux/reducers/boughtProducts/boughtProductsThunk.js";
 import { useDispatch, useSelector } from "react-redux";
-import { showNewBout } from "../../redux/reducers/bout.js";
-const ShowBought=(props)=> {
+const ShowBought=({username})=> {
   const dispatch=useDispatch()
-
-    const { username } = props;
-    const [boughtData, setBoughtData]=useState()
- 
-    useEffect(()=> {
-        fetch('http://localhost:5000/bought', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-      
-         body: JSON.stringify({name: username})
-          })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                setBoughtData(data)
-            })
-            .catch((error) => console.error('Error:', error));
-          
-  
-    }, []) 
+const [boughtData, setBoughtData]=useState()
+  const state = useSelector(state => state.buyProductsReducer);
+ useEffect(()=> {
+dispatch(buyProductsPost(({name: username})))
+ }, [])
+   useEffect(()=> {
+    console.log(JSON.stringify(state))
+    setBoughtData(state.post)
+   }, [state])
     return (
         <div className="showBoughtt">
            {boughtData!=undefined && (
@@ -48,7 +31,7 @@ const ShowBought=(props)=> {
     </div>
 </div>
             ))
-           )}
+            )} 
     </div>
     )
 }

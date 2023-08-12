@@ -13,8 +13,9 @@ import TovarInfoPage from "../pages/tovarInfoPage/tovarInfoPage.js";
 import ProductsPage from "../pages/productsPage/productsPage.js";
 import UserPage from "../pages/userPage/userPage.js";
 import FoundPage from "../pages/foundPage/foundPage.js";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { useDispatch } from "react-redux";
+import { isAuthFunc } from "../functions/authFunctions.js";
 const publicRoutes=[
  
     {
@@ -112,8 +113,7 @@ const publicRoutes=[
 
 
 const AppRoutes=()=> {
-    const dispatch=useDispatch()
-    const [user, setUser]= useState(false)
+   const user =(isAuthFunc()).isAuth
     return user ?  
     (
         <Routes>

@@ -1,14 +1,15 @@
 import "./buy.scss"
-import { useState } from "react"
-const Buy=(props)=> {
-const {setIsBuy}=props
+const Buy=({setIsBuy})=> {
+const handleClick=()=> {
+  setIsBuy(false)
+}
 return (
     <div  className="buyComponentWrapper">
          <div  className="buyComponent">
      <h1 className="isBoughtText"> Товар куплен!
      </h1> 
         <button onClick={()=> {
-          setIsBuy(false)
+       handleClick()
         }} className="buyComponentBtn">
           Ok
         </button>

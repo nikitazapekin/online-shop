@@ -3,7 +3,6 @@ export const isAuthFunc = () => {
 	const cookiesString = document.cookie;
 	const cookiesArray = cookiesString.split(';');
 	const userCookie = cookiesArray.find((cookie) => cookie.trim().startsWith('user='));
-	//   console.log(userCookie)
 	if (userCookie == undefined) {
 		isLogged = false;
 	}
@@ -21,8 +20,8 @@ export const isAuthFunc = () => {
 		} catch (error) {
 			console.error('Ошибка разбора куки user:', error);
 		}
-	} 
-	return { isAuth: isLogged }; 
+	}
+	return { isAuth: isLogged };
 };
 
 export const exitFromAccount = () => {

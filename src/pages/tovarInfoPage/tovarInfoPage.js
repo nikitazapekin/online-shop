@@ -12,6 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { postFavourite } from "../../redux/reducers/tovarInfo/tovarInfoThunk.js";
 import { buyTovarPost } from "../../redux/reducers/buyTovar/buyTovarThunk.js";
 import { isAuthFunc } from "../../functions/authFunctions.js";
+import Comments from "../../components/comments/comments.js";
+import AddToFavourite from "../../components/addToFavourite/addToFavourite.js";
+import Unlogged from "../../components/unlogged/unlogged.js";
 const TovarInfoPage = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
@@ -21,6 +24,7 @@ const TovarInfoPage = () => {
     const [loading, setLoading] = useState(true);
     const [userData, setUserData] = useState();
     const timeoutId = 500;
+    const [isUnlogged, setIsUnlogged]=useState(false)
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
@@ -80,6 +84,9 @@ const TovarInfoPage = () => {
                 )
                 }
                 <div className="purchasedCardFon"></div>
+            {/*    <Comments id={id} itemm={item} /> */}
+            <Unlogged setIsUnlogged={setIsUnlogged} isUnlogged={isUnlogged} />
+                    <AddToFavourite setIsUnlogged={setIsUnlogged} id={id} /> 
             </div>
 )}
             <Footer />

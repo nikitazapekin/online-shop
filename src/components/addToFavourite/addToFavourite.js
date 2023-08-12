@@ -1,53 +1,49 @@
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import {useDispatch } from "react-redux";
 import "./addToFavourite.scss";
-import { isAuth } from "../../redux/reducers/isLogged.js";
-//import { addNewFavourite } from "../../redux/reducers/addToFavouriteReducer.js";
 import { isAuthFunc } from "../../functions/authFunctions.js";
-import { addNewFavourite } from "../../redux/reducers/addToFavouriteActions.js";
-const AddToFavourite = (props) => {
-  const isLogged = useSelector((state) => state.addToFavouriteReducer.isLogged);
-  const username = useSelector((state) => state.addToFavouriteReducer.name);
+import { addToFavouritePost } from "../../redux/reducers/addToFav/addToFavouriteThunk.js";
+const AddToFavourite = ({id, setIsUnlogged}) => {
   const dispatch = useDispatch();
-  const { id } = props;
   const [isAdded, setIsAdded] = useState(false);
   const [sendValue, setSendValue] = useState();
- {/* useEffect(()=> {
-setSendValue(isAuthFunc())
-console.log(sendValue)
-  }, []) */}
+  const [times, setTimes]=useState(false)
+  useEffect(()=> {
+setSendValue({idd: id, obj: isAuthFunc()})
+  }, []) 
 
-  /*useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await dispatch(isAuth());
-        setSendValue({ name: username, id: id });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, [username, dispatch]);
-  const handleAction = async () => {
-    await dispatch(addNewFavourite( JSON.stringify(sendValue)));
-  }; */
+const handleAction=()=> {
+  if (!isAdded && !times && sendValue.obj.isAuth) {
+    setIsAdded(true);
+    setTimes(true)
+    dispatch(addToFavouritePost((sendValue)))
+
+  }
+  if (!sendValue.obj.isAuth) {
+  setIsUnlogged(true)
+
+  }
+}
   return (
-  {/*  <div
-      className="addToFavourite"
-      onClick={() => {
-        if (isAdded && isLogged) {
-          setIsAdded(false);
-        }
-        if (!isAdded && isLogged) {
-          setIsAdded(true);
-//handleAction()
-        }
-      }}
-    >
-      <button className="addToFavouriteItem">
-        {!isAdded ? "Добавить в корзину" : "Добавлено!"}
-    </button> 
-    </div> */}
+    <>
+    <div>
+    </div>
+
+  <div
+className="addToFavourite"
+onClick={() => {
+  handleAction()
+  }
+}
+>
+<button className="addToFavouriteItem">
+  {!isAdded ? "Добавить в корзину" : "Добавлено!"}
+</button> 
+</div> 
+</>
   );
 };
+
 export default AddToFavourite;
+
+//ИСПРАВИЛ

@@ -23,21 +23,13 @@ const [removingPrice, setRemovingPrice]=useState()
         })
           .then((res) => res.json())
           .then((data) => {
-            //  console.log(data)
               setFavData(data.fav)
               console.log(data.dav)
-
-            
-       
-         // console.log(data.fav)
           })
           .catch((error) => console.error('Error:', error));
-        
-
   }, [])
   useEffect(()=> {
 if(favData!=undefined && !isRemoving){
-   // console.log(favData)
     favData.forEach(item=> {
       setPrice(prev=> prev+item.price)
     })
@@ -77,7 +69,6 @@ favData.map(item=> (
       })
         .then((res) => res.json())
         .then((data) => {
-            //console.log(data)
             setFavData(data)
             setIsRemoving(true)
       
@@ -87,7 +78,6 @@ favData.map(item=> (
   }
 /> 
   </div>
- 
 ))
   )}
 <button className="payForAll"

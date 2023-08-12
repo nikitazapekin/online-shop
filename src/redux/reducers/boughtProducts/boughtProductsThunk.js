@@ -26,7 +26,6 @@ export const buyProductsFailure = (error) => {
   };
 };
 export const buyProductsPost = (postData) => {
-  //  const data = { userId: postData.userId, tovId: postData.id, name: postData.username  }; 
   const data={name: postData.name}
     return (dispatch) => {
       dispatch(buyProductsRequest());

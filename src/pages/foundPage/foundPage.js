@@ -15,8 +15,6 @@ const FoundPage=()=> {
         setTimeout(() => {
           setIsLoading(false); 
         }, timeoutId); 
-    
-        // Clean up the effect
         return () => {
           clearTimeout(timeoutId);
         };

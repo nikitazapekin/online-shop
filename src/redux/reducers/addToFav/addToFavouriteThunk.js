@@ -67,10 +67,13 @@ export const addToFavouriteFailure = (error) => {
 };
 
 export const addToFavouritePost = (postData) => {
+  const data=postData
+  console.log(data)
+  
   return (dispatch) => {
     dispatch(addToFavouriteRequest());
     axios
-      .post('https://jsonplaceholder.typicode.com/posts', postData)
+      .post('http://localhost:5000/addToFav', postData)
       .then((response) => {
         const createdPost = response.data;
         dispatch(addToFavouriteSuccess(createdPost));

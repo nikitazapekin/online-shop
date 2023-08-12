@@ -470,10 +470,41 @@ app.post('/addToFav', async (req, res) => {
   let sendValue = req.body;
   console.log("send"+JSON.stringify(sendValue));
 
+
   try {
+    const name = sendValue.obj.user;
+    const posts = await Post.find({}, 'email username password id date logo favourite bought');
+   // console.log("POOOOOOOOOOoo" +posts)j
+    let post;
+    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
+    posts.forEach(item => {
+      console.log(item.username+":"+sendValue.obj.user)
+      if (item.username == sendValue.obj.user) {
+        post = item;
+        console.log("yeeesss")
+        console.log("ppost"+post)
+      }
+    });
+      const purchaseItems = postsPurchases.filter(item => item.id == sendValue.idd);
+      console.log("PURCHASED"+purchaseItems)
+   /* const purchaseItems = postsPurchases.filter(item =>{
+      console.log(sendValue)
+    console.log("IDDDS"+item.id+":"+sendValue.id)
+
+  } ); */
+  console.log("POST"+post)
+    post.favourite.push(...purchaseItems);
+    await post.save();
+    res.json("is added")
+  //  console.log(post);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' });
+  }
+ /* try {
     const name = sendValue.name;
     const posts = await Post.find({}, 'email username password id date logo favourite bought');
-   // console.log("POOOOOOOOOOoo" +posts)
+   // console.log("POOOOOOOOOOoo" +posts)j
     let post;
     const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
     posts.forEach(item => {
@@ -493,7 +524,7 @@ console.log("ppost"+post)
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to create a new postt.' });
-  }
+  } */
 });
 
 
@@ -588,31 +619,6 @@ console.log("new"+newBought)
 
 
 
-
-
-
-/*
-app.post('/bought', async (req, res) => {
-  let { name } = req.body;
-  console.log( name)
-  try {
-    const posts = await Post.find({}, 'email username password id date logo favourite bought');
-    let post;
-    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
-    posts.forEach(async (item) => {
-      if (item.username === name) {
-        post = item;
-       res.json(post.bought)
-     
-      }
-    });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create a new postt.', err });
-  }
-});
- */
 app.post('/bought', async (req, res) => {
   const { name } = req.body;
   console.log(name);

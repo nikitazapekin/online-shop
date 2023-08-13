@@ -26,6 +26,5 @@ export const isAuthFunc = () => {
 
 export const exitFromAccount = () => {
 	document.cookie = 'user' + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-	console.log('dkdk');
 	return { isAuth: false };
 };

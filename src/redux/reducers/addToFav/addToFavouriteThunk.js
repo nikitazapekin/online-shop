@@ -1,43 +1,4 @@
-/*import axios from 'axios';
 
-export const _REQUEST = '_REQUEST';
-export const _SUCCESS = '_SUCCESS';
-export const _FAILURE = '_FAILURE';
-
-export const fetchAddToFavouriteRequest = () => {
-  return {
-    type: _REQUEST,
-  };
-};
-
-export const fetchAddToFavouriteSuccess = (todo) => {
-  return {
-    type: FETCH_TODO_SUCCESS,
-    payload: todo,
-  };
-};
-
-export const fetchAddToFavouriteFailure = (error) => {
-  return {
-    type: FETCH_TODO_FAILURE,
-    payload: error,
-  };
-};
-
-export const addToFavourite = () => {
-  return (dispatch) => {
-    dispatch(fetchAddToFavouriteRequest());
-    axios
-      .get('https://jsonplaceholder.typicode.com/todos/1')
-      .then((response) => {
-        const todo = response.data;
-        dispatch(fetchAddToFavouriteSuccess(todo));
-      })
-      .catch((error) => {
-        dispatch(fetchAddToFavouriteFailure(error.message));
-      });
-  };
-}; */
 
 
 import axios from 'axios';

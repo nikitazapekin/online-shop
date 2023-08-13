@@ -1,55 +1,64 @@
-import "./productsPages.scss"
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import SwitchSearch from "../switchSearch/switchSearch.js";
-import ScrollArrow from "../scrollArrow/scrollArrow.js";
-import ProductsPagesItem from "../productsPagesItem/productsPagesItem.js";
-const ProductsPages =()=> {
-const [currentPage, setCurrentPage]=useState(1)
-const [photos, setPhotos]=useState([])
-const [fetching, setFetching]=useState(true)
-useEffect(()=>{
-  if(fetching){
-console.log("fetching")
-fetch(`http://localhost:5000/tovars?_limit=20&_page=${currentPage}`)
-.then((response) => {
-  if (!response.ok) {
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-})
-.then((res) => {
-setPhotos([...photos, ...res.data])
-setCurrentPage(prevState=> prevState+1)
-})
- 
-    .finally(()=> {
-      setFetching(false)
-    })
-  }
-},[fetching])
-    useEffect(()=> {
-      document.addEventListener('scroll', scrollHandler)
-      return function(){
-        document.removeEventListener('scroll', scrollHandler)
-      }
-        }, []) 
-        const scrollHandler=(e)=> {
-          if( e.target.documentElement.scrollHeight-(e.target.documentElement.scrollTop+ window.innerHeight)<100){ // подвал
-      console.log('scroll')
-      setFetching(true)
-          }
-        }   
-    return (
-        <div className="productsPages">
-<div className="productsPagesTable">
-  {photos.map((item, index)=> (
-    <ProductsPagesItem item={item} key={index} />
-  ))}
-  
-</div>
-<ScrollArrow />
-        </div>
-    )
-}
-export default ProductsPages
+import './productsPages.scss';
+import { useEffect, useState } from 'react';
+import ScrollArrow from '../scrollArrow/scrollArrow.js';
+import ProductsPagesItem from '../productsPagesItem/productsPagesItem.js';
+import { productsPagesPost } from '../../redux/reducers/productsPages/productsPagesThunk.js';
+import { useSelector, useDispatch } from 'react-redux';
+const ProductsPages = () => {
+	const dispatch = useDispatch();
+	const state = useSelector((state) => state.productsPagesReducer.post);
+	const [currentPage, setCurrentPage] = useState(1);
+	const [photos, setPhotos] = useState([]);
+	const [fetching, setFetching] = useState(true);
+	useEffect(() => {
+		if (fetching) {
+			dispatch(productsPagesPost(currentPage));
+		}
+	}, [fetching]);
+	useEffect(() => {
+		console.log(state);
+		if (state != null) {
+			const inputArray = [...photos, ...state];
+			const uniqueIds = new Set();
+			const filteredArray = [];
+
+			for (const obj of inputArray) {
+				if (!uniqueIds.has(obj.id)) {
+					uniqueIds.add(obj.id);
+					filteredArray.push(obj);
+				}
+			}
+			setPhotos(filteredArray);
+		}
+	}, [state]);
+	useEffect(() => {
+		document.addEventListener('scroll', scrollHandler);
+		return function () {
+			document.removeEventListener('scroll', scrollHandler);
+		};
+	}, []);
+	const scrollHandler = (e) => {
+		if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
+			setTimeout(() => {
+				setFetching(true);
+				setCurrentPage((prev) => {
+					const upd = prev + 1;
+					dispatch(productsPagesPost(upd));
+					return upd;
+				});
+			}, 0);
+		}
+	};
+	return (
+		<div className="productsPages">
+			<div className="productsPagesTable">
+				{photos.map((item, index) => (
+					<ProductsPagesItem item={item} key={index} />
+				))}
+			</div>
+			<ScrollArrow />
+		</div>
+	);
+};
+export default ProductsPages;
+//ГОТОВО

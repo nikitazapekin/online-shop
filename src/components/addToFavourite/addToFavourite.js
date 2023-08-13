@@ -17,7 +17,6 @@ const handleAction=()=> {
     setIsAdded(true);
     setTimes(true)
     dispatch(addToFavouritePost((sendValue)))
-
   }
   if (!sendValue.obj.isAuth) {
   setIsUnlogged(true)

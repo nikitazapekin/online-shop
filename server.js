@@ -155,7 +155,7 @@ if(!isRegistered){
 app.post('/userId', async (req, res) => {
   //let { id} = req.body;
   let dataa=req.body
- console.log((dataa.id))
+ console.log("IDDDDDDDDDD"+(dataa.id))
  let id=dataa.id
   let sizeOdDatas=0
   try{
@@ -289,6 +289,41 @@ app.get('/tovars', async (req, res) => {
 });
 
 
+
+
+
+
+
+
+
+
+
+app.get('/tovarss', async (req, res) => {
+  try {
+  
+
+   
+
+    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww')
+     
+
+    res.json({
+      data: posts
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch posts.' });
+  }
+});
+
+
+
+
+
+
+
+
+
 app.get('/tovarss', async (req, res) => {
   try {
     
@@ -352,27 +387,6 @@ app.post('/item', async (req, res) => {
      res.status(500).json({ error: 'Failed to create a new postt.' });
    }
  });
-
-// Ваш исправленный код на серверной стороне
-/*
-app.post('/item', async (req, res) => {
-  try {
-    const { id } = req.body; // Извлекаем 'id' из объекта req.body
-
-    const posts = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
-
-    const filteredPosts = posts.filter((item) => {
-      return item.id === id; // Сравниваем 'id' с извлеченным значением
-    });
-
-    console.log(filteredPosts);
-    res.json(filteredPosts);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create a new postt.' });
-  }
-});
-*/
 
 
 
@@ -497,30 +511,7 @@ app.post('/addToFav', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Failed to create a new postt.' });
   }
- /* try {
-    const name = sendValue.name;
-    const posts = await Post.find({}, 'email username password id date logo favourite bought');
-   // console.log("POOOOOOOOOOoo" +posts)j
-    let post;
-    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
-    posts.forEach(item => {
-      console.log(item.username+":"+sendValue.name)
-      if (item.username == sendValue.name) {
-        post = item;
-        console.log("ppost"+post)
-      }
-    });
-
-    const purchaseItems = postsPurchases.filter(item => item.id == sendValue.id);
-//console.log("pur"+purchaseItems)
-console.log("ppost"+post)
-    post.favourite.push(...purchaseItems);
-    await post.save();
-    console.log(post);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create a new postt.' });
-  } */
+ 
 });
 
 
@@ -638,46 +629,6 @@ app.post('/bought', async (req, res) => {
 
 
 
-
-
-
-
-
-
-/*
-
-app.post('/buy', async (req, res) => {
-  let { tovId, name, userId } = req.body;
-console.log("BUUUUY")
-console.log(tovId, name, userId)
-  try {
-    const posts = await Post.find({}, 'email username password id date logo favourite bought');
-    let post;
-    const postsPurchases = await Post1.find({}, 'type id sale price country title logo describtion rate neww comments');
-    let postBought;
-
-    postsPurchases.forEach(item => {
-      if (item.id == tovId) {
-        postBought = item;
-      }
-    });
-
-    posts.forEach(async (item) => {
-      if (item.username === name) {
-        post = item;
-        post.bought.push(postBought);
-        console.log("BOUGHT" + JSON.stringify(post.bought));
-        await post.save();
-        res.json(post); // Send the response here
-      }
-    });
-
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Failed to create a new postt.', err });
-  }
-});
-*/
 
 
 

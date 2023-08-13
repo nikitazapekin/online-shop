@@ -4,7 +4,11 @@ import { useParams } from "react-router";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Spinner from "../../components/spinner/spinner.js";
+import { useDispatch, useSelector } from "react-redux";
+import { postCataloguePageItem } from "../../redux/reducers/cataloguePageItem/cataloguePageItemThunk.js";
 const CataloguePageItem =()=> {
+  const dispatch = useDispatch()
+  const state=useSelector(state=>state.cataloguePageItemReducer)
     const [elems, setElems]=useState()
     const {id} =useParams()
     const idInLowerCase=id.toLowerCase()
@@ -15,30 +19,16 @@ const CataloguePageItem =()=> {
         setTimeout(() => {
           setIsLoading(false); 
         }, timeoutId); 
-    
-        // Clean up the effect
         return () => {
           clearTimeout(timeoutId);
         };
       }, []);
-
 useEffect(()=> {
-    fetch('http://localhost:5000/id', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id: idInLowerCase }),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-                setElems(data)
-            console.log(data)
-        })
-        .catch((error) => console.error('Error:', error));
-      
+dispatch(postCataloguePageItem({ id: idInLowerCase }))
 }, [])
-
+useEffect(()=> {
+console.log(state)
+},[state])
 
 
     return (

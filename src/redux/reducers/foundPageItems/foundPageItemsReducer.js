@@ -1,26 +1,28 @@
-import { PRODUCTS_PAGES_FAILURE, PRODUCTS_PAGES_SUCCESS, PRODUCTS_PAGES_REQUEST } from "./productsPagesThunk.js";
+import { FOUND_PAGE_ITEMS_FAILURE, FOUND_PAGE_ITEMS_SUCCESS, FOUND_PAGE_ITEMS_REQUEST } from "./foundPageItemsThunk.js";
 const initialState = {
   loading: false,
   post: null,
   error: '',
 };
 
-const productsPagesReducer = (state = initialState, action) => {
+const foundPageItemsReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCTS_PAGES_REQUEST:
+    case FOUND_PAGE_ITEMS_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case PRODUCTS_PAGES_SUCCESS:
+    case FOUND_PAGE_ITEMS_SUCCESS:
 
-const filteredItems= (action.payload.data)
+const filteredItems= (action.payload)
+
+
       return {
         loading: false,
         post: filteredItems,
         error: '',
       };
-    case PRODUCTS_PAGES_FAILURE:
+    case FOUND_PAGE_ITEMS_FAILURE:
       return {
         loading: false,
         post: null,
@@ -31,4 +33,4 @@ const filteredItems= (action.payload.data)
   }
 };
 
-export default productsPagesReducer;
+export default foundPageItemsReducer;

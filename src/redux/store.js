@@ -23,50 +23,12 @@ import buyProductsReducer from "./reducers/boughtProducts/boughtProductsReducer.
 import showFvReducer from "./reducers/showFavourite/showFavouriteReducer.js";
 import removeFvReducer from "./reducers/removeFromFav/removeFromFavReducer.js";
 import payForAllReducer from "./reducers/payForAll/payForAllReducer.js";
-//import showBoughtReducer from "./reducers/showBoughtReducer.js";
-
-/*export default configureStore({
-  reducer: {
-   // addToFavouriteReducer: addToFavouriteReducer,
-   todos: todoSlice,
-   addToFavouriteSlice: addToFavouriteSlice,
-  favourite: showFavouriteReducer,
-  bought: showBoughtReducer,
-  navig: navigationReducer,
- commentsReducer: commentsReducer,
- testSlice: testSlice, 
- commentsAsyncReducer: commentsAsyncReducer,
- loginReducer: loginReducer,
-buyReducer: buyReducer,
-bout: bout,
-coommRed: coommRed
-  },
-});
-*/
-
-
-/*
-export default configureStore({
-  reducer: {
-    //addToFavouriteReducer: addToFavouriteReducer,
-    todos: todoSlice,
-    addToFavouriteSlice: addToFavouriteSlice,
-    favourite: showFavouriteReducer,
-    bought: showBoughtReducer,
-    navig: navigationReducer,
-    commentsReducer: commentsReducer,
-    testSlice: testSlice,
-    commentsAsyncReducer: commentsAsyncReducer,
-    loginReducer: loginReducer,
-    buyReducer: buyReducer,
-    bout: bout,
-    //=========
-    addToFavouriteReducer: addToFavouriteReducer,
-    tovarReducer: tovarReducer,
-  },
-  middleware: [thunkMiddleware], 
-}); 
-*/
+import sliderReducer from "./reducers/slider/sliderReducer.js";
+import productsPagesReducer from "./reducers/productsPages/productsPagesReducer.js";
+import foundPageItemsReducer from "./reducers/foundPageItems/foundPageItemsReducer.js";
+import userPageReducer from "./reducers/userPageCard/userPageCardReducer.js";
+//import cataloguePageItemReducer from "./reducers/cataloguePageItem/cataloguePageItemReducer.js";
+import cataloguePageItemReducer from "./reducers/cataloguePageItem/cataloguePageItemReducer.js";
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 const rootReducer = combineReducers({
   todos: todoSlice,
@@ -87,7 +49,12 @@ const rootReducer = combineReducers({
     buyProductsReducer: buyProductsReducer,
     showFvReducer: showFvReducer,
     removeFvReducer: removeFvReducer,
-    payForAllReducer: payForAllReducer
+    payForAllReducer: payForAllReducer,
+    sliderReducer: sliderReducer,
+    productsPagesReducer: productsPagesReducer,
+    foundPageItemsReducer: foundPageItemsReducer,
+    userPageReducer: userPageReducer,
+    cataloguePageItemReducer: cataloguePageItemReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

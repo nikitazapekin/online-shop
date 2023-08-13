@@ -1,26 +1,27 @@
-import { PRODUCTS_PAGES_FAILURE, PRODUCTS_PAGES_SUCCESS, PRODUCTS_PAGES_REQUEST } from "./productsPagesThunk.js";
+import { SLIDER_FAILURE, SLIDER_SUCCESS, SLIDER_REQUEST } from "./sliderThunk.js";
 const initialState = {
   loading: false,
   post: null,
   error: '',
 };
 
-const productsPagesReducer = (state = initialState, action) => {
+const sliderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case PRODUCTS_PAGES_REQUEST:
+    case SLIDER_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case PRODUCTS_PAGES_SUCCESS:
-
-const filteredItems= (action.payload.data)
+    case SLIDER_SUCCESS:
+const filteredItems= (action.payload.data).filter(item=> {
+  return item.neww !== false;
+})
       return {
         loading: false,
         post: filteredItems,
         error: '',
       };
-    case PRODUCTS_PAGES_FAILURE:
+    case SLIDER_FAILURE:
       return {
         loading: false,
         post: null,
@@ -31,4 +32,4 @@ const filteredItems= (action.payload.data)
   }
 };
 
-export default productsPagesReducer;
+export default sliderReducer;

@@ -1,6 +1,5 @@
 import Navigation from '../../components/navigation/navigation.js';
 import TitleOfSite from '../../components/titleOfSite/titleOfSite.js';
-
 import Fon2 from './f.jpg';
 import { Link } from 'react-router-dom';
 import './homepage.scss';

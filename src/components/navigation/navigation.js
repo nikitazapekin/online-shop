@@ -20,6 +20,7 @@ const Navigation = () => {
 	useEffect(() => {
 		try {
 			setIsLoggedUser(isAuthFunc());
+			console.log(isAuthFunc())
 		} catch (err) {
 			console.log(err);
 		}

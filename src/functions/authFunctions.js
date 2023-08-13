@@ -28,3 +28,14 @@ export const exitFromAccount = () => {
 	document.cookie = 'user' + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
 	return { isAuth: false };
 };
+
+
+export const login=(username, id)=> {
+	let expirationDate = new Date();
+	expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000));
+	document.cookie = `user=${JSON.stringify({
+	  name: username,
+	  isLogged: true,
+	  id: id
+	})}; expires=${expirationDate.toUTCString()}`;
+}

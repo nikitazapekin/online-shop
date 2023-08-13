@@ -3,9 +3,8 @@ import { Link } from "react-router-dom"
 import { useNavigate } from 'react-router-dom';
 import { useRef, useState,useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { registerAction } from "../../redux/reducers/isLogged.js";
-//import { registerAction } from "../../redux/reducers/registerReducer.js";
-let lengthOfLogs=0;
+import { login } from '../../functions/authFunctions.js';
+
 const Register =()=> {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -18,42 +17,6 @@ const Register =()=> {
       const changeHandler=(event)=> {
         setForm({...form, [event.target.name]: event.target.value})
             }
-
-        /*  const register=()=> {
-            const data = 
-            JSON.stringify({"email": form.email, "password": form.password, "username": form.username, "date": new Date() });
-           
-            fetch('http://localhost:5000/register', { 
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: data
-            })
-              .then(response => response.json())
-              .then(responseData => {
-                console.log(responseData);
-                if(responseData=="is registered"){
-                  setIsLogged(true)
-                }
-                if(responseData=="is invalid"){
-                  setIsInvalid(true)
-                }
-                if(responseData!="is registered" && responseData!="is invalid"){
-                  navigate(`/user/${responseData.id}`);
-                  const cookieValue=JSON.stringify({name: form.username, isLogged: true, id: responseData.id})
-              
-                 dispatch(registerAction(cookieValue))
-                  let expirationDate = new Date();
-        expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000)); 
-        document.cookie = `user=${JSON.stringify({name: form.username, isLogged: true, id: responseData.id})}expires=` + expirationDate.toUTCString() 
-        }
-              }) 
-            
-          } */
-
-
-
           const register = () => {
             const data = JSON.stringify({
               "email": form.email,
@@ -81,20 +44,7 @@ const Register =()=> {
                   }
                   if (responseData !== "is registered" && responseData !== "is invalid") {
                     navigate(`/user/${responseData.id}`);
-                    const cookieValue = JSON.stringify({
-                      name: form.username,
-                      isLogged: true,
-                      id: responseData.id
-                    });
-          
-                    dispatch(registerAction(cookieValue));
-                    let expirationDate = new Date();
-                    expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000));
-                    document.cookie = `user=${JSON.stringify({
-                      name: form.username,
-                      isLogged: true,
-                      id: responseData.id
-                    })}; expires=${expirationDate.toUTCString()}`;
+          login(form.username, responseData.id)
                   }
                 });
             } catch (error) {

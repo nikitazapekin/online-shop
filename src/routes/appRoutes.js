@@ -7,7 +7,7 @@ import RegistrationWebPage from "../pages/registrationWebPage/registrationWebPag
 import Homepage from "../pages/homepage/homepage.js";
 import LoginPage from "../pages/loginPage/loginPage.js";
 import CataloguePage from "../pages/cataloguePage/cataloguePage.js";
-import CataloguePageItem from "../pages/cataloguePageItem/cataloguePageItem.js";
+//import CataloguePageItem from "../pages/cataloguePageItem/cataloguePageItem.js";
 import AddPurchase from "../components/addPurchase/addPurchase.js";
 import TovarInfoPage from "../pages/tovarInfoPage/tovarInfoPage.js";
 import ProductsPage from "../pages/productsPage/productsPage.js";
@@ -41,10 +41,6 @@ const publicRoutes=[
     {
         path: CATALOGUE_PAGE_ROUTE,
         Component: CataloguePage
-    },
-    {
-        path: CATALOGUE_PAGE_ITEM_ROUTE,
-        Component: CataloguePageItem
     },
     {
         path: ADD_ROUTE,
@@ -88,10 +84,6 @@ const publicRoutes=[
         Component: CataloguePage
     },
     {
-        path: CATALOGUE_PAGE_ITEM_ROUTE,
-        Component: CataloguePageItem
-    },
-    {
         path: ADD_ROUTE,
         Component: AddPurchase
     },
@@ -112,8 +104,8 @@ const publicRoutes=[
 
 
 
-const AppRoutes=()=> {
-   const user =(isAuthFunc()).isAuth
+const AppRoutes=({user})=> {
+  // const user =(isAuthFunc()).isAuth
     return user ?  
     (
         <Routes>

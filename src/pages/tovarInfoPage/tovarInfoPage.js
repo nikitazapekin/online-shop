@@ -84,7 +84,6 @@ const TovarInfoPage = () => {
                 )
                 }
                 <div className="purchasedCardFon"></div>
-            {/*    <Comments id={id} itemm={item} /> */}
             <Unlogged setIsUnlogged={setIsUnlogged} isUnlogged={isUnlogged} />
                     <AddToFavourite setIsUnlogged={setIsUnlogged} id={id} /> 
             </div>

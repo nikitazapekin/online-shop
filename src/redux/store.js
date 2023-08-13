@@ -20,6 +20,9 @@ import addToFavouriteReducer from "./reducers/addToFav/addToFavReducer.js";
 import buyTovarReducer from "./reducers/buyTovar/buyTovarReducer.js";
 import tovarReducer from "./reducers/tovarInfo/tovarInfoReducer.js";
 import buyProductsReducer from "./reducers/boughtProducts/boughtProductsReducer.js";
+import showFvReducer from "./reducers/showFavourite/showFavouriteReducer.js";
+import removeFvReducer from "./reducers/removeFromFav/removeFromFavReducer.js";
+import payForAllReducer from "./reducers/payForAll/payForAllReducer.js";
 //import showBoughtReducer from "./reducers/showBoughtReducer.js";
 
 /*export default configureStore({
@@ -81,7 +84,10 @@ const rootReducer = combineReducers({
     addToFavouriteReducer: addToFavouriteReducer,
     tovarReducer: tovarReducer,
     buyTovarReducer: buyTovarReducer,
-    buyProductsReducer: buyProductsReducer
+    buyProductsReducer: buyProductsReducer,
+    showFvReducer: showFvReducer,
+    removeFvReducer: removeFvReducer,
+    payForAllReducer: payForAllReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

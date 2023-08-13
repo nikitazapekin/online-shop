@@ -487,11 +487,7 @@ app.post('/addToFav', async (req, res) => {
     });
       const purchaseItems = postsPurchases.filter(item => item.id == sendValue.idd);
       console.log("PURCHASED"+purchaseItems)
-   /* const purchaseItems = postsPurchases.filter(item =>{
-      console.log(sendValue)
-    console.log("IDDDS"+item.id+":"+sendValue.id)
-
-  } ); */
+  
   console.log("POST"+post)
     post.favourite.push(...purchaseItems);
     await post.save();
@@ -556,6 +552,7 @@ app.post('/favv', async (req, res) => {
 
 app.post('/removeFavv', async (req, res) => {
   let { id, name } = req.body;
+  console.log("IDDD", id, name)
   try {
     const posts = await Post.find({}, 'email username password id date logo favourite bought');
     let post;
@@ -565,13 +562,11 @@ app.post('/removeFavv', async (req, res) => {
         post = item;
         const newPost = post.favourite.filter((item) => item.id !== id);
         item.favourite = newPost;
-        console.log(newPost);
         await item.save(); 
       }
     });
     posts.forEach(item=> {
       if (item.username === name) {
-        
         res.json(item.favourite);
       }
     })
@@ -586,7 +581,7 @@ app.post('/removeFavv', async (req, res) => {
 
 app.post('/removeAllFavv', async (req, res) => {
   let {data, name } = req.body;
-  console.log(data, name)
+  console.log("THISSS"+data, name)
   try {
     const posts = await Post.find({}, 'email username password id date logo favourite bought');
     let post;
@@ -600,8 +595,8 @@ app.post('/removeAllFavv', async (req, res) => {
 let newBought=item.bought.concat(prevFav)
 item.bought=newBought
 item.favourite=[]
-console.log("prev"+prevFav)
-console.log("new"+newBought)
+//console.log("prev"+prevFav)
+//console.log("new"+newBought)
         await item.save(); 
       }
     });

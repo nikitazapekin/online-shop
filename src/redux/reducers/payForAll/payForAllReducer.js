@@ -1,27 +1,26 @@
-
-import { SHOW_FAVOURITE_FAILURE, SHOW_FAVOURITE_SUCCESS, SHOW_FAVOURITE_REQUEST } from "./showFavouriteThunk.js";
+import { PAY_FOR_ALL_FAILURE, PAY_FOR_ALL_SUCCESS, PAY_FOR_ALL_REQUEST } from "./payForAllThunk.js";
 const initialState = {
   loading: false,
   post: null,
   error: '',
 };
 
-const showFvReducer = (state = initialState, action) => {
+const payForAllReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_FAVOURITE_REQUEST:
+    case PAY_FOR_ALL_REQUEST:
         console.log("request")
       return {
         ...state,
         loading: true,
       };
-    case SHOW_FAVOURITE_SUCCESS:
+    case PAY_FOR_ALL_SUCCESS:
         console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,
         error: '',
       };
-    case SHOW_FAVOURITE_FAILURE:
+    case PAY_FOR_ALL_FAILURE:
       return {
         loading: false,
         post: null,
@@ -32,4 +31,4 @@ const showFvReducer = (state = initialState, action) => {
   }
 };
 
-export default showFvReducer;
+export default payForAllReducer;

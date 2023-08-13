@@ -48,7 +48,7 @@ const UserPageCard = () => {
       </div>
       {dataUser != undefined && !selectPurchases && (
         <>
-          <ShowFavourite username={dataUser.username} />
+          <ShowFavourite  />
         </>
       )}
       {dataUser != undefined && selectPurchases && (

@@ -1,108 +1,88 @@
+import './showFavourite.scss';
+import { useEffect, useState, useRef } from 'react';
+import { showFavouritePost } from '../../redux/reducers/showFavourite/showFavouriteThunk.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { isAuthFunc } from '../../functions/authFunctions.js';
+import { removeFromFavPost } from '../../redux/reducers/removeFromFav/removeFromFavThunk.js';
+import { payForAllPost } from '../../redux/reducers/payForAll/payForAllThunk.js';
+import FavDataItem from '../favDataItem/favDataItem.js';
+const ShowFavourite = () => {
+	const boughtProducts = useRef();
+	const dispatch = useDispatch();
+	const [username, setUsername] = useState('');
+	const state = useSelector((state) => state.showFvReducer);
+	const [favData, setFavData] = useState();
+	console.log(favData);
+	const [price, setPrice] = useState(0);
+	const [isRemoving, setIsRemoving] = useState(false);
+	const [removingPrice, setRemovingPrice] = useState();
+	useEffect(() => {
+		let values = isAuthFunc();
+		setUsername(values.user);
+	}, []);
+	useEffect(() => {
+		let values = isAuthFunc();
+		setUsername(values.user);
 
-
-
-import "./showFavourite.scss";
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-import { Link } from "react-router-dom";
-const ShowFavourite = (props) => {
-  const { username } = props;
-const [favData, setFavData]=useState()
-const [price, setPrice] =useState(0)
- const [isRemoving, setIsRemoving] =useState(false)
-const [removingPrice, setRemovingPrice]=useState()
-    useEffect(()=> {
-      fetch('http://localhost:5000/favv', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-    
-       body: JSON.stringify({name: username})
-        })
-          .then((res) => res.json())
-          .then((data) => {
-              setFavData(data.fav)
-              console.log(data.dav)
-          })
-          .catch((error) => console.error('Error:', error));
-  }, [])
-  useEffect(()=> {
-if(favData!=undefined && !isRemoving){
-    favData.forEach(item=> {
-      setPrice(prev=> prev+item.price)
-    })
-    setIsRemoving(false)
-  }
-  if(isRemoving){
-    setPrice((prev)=>prev-removingPrice)
-  }
-  }, [favData])
-  return (
-<div className="showFavouritee">
-  {favData!=undefined && (
-favData.map(item=> (
-  <div className="favDataItem">
-    <Link style={{textDecoration: "none"}} to={`/tovarInfo/${item.id}`}>
-    <img src={item.logo} alt="logo" className="favDataImage" />
-    <div className="favItemBlock">
-    <div className="lineOfFav">
-    <p className="favDataTitle">{item.title}</p>
-    <p className="favDataPrice">{item.price}rub</p>
-    </div>
-    <p className="favItemDescribtion">
-      {item.describtion}
-    </p>
-    </div>
-    </Link>
-   <FontAwesomeIcon className='favTrashCan' icon={faTrashCan} bounce style={{ color: "#ec0909" }}
-    onClick={(event)=> {
-   setRemovingPrice(item.price)
-      fetch('http://localhost:5000/removeFavv', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-    
-     body: JSON.stringify({id: item.id, name: username})
-      })
-        .then((res) => res.json())
-        .then((data) => {
-            setFavData(data)
-            setIsRemoving(true)
-      
-        })
-        .catch((error) => console.error('Error:', error));
-    }
-  }
-/> 
-  </div>
-))
-  )}
-<button className="payForAll"
-onClick={()=> {
-  setPrice(0)
-  fetch('http://localhost:5000/removeAllFavv', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-
- body: JSON.stringify({data: favData, name: username})
-  })
-    .then((res) => res.json())
-    .then((data) => {
-        console.log(data)
-        setFavData(data)
-
-  
-    })
-    .catch((error) => console.error('Error:', error));
-}}
->Pay for everything {price}</button>
-</div>
-  );
+		if (favData !== null && favData !== undefined) {
+			console.log(state);
+			console.log(favData);
+		} else {
+			dispatch(showFavouritePost({ name: values.user }));
+		}
+	}, [favData]);
+	useEffect(() => {
+		try {
+			if (state.post.fav != null && state.post.fav != undefined) {
+				setFavData(state.post.fav);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	}, [state.post]);
+	useEffect(() => {
+		if (favData != undefined && !isRemoving) {
+			favData.forEach((item) => {
+				setPrice((prev) => prev + item.price);
+			});
+			setIsRemoving(false);
+		}
+		if (isRemoving) {
+			setPrice((prev) => prev - removingPrice);
+		}
+	}, [favData]);
+	const removeProduct = (index, id, username) => {
+		boughtProducts.current.children[index].style.display = 'none';
+		dispatch(removeFromFavPost({ id: id, name: username }));
+	};
+	const pay = () => {
+		setPrice(0);
+		dispatch(payForAllPost({ data: favData, name: username }));
+		setFavData([]);
+	};
+	return (
+		<div ref={boughtProducts} className="showFavouritee">
+			{favData != undefined &&
+				favData != null &&
+				favData.map((item, index) => (
+					<FavDataItem
+						key={index}
+						removeProduct={removeProduct}
+						item={item}
+						index={index}
+						username={username}
+					/>
+				))}
+			<button
+				className="payForAll"
+				onClick={() => {
+					pay();
+				}}
+			>
+				Pay for everything {price}
+			</button>
+		</div>
+	);
 };
-
 export default ShowFavourite;
+//ГОТОВО

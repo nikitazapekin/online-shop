@@ -1,35 +1,42 @@
 
-import { REMOVE_FROM_FAV_FAILURE, REMOVE_FROM_FAV_SUCCESS, REMOVE_FROM_FAV_REQUEST } from "./removeFromFavThunk.js";
+import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGIN_REQUEST, CLEAR_STORE } from "./loginThunk.js";
 const initialState = {
   loading: false,
   post: null,
   error: '',
 };
 
-const removeFvReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REMOVE_FROM_FAV_REQUEST:
+    case LOGIN_REQUEST:
         console.log("request")
       return {
         ...state,
         loading: true,
       };
-    case REMOVE_FROM_FAV_SUCCESS:
+    case LOGIN_SUCCESS:
         console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,
         error: '',
       };
-    case REMOVE_FROM_FAV_FAILURE:
+    case LOGIN_FAILURE:
       return {
         loading: false,
         post: null,
         error: action.payload,
       };
+      case CLEAR_STORE:
+        return {
+            loading: false,
+        post: null,
+        error: action.payload,  
+        }
+      //  console.log(state)
     default:
       return state;
   }
 };
 
-export default removeFvReducer;
+export default loginReducer;

@@ -16,7 +16,6 @@ const UserPageCard = () => {
 		dispatch(postUser(dataa));
 	}, []);
 	useEffect(() => {
-		console.log(state);
 		setDataUser(state.post);
 	}, [state]);
 	return (

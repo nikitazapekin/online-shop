@@ -8,9 +8,9 @@ import showBoughtReducer from "./reducers/showBoughtReducer.js";
 import showFavouriteReducer from "./reducers/showFavouriteReducer.js";
 import navigationReducer from "./reducers/navigationReducer.js";
 import testSlice from "./reducers/filteredItemsReducer.js"
-import commentsReducer from "./reducers/commentsReducer.js";
+//import commentsReducer from "./reducers/commentsReducer.js";
 import commentsAsyncReducer from "./reducers/commentsAsyncReducer.js";
-import loginReducer from "./reducers/loginReducer.js";
+//import loginReducer from "./reducers/loginReducer.js";
 import buyReducer from "./reducers/buyReducer.js";
 import bout from "./reducers/bout.js";
 import coommRed from "./coommRed.js";
@@ -29,6 +29,10 @@ import foundPageItemsReducer from "./reducers/foundPageItems/foundPageItemsReduc
 import userPageReducer from "./reducers/userPageCard/userPageCardReducer.js";
 //import cataloguePageItemReducer from "./reducers/cataloguePageItem/cataloguePageItemReducer.js";
 import cataloguePageItemReducer from "./reducers/cataloguePageItem/cataloguePageItemReducer.js";
+import registerReducer from "./reducers/register/registerReducer.js";
+//import loginReducer from "./reducers/loginReducer.js";
+import loginReducer from "./reducers/login/loginReducer.js";
+import commentsReducer from "./reducers/comments/commentsReducer.js";
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 const rootReducer = combineReducers({
   todos: todoSlice,
@@ -36,7 +40,7 @@ const rootReducer = combineReducers({
     favourite: showFavouriteReducer,
     bought: showBoughtReducer,
     navig: navigationReducer,
-    commentsReducer: commentsReducer,
+   
     testSlice: testSlice,
     commentsAsyncReducer: commentsAsyncReducer,
     loginReducer: loginReducer,
@@ -54,7 +58,10 @@ const rootReducer = combineReducers({
     productsPagesReducer: productsPagesReducer,
     foundPageItemsReducer: foundPageItemsReducer,
     userPageReducer: userPageReducer,
-    cataloguePageItemReducer: cataloguePageItemReducer
+    cataloguePageItemReducer: cataloguePageItemReducer,
+    registerReducer: registerReducer,
+    loginReducer: loginReducer,
+    commentsReducer: commentsReducer,
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

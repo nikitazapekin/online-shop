@@ -74,6 +74,8 @@ const TovarInfoPage = () => {
                             await dispatch(buyTovarPost({ username: userData.user, userId: userData.id, id: id }));
                             setIsBuy(true)
                         }}>Buy</button>
+                            <Comments id={id} item={item} setItem={setItem} />
+                    <AddToFavourite id={id} />
                     </div>
                 )}
                 {isBuy ? (

@@ -1,6 +1,5 @@
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-
 export const fetchTodos = createAsyncThunk(
     'todos/fetchTodos',
     async function(_, {rejectWithValue}) {
@@ -12,7 +11,6 @@ export const fetchTodos = createAsyncThunk(
             }
     
             const data = await response.json();
-          //  console.log(data)
             return data;
         } catch (error) {
             return rejectWithValue(error.message);
@@ -20,12 +18,10 @@ export const fetchTodos = createAsyncThunk(
     }
 );
 export const addNewTodo = createAsyncThunk(
-   // 'todos',
     'todos/addNewTodo',
    
     async function (dataa, {rejectWithValue, dispatch}) {
         try {
-          //  name: 'todos',
             const todo = {
              
               title: dataa,

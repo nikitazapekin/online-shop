@@ -67,6 +67,7 @@ const Post = mongoose.model('Post', postSchema);
 
 app.post('/register', async (req, res) => {
   let { username, email, password, date } = req.body;
+  console.log("USERRR"+username, email, password, date)
   let sizeOfDatas = 0;
   let emaill=email
 password=encrypt(password)
@@ -119,6 +120,7 @@ mongoose.connection.on('error', (err) => {
 
 app.post('/login', async (req, res) => {
   let { email,  password} = req.body;
+  console.log("DATAAA" + email, password)
   email=encrypt(email)
   password=encrypt(password)
   console.log("EM "+email, "Pas "+password)
@@ -127,19 +129,15 @@ app.post('/login', async (req, res) => {
 let isRegistered =false
     const posts = await Post.find({}, 'email username password id');
 posts.forEach(item=> {
- console.log(item)
- console.log(item.email+":"+email)
- console.log(item.password+":"+password)
+
  if(item.email==email && item.password==password){
   console.log("find "+item.id)
-  res.json({id: item.id})
+  res.json({id: item.id, name: item.username})
   isRegistered=true
  }
 
 })
 if(!isRegistered){
- 
-
     res.json("is non registered")
 }
   } catch(err){
@@ -181,12 +179,6 @@ if(!isRegistered){
     res.status(500).json({ error: 'Failed to create a new postt.' , err});
   }  
 })
-
-
-
-
-
-
 
 
 app.use('/userImage', (req, res, next) => {

@@ -20,7 +20,6 @@ const useCustomSearch = (searchTerm) => {
         setFilteredItems(filteredItems);
       } catch (error) {
         console.error('Error fetching data:', error);
-        // Handle error, e.g., setFilteredItems([]) or show an error message
       }
     };
 

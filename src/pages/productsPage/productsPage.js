@@ -1,4 +1,3 @@
-import Comments from "../../components/comments/comments.js"
 import Footer from "../../components/footer/footer.js"
 import Navigation from "../../components/navigation/navigation.js"
 import ProductsPages from "../../components/productsPages/productsPages.js"

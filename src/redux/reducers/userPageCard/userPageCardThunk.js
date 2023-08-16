@@ -20,6 +20,7 @@ export const userPageSuccess = (post) => {
 };
 
 export const userPageFailure = (error) => {
+  throw new Error("error")
   return {
     type: USER_PAGE_FAILURE,
     payload: error,

@@ -16,6 +16,8 @@ import FoundPage from "../pages/foundPage/foundPage.js";
 import {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { isAuthFunc } from "../functions/authFunctions.js";
+import { lazy, Suspense } from "react";
+//const Homepage=lazy(()=> import('../pages/homepage/homepage.js'))
 const publicRoutes=[
  
     {
@@ -109,7 +111,10 @@ const AppRoutes=({user})=> {
     return user ?  
     (
         <Routes>
+
 {privateRoutes.map(({path, Component})=>( <Route key={path} path={path} element={<Component />} exact={true} />)
+
+    
 )}
 
 <Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} /> 

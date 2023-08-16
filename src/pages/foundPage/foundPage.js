@@ -11,7 +11,6 @@ const FoundPage=()=> {
     const [isLoading, setIsLoading] = useState(true);
     const timeoutId=500
       useEffect(() => {
-       
         setTimeout(() => {
           setIsLoading(false); 
         }, timeoutId); 

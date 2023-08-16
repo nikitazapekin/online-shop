@@ -51,7 +51,6 @@ const TovarInfoPage = () => {
     useEffect(() => {
         setUserData(isAuthFunc());
     }, [isAuthFunc]);
-
     return (
         <div className="tovarInfoPage">
             <Navigation />

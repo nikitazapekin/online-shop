@@ -1,0 +1,31 @@
+.boundaryError{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1111;
+}
+.errorText{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: red;
+    top: 100px;
+}
+.errorBtn {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1111;
+    width: 300px;
+    height: 60px;
+    top: 150px;
+    cursor: pointer;
+    background-color: rgb(223, 84, 84);
+    border-radius: 20px;
+    border: none;
+    outline: none;
+    font-size: 24px;
+
+}

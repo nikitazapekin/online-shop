@@ -8,22 +8,15 @@ const RegistrationWebPage=()=> {
     const [isLoading, setIsLoading] = useState(true);
     const timeoutId=500
       useEffect(() => {
-       
         setTimeout(() => {
           setIsLoading(false); 
         }, timeoutId); 
-    
-        // Clean up the effect
         return () => {
           clearTimeout(timeoutId);
         };
       }, []);
     return (
         <div className="registerWebPage">
-
-   
-
-
         <Navigation />
 
         {isLoading? (

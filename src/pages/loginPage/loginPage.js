@@ -6,7 +6,6 @@ import Login from "../../components/login/login.js"
 import Spinner from "../../components/spinner/spinner.js"
 import { useState, useEffect } from "react"
 const LoginPage=()=> {
-
     const [isLoading, setIsLoading] = useState(true);
     const timeoutId=500
       useEffect(() => {
@@ -14,8 +13,6 @@ const LoginPage=()=> {
         setTimeout(() => {
           setIsLoading(false); 
         }, timeoutId); 
-    
-        // Clean up the effect
         return () => {
           clearTimeout(timeoutId);
         };
@@ -28,7 +25,6 @@ const LoginPage=()=> {
            <Spinner /> 
         )
 : (
-
 <>
 <div className="area" >
             <ul className="circles">
@@ -48,8 +44,6 @@ const LoginPage=()=> {
         </>
 )
         }
-     
-
     <Footer />  
         </>
     )

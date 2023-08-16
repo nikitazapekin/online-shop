@@ -5,6 +5,12 @@ import ShowFavourite from '../showFavourite/showFavourite.js';
 import ShowBought from '../showBought/showBought.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { postUser } from '../../redux/reducers/userPageCard/userPageCardThunk.js';
+//import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
+import { withErrorBoundary } from 'react-error-boundary';
+import FallbackComponent from '../FallbackComponent/fallbackComponent.js';
+import ErrorFallback from '../errorFallback/errorFallback.js';
+
+import { ErrorBoundary } from 'react-error-boundary';
 const UserPageCard = () => {
 	const { id } = useParams();
 	const dataa = { id: id };
@@ -13,13 +19,20 @@ const UserPageCard = () => {
 	const [selectPurchases, setSelectPurchases] = useState(false);
 	const state = useSelector((state) => state.userPageReducer);
 	useEffect(() => {
-		dispatch(postUser(dataa));
+
+	dispatch(postUser(dataa));
+
 	}, []);
 	useEffect(() => {
 		setDataUser(state.post);
 	}, [state]);
 	return (
+		
 		<div className="userPageCard">
+			  <ErrorBoundary FallbackComponent={FallbackComponent}>
+			<button onClick={()=> {
+				throw new Error("test")
+			}}>csc</button>
 			{dataUser != undefined && (
 				<div>
 					<div className="userPageCardBlock">
@@ -50,7 +63,10 @@ const UserPageCard = () => {
 			)}
 
 			<div className="userPageCardFon"></div>
+			</ErrorBoundary>
 		</div>
+	
 	);
 };
 export default UserPageCard;
+ 

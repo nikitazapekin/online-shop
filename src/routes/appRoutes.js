@@ -62,12 +62,8 @@ const publicRoutes=[
     }
   
 ]
-
-
-
  const privateRoutes=[
    
-  
     {
         path: HOMEPAGE_ROUTE,
         Component: Homepage
@@ -104,32 +100,68 @@ const publicRoutes=[
 ]
 
 
+/*
+const AppRoutes = ({ user, setUser }) => {
+    return user ? (
+      <Routes>
+        {privateRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<Component setUser={setUser} />} // Передача setUser в компонент
+            exact={true}
+          />
+        ))}
+  
+        <Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} />
+      </Routes>
+    ) : (
+      <Routes>
+        {publicRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<Component setUser={setUser} />} // Передача setUser в компонент
+            exact={true}
+          />
+        ))}
+  
+        <Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} />
+      </Routes>
+    );
+  };
+  
+
+export default AppRoutes */
 
 
-const AppRoutes=({user})=> {
-  // const user =(isAuthFunc()).isAuth
+
+
+const AppRoutes=({user, setUser})=> {
     return user ?  
     (
         <Routes>
 
-{privateRoutes.map(({path, Component})=>( <Route key={path} path={path} element={<Component />} exact={true} />)
+{privateRoutes.map(({path, Component})=>( <Route  key={path} path={path} element={<Component setUser={setUser} user={user} />} exact={true} />)
 
     
 )}
 
-<Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} /> 
+<Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} />  
 
         </Routes>
     )
     :
     (
         <Routes>
-{publicRoutes.map(({path, Component})=> (<Route key={path} path={path} element={<Component />} exact={true} />)
+{publicRoutes.map(({path, Component})=> (<Route   key={path} path={path} element={<Component setUser={setUser} user={user} />} exact={true} />)
 )}
 
 <Route path="*" element={<Navigate replace to={HOMEPAGE_ROUTE} />} /> 
-
+    
         </Routes>
     )
 };
 export default AppRoutes
+
+

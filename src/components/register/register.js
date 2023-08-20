@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../functions/authFunctions.js';
 import { registerPost } from '../../redux/reducers/register/registerThunk.js';
-const Register = () => {
+const Register = ({user}) => {
 	const state = useSelector((state) => state.registerReducer);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -35,11 +35,14 @@ const Register = () => {
 		if (state.post == 'is registered') {
 			setIsLogged(true);
 		}
-		if (state.post !== 'is registered' && state.post !== 'is invalid') {
+		if (state.post !== 'is registered' && state.post !== 'is invalid' ) {
 			if (state.post != null && state.post != undefined) {
-				navigate(`/user/${state.post.id}`);
 				login(form.username, state.post.id);
-			}
+				navigate(`/user/${state.post.id}`);
+				if(user!=false){
+
+				}
+			} 
 		}
 	}, [state]);
 	return (
@@ -91,8 +94,9 @@ const Register = () => {
 			<Link to="/login" style={{ textDecoration: 'none', color: '#fff' }}>
 				<h2 className="orLogin registrationItem">or Login</h2>
 			</Link>
-
 			<div className="registerFon"></div>
+			<button onClick={()=> {
+			}}>cssc</button>
 		</div>
 	);
 };

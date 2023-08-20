@@ -1,25 +1,29 @@
+import { DEBOUNCE_FAILURE, DEBOUNCE_REQUEST, DEBOUNCE_SUCCESS } from "./debounceThunk.js";
 
-import { USER_PAGE_FAILURE, USER_PAGE_REQUEST, USER_PAGE_SUCCESS } from "./userPageCardThunk.js";
 const initialState = {
   loading: false,
   post: null,
   error: '',
 };
 
-const userPageReducer = (state = initialState, action) => {
+const debounceReducer = (state = initialState, action) => {
   switch (action.type) {
-    case USER_PAGE_REQUEST:
+    case DEBOUNCE_REQUEST:
+        console.log("request")
       return {
         ...state,
         loading: true,
       };
-    case USER_PAGE_SUCCESS:
+    case DEBOUNCE_SUCCESS:
+        console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,
         error: '',
       };
-    case USER_PAGE_FAILURE:
+    case DEBOUNCE_FAILURE:
+      console.log("BAdd")
+      throw new Error("bd")
       return {
         loading: false,
         post: null,
@@ -30,4 +34,4 @@ const userPageReducer = (state = initialState, action) => {
   }
 };
 
-export default userPageReducer;
+export default debounceReducer;

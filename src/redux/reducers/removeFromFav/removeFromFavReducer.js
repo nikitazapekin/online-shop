@@ -9,13 +9,11 @@ const initialState = {
 const removeFvReducer = (state = initialState, action) => {
   switch (action.type) {
     case REMOVE_FROM_FAV_REQUEST:
-        console.log("request")
       return {
         ...state,
         loading: true,
       };
     case REMOVE_FROM_FAV_SUCCESS:
-        console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,

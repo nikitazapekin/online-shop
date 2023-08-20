@@ -29,8 +29,6 @@ export const addToFavouriteFailure = (error) => {
 
 export const addToFavouritePost = (postData) => {
   const data=postData
-  console.log(data)
-  
   return (dispatch) => {
     dispatch(addToFavouriteRequest());
     axios

@@ -35,7 +35,6 @@ export const productsPagesPost = (currentPage) => {
         .get(`http://localhost:5000/tovars?_limit=20&_page=${currentPage}`) 
         .then((response) => {
           const fetchedData = response.data;
-          console.log(response.data);
           dispatch(productsPagesSuccess(fetchedData));
         })
         .catch((error) => {
@@ -44,31 +43,6 @@ export const productsPagesPost = (currentPage) => {
     };
   };
   
-/*
-export const  productsPagesPost = (postData) => {
-    console.log(postData)
-    const data=postData;
-    
-      return (dispatch) => {
-        dispatch(productsPagesRequest());
-        axios
-          .post('http://localhost:5000/removeAllFavv', (data)) 
-          .then((response) => {
-            const createdPost = response.data;
-            console.log(response.data);
-            dispatch(productsPagesSuccess(createdPost));
-          })
-          .catch((error) => {
-            dispatch(productsPagesFailure(error.message));
-          });
-      };
-    };
-    
-*/
-
-
-
-
 
 
 

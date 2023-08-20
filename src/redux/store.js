@@ -15,6 +15,7 @@ import cataloguePageItemReducer from "./reducers/cataloguePageItem/cataloguePage
 import registerReducer from "./reducers/register/registerReducer.js";
 import loginReducer from "./reducers/login/loginReducer.js";
 import commentsReducer from "./reducers/comments/commentsReducer.js";
+import debounceReducer from './reducers/debounce/debounceReducer.js';
 import { combineReducers, createStore, applyMiddleware } from 'redux';
 const rootReducer = combineReducers({
     addToFavouriteReducer: addToFavouriteReducer,
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
     registerReducer: registerReducer,
     loginReducer: loginReducer,
     commentsReducer: commentsReducer,
+    debounceReducer: debounceReducer
 });
 
 export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

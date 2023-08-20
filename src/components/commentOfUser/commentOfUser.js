@@ -1,6 +1,7 @@
 import './commentOfUser.scss';
 import User from './user.jpg';
 import StarsOfUserComment from '../starsOfUserComment/starsOfUserComment.js';
+import React from 'react';
 const CommentOfUser = ({ author, text, rate, date }) => {
 	return (
 		<div className="commentOfUser">
@@ -12,6 +13,7 @@ const CommentOfUser = ({ author, text, rate, date }) => {
 
 			{rate != undefined && date != undefined && (
 				<>
+
 					<StarsOfUserComment rate={rate} />
 					<p className="userCommentDate">{date.slice(0, 10)}</p>
 				</>

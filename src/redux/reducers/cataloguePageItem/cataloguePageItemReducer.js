@@ -9,13 +9,11 @@ const initialState = {
 const cataloguePageItemReducer = (state = initialState, action) => {
   switch (action.type) {
     case CATALOGUE_PAGE_ITEM_REQUEST:
-        console.log("request")
       return {
         ...state,
         loading: true,
       };
     case CATALOGUE_PAGE_ITEM_SUCCESS:
-        console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,

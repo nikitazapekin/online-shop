@@ -9,13 +9,11 @@ const initialState = {
 const showFvReducer = (state = initialState, action) => {
   switch (action.type) {
     case SHOW_FAVOURITE_REQUEST:
-        console.log("request")
       return {
         ...state,
         loading: true,
       };
     case SHOW_FAVOURITE_SUCCESS:
-        console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,

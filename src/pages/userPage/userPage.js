@@ -11,13 +11,6 @@ import { withErrorBoundary } from "react-error-boundary"
 import ErrorFallback from "../../components/errorFallback/errorFallback.js"
 
 import FallbackComponent from "../../components/FallbackComponent/fallbackComponent.js"
-
-/*
-const BrokenComponent = () => {
-  // Имитация ошибки
-  throw new Error('Ошибка в компоненте BrokenComponent.');
-};
- */
 const UserPage=()=> {
   //throw new Error("kkkk")
     const [isLoading, setIsLoading] = useState(true);

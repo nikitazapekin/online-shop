@@ -6,7 +6,7 @@ export const BUY_PRODUCTS_SUCCESS = 'TOVAR_SUCCESS';
 export const BUY_PRODUCTS_FAILURE = 'TOVAR_FAILURE';
 
 export const buyProductsRequest = () => {
-    console.log("tov reqquest")
+  
   return {
     type: BUY_PRODUCTS_REQUEST,
   };
@@ -20,6 +20,7 @@ export const buyProductsSuccess = (post) => {
 };
 
 export const buyProductsFailure = (error) => {
+  throw new Error("bad request")
   return {
     type: BUY_PRODUCTS_FAILURE,
     payload: error,
@@ -32,9 +33,8 @@ export const buyProductsPost = (postData) => {
       axios
         .post('http://localhost:5000/bought', (data)) 
         .then((response) => {
-          console.log(12333);
           const createdPost = response.data;
-          console.log(response.data);
+         
           dispatch(buyProductsSuccess(createdPost));
         })
         .catch((error) => {

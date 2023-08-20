@@ -26,7 +26,6 @@ export const showFavouriteFailure = (error) => {
   };
 };
 export const showFavouritePost = (postData) => {
-  console.log(postData)
   const data=postData;
   
     return (dispatch) => {
@@ -35,7 +34,6 @@ export const showFavouritePost = (postData) => {
         .post('http://localhost:5000/favv', (data)) 
         .then((response) => {
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(showFavouriteSuccess(createdPost));
         })
         .catch((error) => {

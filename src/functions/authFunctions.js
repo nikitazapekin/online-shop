@@ -25,11 +25,17 @@ export const isAuthFunc = () => {
 };
 
 export const exitFromAccount = () => {
-	document.cookie = 'user' + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-	return { isAuth: false };
+    const cookies = document.cookie.split(';');
+    
+    for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i];
+        const eqPos = cookie.indexOf('=');
+        const cookieName = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = cookieName + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
+    }
+    
+    return { isAuth: false };
 };
-
-
 export const login=(username, id)=> {
 	let expirationDate = new Date();
 	expirationDate.setTime(expirationDate.getTime() + (7 * 24 * 60 * 60 * 1000));

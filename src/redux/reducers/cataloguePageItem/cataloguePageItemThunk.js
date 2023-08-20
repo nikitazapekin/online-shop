@@ -26,8 +26,6 @@ export const cataloguePageItemFailure = (error) => {
   };
 };
 export const postCataloguePageItem = (postData) => {
-    console.log("func");
-    console.log(postData);
     const data =postData; 
     return (dispatch) => {
       dispatch(cataloguePageItemRequest());
@@ -36,7 +34,6 @@ export const postCataloguePageItem = (postData) => {
         .then((response) => {
     
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(cataloguePageItemSuccess(createdPost));
         })
         .catch((error) => {

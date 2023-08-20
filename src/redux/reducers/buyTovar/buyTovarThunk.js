@@ -32,9 +32,7 @@ export const buyTovarPost = (postData) => {
       axios
         .post('http://localhost:5000/buy', (data)) 
         .then((response) => {
-          console.log(12333);
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(buyTovarSuccess(createdPost));
         })
         .catch((error) => {

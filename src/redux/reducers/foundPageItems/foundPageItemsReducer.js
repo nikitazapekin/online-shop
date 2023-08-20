@@ -15,8 +15,6 @@ const foundPageItemsReducer = (state = initialState, action) => {
     case FOUND_PAGE_ITEMS_SUCCESS:
 
 const filteredItems= (action.payload)
-
-
       return {
         loading: false,
         post: filteredItems,

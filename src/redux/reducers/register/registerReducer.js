@@ -9,13 +9,11 @@ const initialState = {
 const registerReducer = (state = initialState, action) => {
   switch (action.type) {
     case REGISTER_REQUEST:
-        console.log("request")
       return {
         ...state,
         loading: true,
       };
     case REGISTER_SUCCESS:
-        console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,

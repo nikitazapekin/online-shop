@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Navigation from '../../components/navigation/navigation.js';
-import Slider from '../../components/slider/slider.js';
 import TypesOfPurchases from '../../components/typesOfPurchases/typesOfPurchases.js';
 import Footer from '../../components/footer/footer.js';
+import Slider from '../../components/slider/slider.js'
 import Spinner from '../../components/spinner/spinner.js';
 import './cataloguePage.scss';
 const CataloguePage = () => {
@@ -25,7 +25,9 @@ const CataloguePage = () => {
 				<Spinner />
 			) : (
 				<>
-					<Slider />
+			
+				
+					<Slider /> 
 					<TypesOfPurchases />
 					<Footer />
 				</>

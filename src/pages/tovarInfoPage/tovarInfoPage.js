@@ -1,5 +1,5 @@
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import Navigation from "../../components/navigation/navigation.js";
 import "./tovarInfoPage.scss";
 import Nn from "./new.png";
@@ -12,9 +12,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { postFavourite } from "../../redux/reducers/tovarInfo/tovarInfoThunk.js";
 import { buyTovarPost } from "../../redux/reducers/buyTovar/buyTovarThunk.js";
 import { isAuthFunc } from "../../functions/authFunctions.js";
-import Comments from "../../components/comments/comments.js";
 import AddToFavourite from "../../components/addToFavourite/addToFavourite.js";
 import Unlogged from "../../components/unlogged/unlogged.js";
+const LazyComments=React.lazy(()=> import("../../components/comments/comments.js"))
 const TovarInfoPage = () => {
     const dispatch = useDispatch();
     const { id } = useParams();
@@ -59,7 +59,7 @@ const TovarInfoPage = () => {
 ) : (
             <div className="puschaseCard">
                 {item !== undefined && item !== null && (
-                    <div>
+                    <div className="purchaseLine">
                         <div className="imagePurchaseBlock">
                             {item.logo && <img src={item.logo} alt="item" className="purchaseCardImage" />}
                             {item.neww && <img src={Nn} className="itemNew" alt="itemNew" />}
@@ -70,10 +70,18 @@ const TovarInfoPage = () => {
                         <h2 className="priceOfItem">{item.price} rub</h2>
                         <h2 className="itemCountry">country {item.country}</h2>
                         <button className="buyBtn" onClick={async () => {
-                            await dispatch(buyTovarPost({ username: userData.user, userId: userData.id, id: id }));
-                            setIsBuy(true)
+
+                            if(isUnlogged){
+
+                                await dispatch(buyTovarPost({ username: userData.user, userId: userData.id, id: id }));
+                                setIsBuy(true)
+                            } else{
+setIsUnlogged(true)
+                            }
                         }}>Buy</button>
-                            <Comments id={id} item={item} setItem={setItem} />
+                        <Suspense fallback={<p>load</p>}>
+<LazyComments id={id} item={item} setItem={setItem} />
+                        </Suspense>
                     <AddToFavourite id={id} />
                     </div>
                 )}

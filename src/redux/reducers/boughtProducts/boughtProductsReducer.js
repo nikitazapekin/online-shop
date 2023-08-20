@@ -22,6 +22,8 @@ const buyProductsReducer = (state = initialState, action) => {
         error: '',
       };
     case BUY_PRODUCTS_FAILURE:
+      console.log("BAdd")
+      throw new Error("bd")
       return {
         loading: false,
         post: null,

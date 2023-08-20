@@ -31,14 +31,12 @@ export const clearStore=()=> {
 }
 export const loginPost = (posttData) => {
   const data=posttData
-  console.log(data)
     return (dispatch) => {
       dispatch(loginRequest());
       axios
         .post('http://localhost:5000/login', (data)) 
         .then((response) => {
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(loginSuccess(createdPost));
         })
         .catch((error) => {

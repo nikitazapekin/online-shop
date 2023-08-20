@@ -9,13 +9,11 @@ const initialState = {
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
-        console.log("request")
       return {
         ...state,
         loading: true,
       };
     case LOGIN_SUCCESS:
-        console.log("SUCCESS"+action.payload)
       return {
         loading: false,
         post: action.payload,
@@ -33,7 +31,6 @@ const loginReducer = (state = initialState, action) => {
         post: null,
         error: action.payload,  
         }
-      //  console.log(state)
     default:
       return state;
   }

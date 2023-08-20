@@ -26,17 +26,13 @@ export const tovarFailure = (error) => {
   };
 };
 export const postFavourite = (postData) => {
-    console.log("func");
-    console.log(postData);
     const data = { id: postData }; 
     return (dispatch) => {
       dispatch(tovarRequest());
       axios
         .post('http://localhost:5000/item', data) 
         .then((response) => {
-          console.log(12333);
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(tovarSuccess(createdPost));
         })
         .catch((error) => {

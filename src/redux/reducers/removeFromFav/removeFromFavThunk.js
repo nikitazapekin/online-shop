@@ -4,7 +4,6 @@ export const REMOVE_FROM_FAV_REQUEST = 'REMOVE_FROM_FAV_REQUEST';
 export const REMOVE_FROM_FAV_SUCCESS = 'REMOVE_FROM_FAV_SUCCESS';
 export const REMOVE_FROM_FAV_FAILURE = 'REMOVE_FROM_FAV_FAILURE';
 export const removeFromFavRequest = () => {
-    console.log("tov reqquest")
   return {
     type: REMOVE_FROM_FAV_REQUEST,
   };
@@ -24,7 +23,6 @@ export const removeFromFavFailure = (error) => {
   };
 };
 export const removeFromFavPost = (postData) => {
-  console.log(postData)
   const data=postData;
   
     return (dispatch) => {
@@ -33,7 +31,6 @@ export const removeFromFavPost = (postData) => {
         .post('http://localhost:5000/removeFavv', (data)) 
         .then((response) => {
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(removeFromFavSuccess(createdPost));
         })
         .catch((error) => {

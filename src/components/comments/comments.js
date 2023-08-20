@@ -1,11 +1,13 @@
 import './comments.scss';
 import { useState, useRef, useEffect } from 'react';
-import CommentOfUser from '../commentOfUser/commentOfUser.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { isAuthFunc } from '../../functions/authFunctions.js';
 import { commentsPost } from '../../redux/reducers/comments/commentsReducerThunk.js';
 import Unlogged from '../../components/unlogged/unlogged.js';
 import { rating } from '../../functions/authFunctions.js';
+import React from 'react';
+import { Suspense } from 'react';
+const LazyComments=React.lazy(()=> import("../commentOfUser/commentOfUser.js"))
 const Comments = ({ id, item, setItem }) => {
 	const dispatch = useDispatch();
 	const state = useSelector((state) => state.commentsReducer);
@@ -35,7 +37,6 @@ const Comments = ({ id, item, setItem }) => {
 				}
 			}
 		};
-
 		if (stars.current.children != undefined) {
 			Object.values(stars.current.children).forEach((item) => {
 				item.addEventListener('click', handleStarClick);
@@ -108,7 +109,8 @@ const Comments = ({ id, item, setItem }) => {
 				<div className="commentsItems">
 					{item.comments != undefined &&
 						item.comments.map((elemm, index) => (
-							<CommentOfUser
+							<Suspense fallback={<p>loading</p>}>
+						<LazyComments
 								key={index}
 								author={elemm.author}
 								rate={elemm.rate}
@@ -116,7 +118,8 @@ const Comments = ({ id, item, setItem }) => {
 								date={elemm.date}
 								id={id}
 								number={index}
-							/>
+						/>
+								</Suspense>
 						))}
 				</div>
 			</div>

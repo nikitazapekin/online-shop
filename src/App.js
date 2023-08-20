@@ -2,12 +2,17 @@
 import './App.css';
 import AppRoutes from './routes/appRoutes.js';
 import { isAuthFunc } from './functions/authFunctions.js';
+import { useState } from 'react';
 function App() {
-
-  const user =(isAuthFunc()).isAuth
+  const [user, setUser] =useState((isAuthFunc()).isAuth)
+  console.log("RE "+(isAuthFunc()).isAuth)
   return (
     <div className="App">
-      <AppRoutes user={user} />
+      <AppRoutes setUser={setUser} user={user} />
+
+    <button onClick={()=> {
+      console.log(user)
+    }}>fvfvf</button>
     </div>
   );
 }

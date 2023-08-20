@@ -4,7 +4,7 @@ import Footer from "../../components/footer/footer.js"
 import "./registerWebPage.scss"
 import { useState, useEffect } from "react"
 import Spinner from "../../components/spinner/spinner.js"
-const RegistrationWebPage=()=> {
+const RegistrationWebPage=({user})=> {
     const [isLoading, setIsLoading] = useState(true);
     const timeoutId=500
       useEffect(() => {
@@ -24,7 +24,7 @@ const RegistrationWebPage=()=> {
         ) :
         (
 <>
-     <Register />
+     <Register user={user}  />
      
 <div class="area" >
             <ul class="circles">

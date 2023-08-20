@@ -27,8 +27,6 @@ export const userPageFailure = (error) => {
   };
 };
 export const postUser = (postData) => {
-    console.log("func");
-    console.log(postData);
     const data =postData; 
     return (dispatch) => {
       dispatch(userPageRequest());
@@ -37,7 +35,6 @@ export const postUser = (postData) => {
         .then((response) => {
     
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(userPageSuccess(createdPost));
         })
         .catch((error) => {

@@ -31,7 +31,6 @@ export const fetchSliderData = () => {
       .get('http://localhost:5000/tovarss') 
       .then((response) => {
         const fetchedData = response.data;
-        console.log(response.data);
         dispatch(sliderSuccess(fetchedData));
       })
       .catch((error) => {

@@ -1,11 +1,14 @@
 import Navigation from "../../components/navigation/navigation.js"
 import Footer from "../../components/footer/footer.js"
+
 import "./foundPage.scss"
 import { useParams } from "react-router"
-import FoundPageItems from "../../components/foundPageItems/foundPageItems.js"
 import ScrollArrow from "../../components/scrollArrow/scrollArrow.js"
 import { useState, useEffect } from "react"
 import Spinner from "../../components/spinner/spinner.js"
+//import { Suspense, React } from "react"
+import FoundPageItems from "../../components/foundPageItems/foundPageItems.js"
+//const LazyFoundPageItems=React.lazy(()=> import("../../components/foundPageItems/foundPageItems.js"))
 const FoundPage=()=> {
     const id=useParams()
     const [isLoading, setIsLoading] = useState(true);
@@ -28,7 +31,11 @@ const FoundPage=()=> {
             (
 <>
 
-<FoundPageItems id={id} />
+<FoundPageItems />
+{/*
+<Suspense fallback={<p>scwc</p>}>
+<LazyFoundPageItems id={id} />
+            </Suspense> */}
 <ScrollArrow />
 </>
             )

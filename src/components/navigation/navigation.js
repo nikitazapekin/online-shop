@@ -8,7 +8,12 @@ import useDebounce from '../../hooks/debounce.js';
 import BurgerMenu from '../burgerMenu/burgerMenu.js';
 import { useNavigate } from 'react-router-dom';
 import { exitFromAccount } from '../../functions/authFunctions.js';
+import debounce from 'lodash/debounce.js';
+import { debouncePost } from '../../redux/reducers/debounce/debounceThunk.js';
+import { useDispatch, useSelector } from 'react-redux';
 const Navigation = () => {
+	const dispatch=useDispatch()
+	const state=useSelector(state=>state.debounceReducer)
 	const navigate = useNavigate();
 	const [isLoggedUser, setIsLoggedUser] = useState();
 	const [value, setValue] = useState('');
@@ -20,30 +25,22 @@ const Navigation = () => {
 	useEffect(() => {
 		try {
 			setIsLoggedUser(isAuthFunc());
-			console.log(isAuthFunc())
 		} catch (err) {
 			console.log(err);
 		}
 	}, []);
+const search = debounce((query) => {
+dispatch(debouncePost(query))
+	}, 500);
+	useEffect(()=> {
+	  setElems(state.post)
 
-	const debouncedSearch = useDebounce(search, 500);
-	function search(query) {
-		fetch('http://localhost:5000/tovars')
-			.then((response) => response.json())
-			.then((json) => {
-				if (json !== undefined) {
-					const filteredItems = json.data.filter((item) =>
-						item.title.toLowerCase().includes(query.toLowerCase()),
-					);
-					setElems(filteredItems);
-				}
-			});
-	}
+  }, [state])
+  const onChange = (e) => {
+	setValue(e.target.value);
+	search(e.target.value);
+  };
 
-	const onChange = (e) => {
-		setValue(e.target.value);
-		debouncedSearch(e.target.value);
-	};
 	const handleKeyPress = (event) => {
 		if (event.key === 'Enter') {
 			navigate(`/foundPage/${value}`);

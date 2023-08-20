@@ -4,7 +4,6 @@ export const REGISTER_REQUEST = 'REGISTER_REQUEST';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_FAILURE = 'REGISTER_FAILURE';
 export const registerRequest = () => {
-    console.log("tov reqquest")
   return {
     type: REGISTER_REQUEST,
   };
@@ -25,14 +24,12 @@ export const registerFailure = (error) => {
 };
 export const registerPost = (posttData) => {
   const data=posttData
-  console.log(data)
     return (dispatch) => {
       dispatch(registerRequest());
       axios
         .post('http://localhost:5000/register', (data)) 
         .then((response) => {
           const createdPost = response.data;
-          console.log(response.data);
           dispatch(registerSuccess(createdPost));
         })
         .catch((error) => {

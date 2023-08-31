@@ -1,10 +1,12 @@
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons';
-
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 import './favDataItem.js';
 const FavDataItem = ({ item, index, username, removeProduct }) => {
 	return (
+		<ErrorBoundary>
+
 		<div className="favDataItem">
 			<Link style={{ textDecoration: 'none' }} to={`/tovarInfo/${item.id}`}>
 				<img src={item.logo} alt="logo" className="favDataImage" />
@@ -24,8 +26,9 @@ const FavDataItem = ({ item, index, username, removeProduct }) => {
 				onClick={() => {
 					removeProduct(index, item.id, username);
 				}}
-			/>
+				/>
 		</div>
+				</ErrorBoundary>
 	);
 };
 export default FavDataItem;

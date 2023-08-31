@@ -1,8 +1,10 @@
 import './foundPageItemsElem.scss';
 import { Link } from 'react-router-dom';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const FoundPageItemsElem = ({ item }) => {
 	return (
 		<>
+		<ErrorBoundary>
 			<Link style={{ textDecoration: 'none', color: '#fff' }} to={`/tovarInfo/${item.id}`}>
 				<div className="productsPagesTableItem">
 					<div className="productsPagesTableItemWrapper">
@@ -13,6 +15,7 @@ const FoundPageItemsElem = ({ item }) => {
 					<div className="productsPagesTableItemFon"></div>
 				</div>
 			</Link>
+		</ErrorBoundary>
 		</>
 	);
 };

@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
+import { ErrorBoundary } from "../errorBoundary/errorBoundary.js"
 const ProductsPagesItem=(props)=> {
     const  {item} =props
        return (
 <>
+<ErrorBoundary>
+
 <Link style={{textDecoration: "none", color: "#fff" }}  to={`/tovarInfo/${item.id}`}>
      <div className="productsPagesTableItem">
       <div className="productsPagesTableItemWrapper">
@@ -13,6 +16,7 @@ const ProductsPagesItem=(props)=> {
          <div className="productsPagesTableItemFon"></div>
      </div>
   </Link> 
+</ErrorBoundary>
 </>
     )
 }

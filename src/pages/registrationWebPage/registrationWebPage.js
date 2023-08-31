@@ -4,6 +4,7 @@ import Footer from "../../components/footer/footer.js"
 import "./registerWebPage.scss"
 import { useState, useEffect } from "react"
 import Spinner from "../../components/spinner/spinner.js"
+import { ErrorBoundary } from "../../components/errorBoundary/errorBoundary.js"
 const RegistrationWebPage=({user})=> {
     const [isLoading, setIsLoading] = useState(true);
     const timeoutId=500
@@ -16,6 +17,7 @@ const RegistrationWebPage=({user})=> {
         };
       }, []);
     return (
+<ErrorBoundary>
         <div className="registerWebPage">
         <Navigation />
 
@@ -24,6 +26,7 @@ const RegistrationWebPage=({user})=> {
         ) :
         (
 <>
+
      <Register user={user}  />
      
 <div class="area" >
@@ -45,7 +48,8 @@ const RegistrationWebPage=({user})=> {
     }
     <Footer />
     </div>
+       </ErrorBoundary>
        
-    )
+       )
 }
 export default RegistrationWebPage

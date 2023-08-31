@@ -1,21 +1,18 @@
 
-
-
 import express from 'express';
 import crypto from "crypto"
 import mongoose from 'mongoose';
 import cookie_parser from "cookie-parser"
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import config from "config"
 import validator from 'validator'
 import { encrypt, decrypt } from './src/serverFolder/cryptAndEncrypt.js';
-const PORT = 5000;
 const app = express();
-const DB_url ="mongodb+srv://nikita:nikita@cluster0.vsujhaf.mongodb.net/?retryWrites=true&w=majority"
+const DB_url= config.get('DB_URL')
 const corsOptions = {
   origin: 'http://localhost:3000',
 };
-
 app.use(cors(corsOptions));
 app.use(express.json({ limit: '10mb' }));
 app.use(bodyParser.json());
@@ -35,9 +32,32 @@ const postSchema = new mongoose.Schema({
   favourite: Array,
   bought: Array
 });
-
-//app.use('/auth', authRoutes);
 const Post = mongoose.model('Post', postSchema);
+app.post('/login', async (req, res) => {
+  let { email,  password} = req.body;
+  email=encrypt(email)
+  password=encrypt(password)
+  let sizeOdDatas=0
+  try{
+let isRegistered =false
+    const posts = await Post.find({}, 'email username password id');
+posts.forEach(item=> {
+
+ if(item.email==email && item.password==password){
+  res.json({id: item.id, name: item.username})
+  isRegistered=true
+ }
+
+})
+if(!isRegistered){
+    res.json("is non registered")
+}
+  } catch(err){
+    console.error(err);
+    res.status(500).json({ error: 'Failed to create a new postt.' , err});
+  }
+})
+
 app.post('/register', async (req, res) => {
   let { username, email, password, date } = req.body;
   let sizeOfDatas = 0;
@@ -88,7 +108,7 @@ mongoose.connection.on('error', (err) => {
   res.status(500).json({ error: 'Ошибка подключения к базе данных' });
 });
 
-
+/*
 app.post('/login', async (req, res) => {
   let { email,  password} = req.body;
   email=encrypt(email)
@@ -112,7 +132,7 @@ if(!isRegistered){
     console.error(err);
     res.status(500).json({ error: 'Failed to create a new postt.' , err});
   }
-})
+}) */
 app.post('/userId', async (req, res) => {
   let dataa=req.body
  let id=dataa.id
@@ -460,6 +480,7 @@ app.post('/buy', async (req, res) => {
     res.status(500).json({ error: 'Failed to process the request' });
   }
 });
+const PORT = config.get('PORT') || 5000;
 
 async function startApp() {
   try {

@@ -9,10 +9,6 @@ function App() {
   return (
     <div className="App">
       <AppRoutes setUser={setUser} user={user} />
-
-    <button onClick={()=> {
-      console.log(user)
-    }}>fvfvf</button>
     </div>
   );
 }

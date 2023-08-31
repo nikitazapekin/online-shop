@@ -6,6 +6,7 @@ import { isAuthFunc } from '../../functions/authFunctions.js';
 import { removeFromFavPost } from '../../redux/reducers/removeFromFav/removeFromFavThunk.js';
 import { payForAllPost } from '../../redux/reducers/payForAll/payForAllThunk.js';
 import FavDataItem from '../favDataItem/favDataItem.js';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const ShowFavourite = () => {
 	const boughtProducts = useRef();
 	const dispatch = useDispatch();
@@ -61,6 +62,8 @@ const ShowFavourite = () => {
 		setFavData([]);
 	};
 	return (
+		<ErrorBoundary>
+
 		<div ref={boughtProducts} className="showFavouritee">
 			{favData != undefined &&
 				favData != null &&
@@ -71,7 +74,7 @@ const ShowFavourite = () => {
 						item={item}
 						index={index}
 						username={username}
-					/>
+						/>
 				))}
 			<button
 				className="payForAll"
@@ -82,6 +85,7 @@ const ShowFavourite = () => {
 				Pay for everything {price}
 			</button>
 		</div>
+				</ErrorBoundary>
 	);
 };
 export default ShowFavourite;

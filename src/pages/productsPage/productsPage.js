@@ -6,7 +6,6 @@ import "./productsPage.scss"
 import { useState, useEffect } from "react"
 import Spinner from "../../components/spinner/spinner.js"
 import React from "react"
-import LazyLoadComponent from "../../components/lazyLoadComponent/lazyLoadComponent.js"
 const LazyProducts=React.lazy(()=> import("../../components/productsPages/productsPages.js"))
 const ProductsPage =()=> {
     const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +29,7 @@ const ProductsPage =()=> {
                 (
                     <>
                     <h1 className="productsTitle">Products</h1>
-                   <Suspense fallback={(<LazyLoadComponent />)}> 
+                   <Suspense fallback={(<h1>loading</h1>)}> 
                 <LazyProducts />
                     </Suspense>
                     <ScrollArrow />

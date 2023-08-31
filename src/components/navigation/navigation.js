@@ -69,14 +69,14 @@ dispatch(debouncePost(query))
 					</div>
 					<div className="navigationItem">
 						<Link style={{ textDecoration: 'none', color: '#fff' }} to="/catalogue">
-							{' '}
+				
 							Catalogue
 						</Link>
 					</div>
 					<div className="navigationItem">
 						<Link style={{ textDecoration: 'none', color: '#fff' }} to="/products">
-							{' '}
-							Products{' '}
+						
+							Products
 						</Link>
 					</div>
 					<div className="navigationItem">
@@ -108,7 +108,7 @@ dispatch(debouncePost(query))
 									<button className="signUpBtn">Sign up</button>
 								</Link>
 								<Link to="/login" style={{ textDecoration: 'none' }}>
-									<button className="signInBtn">Sign in</button>{' '}
+									<button className="signInBtn">Sign in</button>
 								</Link>
 							</div>
 						) : (

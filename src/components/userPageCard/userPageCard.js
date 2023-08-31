@@ -5,12 +5,7 @@ import ShowFavourite from '../showFavourite/showFavourite.js';
 import ShowBought from '../showBought/showBought.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { postUser } from '../../redux/reducers/userPageCard/userPageCardThunk.js';
-//import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
-import { withErrorBoundary } from 'react-error-boundary';
-import FallbackComponent from '../FallbackComponent/fallbackComponent.js';
-import ErrorFallback from '../errorFallback/errorFallback.js';
-
-import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const UserPageCard = () => {
 	const { id } = useParams();
 	const dataa = { id: id };
@@ -27,9 +22,9 @@ const UserPageCard = () => {
 		setDataUser(state.post);
 	}, [state]);
 	return (
-		
+		<ErrorBoundary>
+
 		<div className="userPageCard">
-			  <ErrorBoundary FallbackComponent={FallbackComponent}>
 			<button onClick={()=> {
 				throw new Error("test")
 			}}>csc</button>
@@ -39,7 +34,7 @@ const UserPageCard = () => {
 						<h1 className="userPageTitle">{dataUser.username}</h1>
 						{dataUser.date != undefined && (
 							<h2 className="userPageLogged">Date of registration: {dataUser.date.slice(0, 10)}</h2>
-						)}
+							)}
 					</div>
 				</div>
 			)}
@@ -63,8 +58,9 @@ const UserPageCard = () => {
 			)}
 
 			<div className="userPageCardFon"></div>
-			</ErrorBoundary>
+		
 		</div>
+			</ErrorBoundary>
 	
 	);
 };

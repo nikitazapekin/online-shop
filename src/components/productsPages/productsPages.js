@@ -4,6 +4,7 @@ import ScrollArrow from '../scrollArrow/scrollArrow.js';
 import ProductsPagesItem from '../productsPagesItem/productsPagesItem.js';
 import { productsPagesPost } from '../../redux/reducers/productsPages/productsPagesThunk.js';
 import { useSelector, useDispatch } from 'react-redux';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const ProductsPages = () => {
 	const dispatch = useDispatch();
 	const state = useSelector((state) => state.productsPagesReducer.post);
@@ -50,6 +51,8 @@ const ProductsPages = () => {
 		}
 	};
 	return (
+		<ErrorBoundary>
+
 		<div className="productsPages">
 			<div className="productsPagesTable">
 				{photos.map((item, index) => (
@@ -58,6 +61,7 @@ const ProductsPages = () => {
 			</div>
 			<ScrollArrow />
 		</div>
+		</ErrorBoundary>
 	);
 };
 export default ProductsPages;

@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSliderData } from '../../redux/reducers/slider/sliderThunk.js';
 import SliderItem from '../sliderItem/sliderItem.js';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const Slider = () => {
 	const slider = useRef();
 	const state = useSelector((state) => state.sliderReducer);
@@ -62,6 +63,8 @@ const Slider = () => {
 
 	return (
 		<>
+		<ErrorBoundary>
+
 			<h1 className="animesLastMonth">Новые товары</h1>
 			<ul ref={slider} className="gallery">
 				{filteredElems !== undefined &&
@@ -79,6 +82,7 @@ const Slider = () => {
 					))}
 				<div className="sliderFon"></div>
 			</ul>
+							</ErrorBoundary>
 		</>
 	);
 };

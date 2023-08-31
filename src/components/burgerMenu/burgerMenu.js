@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from 'react';
 import { isAuthFunc } from '../../functions/authFunctions.js';
 import { exitFromAccount } from '../../functions/authFunctions.js';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const BurgerMenu = () => {
   const navigate = useNavigate();
 const [isLoggedUser, setIsLoggedUser]=useState()
@@ -40,6 +41,8 @@ const [isLoggedUser, setIsLoggedUser]=useState()
     navigate("/")
   }
   return isLoggedUser !== undefined && (
+    <ErrorBoundary>
+
     <div className='burgerWrapper'>
       <button className="burger-icon icon nav-icon-3" onClick={toggleMenu}>
         <span></span>
@@ -76,6 +79,7 @@ const [isLoggedUser, setIsLoggedUser]=useState()
         </ul>
       </nav>
     </div>
+            </ErrorBoundary>
   );
 };
 

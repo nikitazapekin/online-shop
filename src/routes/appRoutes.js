@@ -8,7 +8,7 @@ import Homepage from "../pages/homepage/homepage.js";
 import LoginPage from "../pages/loginPage/loginPage.js";
 import CataloguePage from "../pages/cataloguePage/cataloguePage.js";
 //import CataloguePageItem from "../pages/cataloguePageItem/cataloguePageItem.js";
-import AddPurchase from "../components/addPurchase/addPurchase.js";
+//import AddPurchase from "../components/addPurchase/addPurchase.js";
 import TovarInfoPage from "../pages/tovarInfoPage/tovarInfoPage.js";
 import ProductsPage from "../pages/productsPage/productsPage.js";
 import UserPage from "../pages/userPage/userPage.js";
@@ -44,10 +44,7 @@ const publicRoutes=[
         path: CATALOGUE_PAGE_ROUTE,
         Component: CataloguePage
     },
-    {
-        path: ADD_ROUTE,
-        Component: AddPurchase
-    },
+
     {
         path: TOVAR_INFO_PAGE_ROUTE,
         Component: TovarInfoPage
@@ -81,10 +78,7 @@ const publicRoutes=[
         path: CATALOGUE_PAGE_ROUTE,
         Component: CataloguePage
     },
-    {
-        path: ADD_ROUTE,
-        Component: AddPurchase
-    },
+ 
     {
         path: TOVAR_INFO_PAGE_ROUTE,
         Component: TovarInfoPage

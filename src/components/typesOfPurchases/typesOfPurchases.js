@@ -2,7 +2,7 @@ import './typesOfPurchases.scss';
 import { typesOfPurchases } from '../../renderingConstants.js';
 import { useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const TypesOfPurchases = () => {
 	const items = useRef();
 	const navigate = useNavigate();
@@ -22,6 +22,7 @@ const TypesOfPurchases = () => {
 	}, []);
 
 	return (
+		<ErrorBoundary>
 		<div ref={items} className="typesOfPurchases">
 			{typesOfPurchases.map((item) => (
 				<p key={item} className="typeOfPurchase">
@@ -29,6 +30,7 @@ const TypesOfPurchases = () => {
 				</p>
 			))}
 		</div>
+			</ErrorBoundary>
 	);
 };
 

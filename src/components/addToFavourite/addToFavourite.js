@@ -3,6 +3,7 @@ import {useDispatch } from "react-redux";
 import "./addToFavourite.scss";
 import { isAuthFunc } from "../../functions/authFunctions.js";
 import { addToFavouritePost } from "../../redux/reducers/addToFav/addToFavouriteThunk.js";
+import { ErrorBoundary } from "../errorBoundary/errorBoundary.js";
 const AddToFavourite = ({id, setIsUnlogged}) => {
   const dispatch = useDispatch();
   const [isAdded, setIsAdded] = useState(false);
@@ -25,20 +26,21 @@ const handleAction=()=> {
 }
   return (
     <>
+<ErrorBoundary>
     <div>
     </div>
-
   <div
 className="addToFavourite"
 onClick={() => {
   handleAction()
-  }
+}
 }
 >
 <button className="addToFavouriteItem">
   {!isAdded ? "Добавить в корзину" : "Добавлено!"}
 </button> 
 </div> 
+  </ErrorBoundary>
 </>
   );
 };

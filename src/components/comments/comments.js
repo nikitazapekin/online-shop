@@ -5,6 +5,7 @@ import { isAuthFunc } from '../../functions/authFunctions.js';
 import { commentsPost } from '../../redux/reducers/comments/commentsReducerThunk.js';
 import Unlogged from '../../components/unlogged/unlogged.js';
 import { rating } from '../../functions/authFunctions.js';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 import React from 'react';
 import { Suspense } from 'react';
 const LazyComments=React.lazy(()=> import("../commentOfUser/commentOfUser.js"))
@@ -66,6 +67,8 @@ const Comments = ({ id, item, setItem }) => {
 		}
 	}, [state]);
 	return (
+		<ErrorBoundary>
+
 		<div className="commentsForm">
 			<div className="addComment">
 				<input
@@ -75,13 +78,13 @@ const Comments = ({ id, item, setItem }) => {
 					type="text"
 					className="addCommentForm"
 					placeholder="type comment"
-				/>
+					/>
 				<button
 					className="addCommentBtn"
 					onClick={() => {
 						handleAction();
 					}}
-				>
+					>
 					Send{' '}
 				</button>
 				<div className="starRateComment">
@@ -96,7 +99,6 @@ const Comments = ({ id, item, setItem }) => {
 
 						<input type="radio" name="rating" id="r4" />
 						<label for="r4"></label>
-
 						<input type="radio" name="rating" id="r5" />
 						<label for="r5"></label>
 					</div>
@@ -118,12 +120,13 @@ const Comments = ({ id, item, setItem }) => {
 								date={elemm.date}
 								id={id}
 								number={index}
-						/>
+								/>
 								</Suspense>
 						))}
 				</div>
 			</div>
 		</div>
+						</ErrorBoundary>
 	);
 };
 export default Comments;

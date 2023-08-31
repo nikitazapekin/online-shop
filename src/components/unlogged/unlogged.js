@@ -1,10 +1,13 @@
 import './unlogged.scss';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const Unlogged = ({ isUnlogged, setIsUnlogged }) => {
 	const handleClick = () => {
 		setIsUnlogged(false);
 	};
 	return (
 		<>
+		<ErrorBoundary>
+
 			{isUnlogged ? (
 				<div className="unloggedWrapper">
 					<div className="unloggedWindow">
@@ -14,14 +17,15 @@ const Unlogged = ({ isUnlogged, setIsUnlogged }) => {
 								handleClick();
 							}}
 							className="unloggedOk"
-						>
+							>
 							Ok
 						</button>
 					</div>
 				</div>
 			) : (
 				<></>
-			)}
+				)}
+				</ErrorBoundary>
 		</>
 	);
 };

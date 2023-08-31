@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../functions/authFunctions.js';
 import { registerPost } from '../../redux/reducers/register/registerThunk.js';
+import { ErrorBoundary } from '../errorBoundary/errorBoundary.js';
 const Register = ({user}) => {
 	const state = useSelector((state) => state.registerReducer);
 	const dispatch = useDispatch();
@@ -46,6 +47,7 @@ const Register = ({user}) => {
 		}
 	}, [state]);
 	return (
+		<ErrorBoundary>
 		<div className="registerFormPage">
 			<h1>Регистрация</h1>
 			<form className="registerFormElem">
@@ -72,7 +74,7 @@ const Register = ({user}) => {
 					className="username registrationItem"
 					name="username"
 					placeholder="Enter username"
-				/>
+					/>
 				<button
 					onClick={(event) => {
 						event.preventDefault();
@@ -80,7 +82,7 @@ const Register = ({user}) => {
 					}}
 					type="submit"
 					className="continue registrationItem"
-				>
+					>
 					sign up
 				</button>
 				;
@@ -98,6 +100,7 @@ const Register = ({user}) => {
 			<button onClick={()=> {
 			}}>cssc</button>
 		</div>
+			</ErrorBoundary>
 	);
 };
 export default Register;

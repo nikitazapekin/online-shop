@@ -25,6 +25,7 @@ const TovarInfoPage = () => {
     const [userData, setUserData] = useState();
     const timeoutId = 500;
     const [isUnlogged, setIsUnlogged]=useState(false)
+  
     useEffect(() => {
         setTimeout(() => {
             setLoading(false);
@@ -50,6 +51,7 @@ const TovarInfoPage = () => {
 
     useEffect(() => {
         setUserData(isAuthFunc());
+        console.log(isAuthFunc())
     }, [isAuthFunc]);
     return (
         <div className="tovarInfoPage">
@@ -71,8 +73,8 @@ const TovarInfoPage = () => {
                         <h2 className="itemCountry">country {item.country}</h2>
                         <button className="buyBtn" onClick={async () => {
 
-                            if(isUnlogged){
-
+                    //        if(isUnlogged){
+if(userData.isAuth){
                                 await dispatch(buyTovarPost({ username: userData.user, userId: userData.id, id: id }));
                                 setIsBuy(true)
                             } else{

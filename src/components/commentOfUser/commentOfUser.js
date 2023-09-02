@@ -21,10 +21,7 @@ const CommentOfUser = ({ author, text, rate, date }) => {
 					<p className="userCommentDate">{date.slice(0, 10)}</p>
 				</>
 			)}
-			<button onClick={()=> {
-			}}>
-					ырщщщщщщ
-			</button>
+		
 		</div>
 				</ErrorBoundary>
 	);

@@ -12,14 +12,14 @@ const [boughtData, setBoughtData]=useState()
 dispatch(buyProductsPost(({name: username})))
  }, [])
    useEffect(()=> {
-    console.log(JSON.stringify(state))
     setBoughtData(state.post)
+
    }, [state])
     return (
       <ErrorBoundary>
 
         <div className="showBoughtt">
-           {boughtData!=undefined && (
+          {boughtData!=undefined && boughtData!=null && (
              boughtData.map((item)=> (
 <div className="boughtDataItem">
 <img src={item.logo} alt="logo" className="boughtDataImage" />
@@ -34,7 +34,7 @@ dispatch(buyProductsPost(({name: username})))
     </div>
 </div>
             ))
-            )} 
+             )}  
     </div>
             </ErrorBoundary>
     )

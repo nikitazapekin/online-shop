@@ -97,8 +97,7 @@ const Register = ({user}) => {
 				<h2 className="orLogin registrationItem">or Login</h2>
 			</Link>
 			<div className="registerFon"></div>
-			<button onClick={()=> {
-			}}>cssc</button>
+			
 		</div>
 			</ErrorBoundary>
 	);
